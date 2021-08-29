@@ -1,0 +1,29 @@
+apiRules:
+- exclude:
+    uidRegex: ^System\.Object
+    type: Type
+
+- exclude:
+    uidRegex: ^System\.Attribute
+    type: Type
+
+- exclude:
+    uidRegex: ^System\.Int16
+    type: Type
+
+- exclude:
+    uidRegex: ^System\.Int32
+    type: Type
+
+- exclude:
+    uidRegex: ^System\.Configuration
+    type: Type
+
+- exclude:
+    uidRegex: ^System\.Attribute
+    type: Type
+
+- exclude: 
+    uidRegex: ^System\.Runtime
+    type: Type
+

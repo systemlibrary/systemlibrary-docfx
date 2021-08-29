@@ -1,0 +1,3 @@
+- name: [%projectDisplayName%]
+  href: [%projectName%]/
+  homepage: index.md

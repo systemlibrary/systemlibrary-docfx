@@ -1,0 +1,7 @@
+{{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}}
+
+<a class="navbar-brand" href="{{_rel}}[%relativeHostingPath%]index.html">
+  <img id="logo" class="svg" src="{{_rel}}{{{_appLogoPath}}}{{^_appLogoPath}}[%relativeHostingPath%]logo.png{{/_appLogoPath}}" alt="{{_appName}}" >
+</a>
+
+<span class="navbar-title">[%siteTitle%]</span>
