@@ -59,7 +59,6 @@ else {
 Move-Item -Path $projectSiteDirectory$projectName"_index.html" -Destination $projectSiteDirectory$projectName\index.html -Force
 Out ("ADJUST: " + $projectSiteDirectory + $projectName)
 Out "Copied index.html to the docs folder"
-
 # CREATE INDEX NAVIGATION LIST
 $documentationFiles = GetFiles $projectSiteDirectory\$projectName
 
@@ -67,12 +66,51 @@ $documentationFiles = $documentationFiles | Where-Object { $_.Name -ne "toc.html
 
 $documentationFiles = $documentationFiles | Sort-Object Basename
 
-if ($null -eq $relativeHostingPath) {
-    $htmlDocumentationList = "<ol>" + ($documentationFiles | % { $("<li><a class='index-navigation-item' href='/" + $($_.Name) + "'>" + $($_.Basename) + "</a></li>") }) + "</ol>"
+$namespaces = New-Object Collections.Generic.List[String]
+for ($i = 0; $i -le $documentationFiles.Length - 1; $i++) {
+    $baseName = $documentationFiles[$i].BaseName
+    if ($documentationFiles[$i + 1] -ne $null -and $documentationFiles[$i + 1].BaseName -ne $null -and $documentationFiles[$i + 1].BaseName.StartsWith($baseName)) {
+        $namespaces.Add($baseName);
+        $i = $i + 1
+    }
 }
-else {
-    $htmlDocumentationList = "<ol>" + ($documentationFiles | % { $("<li><a class='index-navigation-item' href='" + $relativeHostingPath + $($_.Name) + "'>" + $($_.Basename) + "</a></li>") }) + "</ol>"
+
+function getCssClass($ns, $baseName) {
+    $cssClass = "";
+    foreach ($n in $ns) {
+        if ($n -eq $baseName) {
+            $cssClass = " index-navigation-item--namespace"
+            break
+        }
+    }
+
+    return $cssClass
 }
+
+
+#$relativeHostingPath + $($_.Name)
+function getNavigationListItem($namespaces, $baseName, $href) {
+    $cssClass = getCssClass $namespaces $baseName
+
+    $title = "class"
+
+    if ($cssClass -ne "") {
+        $title = "namespace"
+    }
+
+    return "<li class='" + $cssClass + "' title='" + $title + "'><a class='index-navigation-item' href='" + $href + "'>" + $baseName + "</a></li>"
+}
+
+$htmlDocumentationList = "<ol>" + (
+    $documentationFiles | ForEach-Object {
+        $baseName = ($_.Basename)
+        $href = ($relativeHostingPath + $_.Name)
+
+        $li = getNavigationListItem $namespaces $baseName $href
+        $($li)
+    }
+) + "</ol>"
+
 
 $projectIndexHtml = ($projectSiteDirectory + "\" + $projectName + "\index.html")
 

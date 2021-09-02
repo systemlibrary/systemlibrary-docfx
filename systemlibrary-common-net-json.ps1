@@ -13,12 +13,12 @@ $footerSiteTitle = "System Library Common Net Json"
 
 
 $relativeHostingPath = "/systemlibrary-common-net-json/" # If local IIS, most likely $null, "" or "/" is sufficient
-                                                    # If using 'github pages' it should be the name of the repo with prefix and suffix /
-                                                    # It is the path of where css/js is loaded from, from the "root" of your domain
-                                                    # Simply checking network tab in chrome while browsing your site after pushing to repo, files included in ~/docs/ folder, will reveal what it should (not) be
+# If using 'github pages' it should be the name of the repo with prefix and suffix /
+# It is the path of where css/js is loaded from, from the "root" of your domain
+# Simply checking network tab in chrome while browsing your site after pushing to repo, files included in ~/docs/ folder, will reveal what it should (not) be
 
 # OPTIONAL OPTIONS
-$cleanUp = $true # delete temp files generated during building documentation files
+$cleanUp = $false # delete temp files generated during building documentation files
 
 # EXECUTE
 Set-Location $PSScriptRoot
