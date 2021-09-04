@@ -67,11 +67,48 @@ $documentationFiles = $documentationFiles | Where-Object { $_.Name -ne "toc.html
 $documentationFiles = $documentationFiles | Sort-Object Basename
 
 $namespaces = New-Object Collections.Generic.List[String]
+
 for ($i = 0; $i -le $documentationFiles.Length - 1; $i++) {
     $baseName = $documentationFiles[$i].BaseName
-    if ($documentationFiles[$i + 1] -ne $null -and $documentationFiles[$i + 1].BaseName -ne $null -and $documentationFiles[$i + 1].BaseName.StartsWith($baseName)) {
-        $namespaces.Add($baseName);
-        $i = $i + 1
+
+    if ($null -ne $baseName -and $baseName.EndsWith("-1") -eq $false) {
+        $next = $documentationFiles[$i + 1].BaseName
+        if ($null -ne $next -and $next.StartsWith($baseName) -and $next.Contains("-1") -eq $false) {
+            $namespaces.Add($baseName);
+            $i = $i + 1
+        }
+    }
+}
+
+$names = New-Object Collections.Generic.List[String]
+
+for ($i = 0; $i -le $namespaces.Count - 1; $i++) {
+    $ns = $namespaces[$i]
+    $names.Add($ns)
+    for ($j = 0; $j -le $documentationFiles.Length - 1; $j++) {
+        $file = $documentationFiles[$j].BaseName;
+        if ($null -ne $file -and $file.StartsWith($ns)) {
+            $class = $file.Substring($ns.Length)
+            if ($class -eq "") {
+                # Skipping the current namespace - its already added
+            }
+            else {
+                # Must contain 1 .
+                if ($class.Contains(".")) {
+                    $subns = $class.Substring(1)
+                    # It still contains a ., then class lives in a sub-namespace
+                    if ($subns.Contains(".") -eq $false) {
+                        # not already added, just to be safe
+                        if ($names.Contains($file) -eq $false) {
+                            # it's not a sub-namespace...
+                            if ($namespaces.Contains($file) -eq $false) {
+                                $names.Add($file)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -101,10 +138,20 @@ function getNavigationListItem($namespaces, $baseName, $href) {
     return "<li class='" + $cssClass + "' title='" + $title + "'><a class='index-navigation-item' href='" + $href + "'>" + $baseName + "</a></li>"
 }
 
+function getName($class, $list) {
+    for ($j = 0; $j -le $documentationFiles.Length - 1; $j++) {
+        if ($documentationFiles[$j].BaseName -eq $class) {
+            return $documentationFiles[$j].Name
+        }
+    }
+    return ""
+}
+
 $htmlDocumentationList = "<ol>" + (
-    $documentationFiles | ForEach-Object {
-        $baseName = ($_.Basename)
-        $href = ($relativeHostingPath + $_.Name)
+    $names | ForEach-Object {
+        $baseName = ($_)
+        $name = getName $baseName $documentationFiles
+        $href = ($relativeHostingPath + $name)
 
         $li = getNavigationListItem $namespaces $baseName $href
         $($li)
