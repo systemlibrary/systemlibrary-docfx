@@ -113,24 +113,29 @@
 <div class="markdown level0 remarks">{{{remarks}}}</div>
 {{/remarks}}
 
-<div class="syslib-tab-menu-container">
+
+<div class="custom-menu-data">
+  <h5 id="{{id}}_examples"><span class="custom-class-example custom-class-example-onclick">{{__global.examples}}</span></h5>
+
+  <div class="custom-menu-data-container">
     {{#example}}
-      <div class="syslib-tab-menu-clickable syslib-tab-menu-clickable--example">
-        <h5 id="{{id}}_examples">{{__global.examples}}</h5>
-      </div>
-      <div class="syslib-tab-menu-data" style="display: none;"><div class="syslib-tab-menu-data--close">X</div>
-        <div class="codewrapper">{{{.}}}</div>
-        <div class="comment-examples-container-bottom"></div>
-      </div>
+    <div class="custom-menu-data-class-example" style="display: none;">
+      <div class="syslib-tab-menu-data--close">X</div>
+      <div class="codewrapper">{{{.}}}</div>
+      <div class="comment-examples-container-bottom"></div>
+    </div>
     {{/example}}
+  </div>
+</div>
 
-    {{#syntax}}
-      <div class="syslib-tab-menu-clickable syslib-tab-menu-clickable--example">
-        <h5 id="{{id}}_arguments">Arguments</h5>
-      </div>
 
-      <div class="syslib-tab-menu-data" style="display: none;"><div class="syslib-tab-menu-data--close">X</div>
+{{#syntax}}
+<div class="custom-menu-data">
+  <h5 id="{{id}}_arguments"><span class="custom-class-arguments custom-class-arguments-onclick">Arguments</span></h5>
 
+  <div class="custom-menu-data-container">
+    <div class="custom-menu-data-class-arguments" style="display: none;">
+      <div class="syslib-tab-menu-data--close">X</div>
       {{#typeParameters.0}}
         <h5 class="typeParameters class-tmpl-partial-typeParameters">Generic types</h5>
         <table class="table table-bordered table-striped table-condensed class-tmpl-partial-typeParameters-table">
@@ -151,35 +156,35 @@
         {{#typeParameters.0}}
           </tbody>
         </table>
-        {{/typeParameters.0}}
+      {{/typeParameters.0}}
 
-        {{#parameters.0}}
-        <h5 class="typeParameters class-tmpl-partial-typeParameters">Methods arguments</h5>
-        <table class="table table-bordered table-striped table-condensed">
-          <thead>
-            <tr>
-              <th>{{__global.type}}</th>
-              <th>{{__global.name}}</th>
-              <th>{{__global.description}}</th>
-            </tr>
-          </thead>
-          <tbody>
-          {{/parameters.0}}
-          {{#parameters}}
-              <tr>
-                <td>{{{type.specName.0.value}}}</td>
-                <td><span class="parametername">{{{id}}}</span></td>
-                <td>{{{description}}}</td>
-              </tr>
-          {{/parameters}}
-          {{#parameters.0}}
-          </tbody>
-        </table>
+      {{#parameters.0}}
+      <h5 class="typeParameters class-tmpl-partial-typeParameters">Methods arguments</h5>
+      <table class="table table-bordered table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>{{__global.type}}</th>
+            <th>{{__global.name}}</th>
+            <th>{{__global.description}}</th>
+          </tr>
+        </thead>
+        <tbody>
         {{/parameters.0}}
-      </div>
+        {{#parameters}}
+            <tr>
+              <td>{{{type.specName.0.value}}}</td>
+              <td><span class="parametername">{{{id}}}</span></td>
+              <td>{{{description}}}</td>
+            </tr>
+        {{/parameters}}
+        {{#parameters.0}}
+        </tbody>
+      </table>
+      {{/parameters.0}}
+    </div>
 
-      {{#return}}
-      <div class="syslib-tab-menu-clickable syslib-tab-menu-clickable--example">
+    {{#return}}
+      <div class="custom-menu-data-class-returntype">
         <h5 id="{{id}}_returns">Returns</h5>
       </div>
 
@@ -202,6 +207,7 @@
 
       </div>
     {{/return}}
-
-    {{/syntax}}
   </div>
+
+</div>
+{{/syntax}}

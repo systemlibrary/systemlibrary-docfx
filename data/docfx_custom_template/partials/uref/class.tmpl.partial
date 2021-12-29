@@ -6,9 +6,11 @@
 {{#children}}
 {{^_disableContribution}}
 {{#sourceurl}}
+<div class="custom-source-code-link-container">
 <span class="small pull-right mobile-hide">
   <a href="{{sourceurl}}">{{__global.viewSource}}</a>
-</span>{{/sourceurl}}
+</span>
+</div>{{/sourceurl}}
 {{/_disableContribution}}
 {{#overload}}
 <a id="{{id}}" data-uid="{{uid}}"></a>

@@ -2,9 +2,11 @@
 
 {{^_disableContribution}}
 {{#sourceurl}}
+<div class="custom-source-code-link-container">
 <span class="small pull-right mobile-hide">
   <a href="{{sourceurl}}">View Source</a>
-</span>{{/sourceurl}}
+</span>
+</div>{{/sourceurl}}
 {{/_disableContribution}}
  <h3 id="{{htmlId}}" data-uid="{{uid}}" class="text-capitalize">{{operationId}}</h3>
 {{#summary}}

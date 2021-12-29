@@ -229,28 +229,33 @@ div.sidefilter {
 .article h4 {
 	margin: 0;
 	padding-bottom: 4px;
-	margin-top: 1em;
 }
+
+.article span.small.pull-right {
+	margin-top: 0px;
+	position: relative;
+    right: 0;
+}
+
 
 .article span.small.pull-right.mobile-hide {
 	margin-top: 28px;
 	font-size: 12px;
+	margin-top: 4px;
+    z-index: 9;
 }
 
 h3#properties {
 	text-transform: uppercase;
-	/* color: #000; */
 	color: #795da3;
 	border-bottom: 1px solid;
 	font-weight: 600;
 	margin-bottom: 0;
 	padding-bottom: 3px;
-	//color: #EF6F7F;
 }
 
 h3#fields {
 	text-transform: uppercase;
-	/* color: #000; */
 	color: #795da3;
 	border-bottom: 1px solid;
 	font-weight: 600;
@@ -261,7 +266,6 @@ h3#fields {
 
 h3#methods {
 	text-transform: uppercase;
-	/* color: #000; */
 	color: #795da3;
 	border-bottom: 1px solid;
 	margin-bottom: 0;
@@ -638,7 +642,7 @@ article.content h1 {
 }
 
 .comment-examples-container-bottom {
-	margin-bottom: 1em;
+	margin-bottom: 8px;
 }
 
 .comment-examples-method-container {
@@ -677,12 +681,79 @@ article.content h1 {
 	display: inline-flex;
 }
 
+.custom-menu-data {
+	background: white;
+	position: relative;
+	width: 100%;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.custom-menu-data-container {
+	position: absolute;
+	width: 100%;
+}
+
+.custom-name-onclick,
+.custom-returntype-onclick,
+.custom-arguments-onclick,
+.custom-class-example-onclick,
+.custom-class-arguments-onclick {
+	cursor: pointer;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.custom-class-arguments-onclick {
+	font-weight: 700;
+    margin-right: 2px;
+	color: #337ab7;
+}
+
+.custom-class-example-onclick {
+	font-weight: 700;
+    margin-right: 2px;
+	color: #337ab7;
+}
+
+.custom-name-onclick {
+	font-weight: 700;
+    margin-right: 2px;
+	color: #337ab7;
+}
+
+.custom-returntype-onclick {
+	font-weight: 700;
+	color: #337ab7;
+}
+.custom-arguments-onclick {
+	font-weight: 700;
+	color: #337ab7;
+}
+
+.custom-menu-data-container .custom-menu-data-arguments,
+.custom-menu-data-container .custom-menu-data-returntype,
+.custom-menu-data-container .custom-menu-data-name,
+.custom-menu-data-container .custom-menu-data-class-arguments,
+.custom-menu-data-container .custom-menu-data-class-example {
+    box-shadow: 0px 8px 16px 6px #e1e1e1;
+    z-index: 9999;
+	position: relative;
+    background: white;
+	padding: 1.25em;
+}
+
+.custom-menu-summary-data .markdown.level1.summary.member-summary p {
+	max-width: 80%;
+}
+
 .syslib-tab-menu-clickable {
-	height: 20px;
 	cursor: pointer;
 	font-weight: 900;
 	margin-right: 1em;
-	/* border-bottom: 1px solid rgb(86, 156, 214); */
 	color: #337ab7;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -691,19 +762,14 @@ article.content h1 {
 	user-select: none;
 }
 
-.syslib-tab-menu-clickable.active {
-	padding: 2px;
-	background: rgb(86, 156, 214);
-	color: white;
-}
-
 .syslib-tab-menu-data {
-	margin-top: 26px;
+	margin-top: 40px;
 	box-shadow: 0px 8px 16px 6px #e1e1e1;
 	display: block;
 	position: absolute;
 	z-index: 9999;
-	padding: 2em;
+	margin-top: 4px;
+	padding: 1.75em;
 	background: white;
 	width: 100%;
 }
@@ -711,19 +777,16 @@ article.content h1 {
 .syslib-tab-menu-data--close {
 	cursor: pointer;
 	position: absolute;
-	font-family: ui-monospace;
+	font-family: cursive;
+    font-size: 20px;
 	left: 100%;
-	margin-left: -1.5em;
-	margin-top: -1.5em;
 	text-align: center;
-	height: 22px;
-	width: 22px;
-	font-size: 18px;
 	z-index: 10;
+	margin-top: -20px;
+    margin-left: -18px;
 }
 
 .syslib-tab-menu-container h5 {
-	font-weight: 400;
 	margin-top: 2px;
 	font-weight: 400;
 	font-size: 12px;
@@ -753,4 +816,38 @@ footer {
 
 .index-navigation-item--namespace > a {
 	color: #898989 !important;
+}
+
+
+.syslib-tab-data {
+	position: absolute;
+	border: solid 2px red;
+}
+
+
+ .custom-menu-data-no-text {
+	 color: #2f2f2f;
+	 cursor: unset;
+ }
+
+ .h4-custom-functionName {
+	 padding: 0!important;
+	 margin: 0 !important;
+ }
+
+ .custom-menu-summary-data {
+	 margin-top: 4px;
+	 margin-bottom: 2.2em;
+ }
+
+ .custom-menu-summary-data ul {
+	 margin: 0;
+	 padding: 0;
+	 margin-left: 1.25em;
+	 list-style: unset;
+ }
+
+div.custom-source-code-link-container
+{
+
 }
