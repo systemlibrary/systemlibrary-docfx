@@ -1,8 +1,8 @@
 # REQUIRED OPTIONS
 $csprojFileFullPath = "C:\syslib\systemlibrary-common-net\source\SystemLibrary.Common.Net\SystemLibrary.Common.Net.csproj"
 
-$outputFolderFullPath = "C:\syslib\systemlibrary-common-net\docs\" # set to $null if you want outputFolder to be within the project folder
-#$outputFolderFullPath = "C:\temp\Docs\"
+#$outputFolderFullPath = "C:\syslib\systemlibrary-common-net\docs\" # set to $null if you want outputFolder to be within the project folder
+$outputFolderFullPath = "C:\temp\Docs\"
 
 $docfxConsoleExeFullPath = "C:\syslib\Packages\docfx.console.2.58.0\tools\docfx.exe" # download docfx.console as nuget package to some project, any project, and reference the .exe here
 
@@ -12,8 +12,8 @@ $footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Net/"
 $footerWebsiteUrl = "https://www.systemlibrary.com/"
 $footerSiteTitle = "System Library Common Net"
 
-$relativeHostingPath = "/systemlibrary-common-net/"
-#$relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
+#$relativeHostingPath = "/systemlibrary-common-net/"
+$relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
 # If using 'github pages' it should be the name of the repo with prefix and suffix /
 # It is the path of where css/js is loaded from, from the "root" of your IIS site
 # Simply checking network tab in chrome while browsing your site will reveal what it should be or should not be

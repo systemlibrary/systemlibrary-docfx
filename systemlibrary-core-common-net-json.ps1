@@ -6,11 +6,11 @@ $outputFolderFullPath = "C:\syslib\systemlibrary-core-common-net-json\docs\" # s
 
 $docfxConsoleExeFullPath = "C:\syslib\Packages\docfx.console.2.58.0\tools\docfx.exe" # download docfx.console as nuget package to some project, any project, and reference the .exe here
 
-$siteTitle = "System Library Common .Net JSON"
+$siteTitle = "System Library Common .Net Json"
 $footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-core-common-net-json"
 $footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Net.Json/"
 $footerWebsiteUrl = "https://www.systemlibrary.com/"
-$footerSiteTitle = "System Library Common Net JSON"
+$footerSiteTitle = "System Library Common Net Json"
 
 $relativeHostingPath = "/systemlibrary-core-common-net-json/"
 #$relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient

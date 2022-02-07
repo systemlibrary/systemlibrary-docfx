@@ -26,8 +26,8 @@ try {
     ReplaceTextInFile $docfxJson "[%projectDirectory%]" $projectDirectory.replace('\', '/')
 }
 catch {
-    Warn ("Copy to " + $destinationDir + " from " + $currentDir + " failed")
-    Err "Error occured during copying temp files to your project. Please make sure they do not exist: docfx.json, toc.yml, _docfx_filter.yml, and index.md"
+    Warn ("Copy to " + $projectDirectory + $projectName + " failed")
+    Err "Error occured during copying temp files to your project folder. Do you have a typo in project directory? Some path or file is invalid/does not exist"
     exit
 }
 
