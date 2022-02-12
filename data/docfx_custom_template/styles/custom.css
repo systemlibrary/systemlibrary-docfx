@@ -1,3 +1,21 @@
+:root {
+  --red: #cf222e;
+  --purple: #8250df;
+  --grey: #6e7781;
+  --green: #1a7f37;
+  --blue: #569cd6;
+  --dark-blue: #0a3069;
+  --black: #24292f;
+  --font: monospace;
+}
+
+* {
+  font-family: var(--font);
+  color: var(--black);
+  line-height: 140%;
+  font-size: 16px;
+}
+
 /* HIDE DEFAULT COMPONENTS */
 div.sideaffix,
 div.inheritance,
@@ -15,7 +33,19 @@ h5.propertyValue,
 h3#methods,
 .propertyValue-table,
 .class-header-tmpl-partial-typeParameters,
-.inheritedMembers {
+.inheritedMembers,
+h3#extensionmethods,
+div.extensionmethods-content,
+h3#constructors,
+h3#properties,
+h3#fields {
+  visibility: hidden;
+  height: 0;
+  display: none;
+  position: absolute;
+}
+/* HIDE CUSTOM ELEMENTS DUE TO UNWANTED TEXT */
+.custom-menu-data > h5 > span.custom-class-arguments {
   visibility: hidden;
   height: 0;
   display: none;
@@ -23,8 +53,126 @@ h3#methods,
 }
 
 /* OVERRIDE ARTICLE LAYOUT */
-div.col-md-10 {
-  width: 98.75%;
+#wrapper > div.container.body-content {
+  padding: 0;
+  width: 100%;
+  max-width: 1500px;
+  padding: 0;
+  margin: 0 auto;
+  border: solid 1px red;
+}
+
+/* TOP LOGO BAR */
+#wrapper > header div.container {
+  width: 100%;
+  max-width: 1500px;
+}
+
+#wrapper > header .navbar-inverse {
+  background: #24292f;
+}
+
+@media (max-width: 768px) {
+  div.navbar-header button.navbar-toggle {
+    visibility: hidden;
+    display: none;
+  }
+}
+
+#wrapper > header span.navbar-title {
+  font-size: 32px;
+  padding-left: 14px;
+}
+
+/* DOCUMENTATION AREA CONTAINER */
+@media (min-width: 1380px) {
+  div.article-row-container {
+    margin-left: 330px;
+  }
+}
+@media (max-width: 1379px) {
+  div.article-row-container {
+    margin-left: 260px;
+  }
+}
+@media (max-width: 768px) {
+  div.article-row-container {
+    margin-left: 0px;
+  }
+}
+
+div.article-row-container {
+  border: solid 1px yellow;
+}
+div.article-row-container div.article {
+  margin-top: 90px;
+}
+
+/* DOCUMENTATION AREA */
+#wrapper div.col-md-10 {
+  width: 100%;
+  max-width: 1166px;
+  padding-left: 20px;
+  padding-right: 12px;
+  border: solid 1px orange;
+}
+
+/* LEFT NAVIGATION */
+@media (min-width: 1380px) {
+  body > div#wrapper div.container.hide-when-search,
+  body > div#wrapper div.container.body-content {
+    width: 100%;
+    max-width: 1500px;
+  }
+}
+
+body > div#wrapper div.container.hide-when-search,
+body > div#wrapper div.container.body-content {
+  margin: 0 auto;
+  border: solid 1px salmon;
+}
+
+/* BREAD CRUMBS */
+body > div#wrapper div.container.hide-when-search > ul {
+  @media (min-width: 1380px) {
+    margin-left: 330px;
+  }
+  border: solid 1px green;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* LEFT SIDE NAMESPACES AND CLASSES */
+@media (min-width: 1380px) {
+  div.sidenav > div.sidetoggle > #sidetoc > div > div.sidefilter,
+  div.sidenav > div.sidetoggle > #sidetoc > div > div.sidetoc {
+    width: 330px;
+  }
+}
+@media (max-width: 768px) {
+  div.sidenav > div.sidetoggle > #sidetoc > div ul.nav {
+    margin-left: 8px;
+    text-align: left;
+  }
+}
+@media (max-width: 768px) {
+  div#wrapper > .container.body-content > div.sidenav.hide-when-search {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+div.sidenav > div.sidetoggle > #sidetoc div.sidefilter,
+div.sidenav > div.sidetoggle > #sidetoc div.sidetoc,
+div.sidenav > div.sidetoggle > #sidetoc div.sidetoc > .toc {
+  border: 1px solid beige;
+  background: salmon;
 }
 
 img#logo {
@@ -32,17 +180,90 @@ img#logo {
   height: 100%;
 }
 
+/* FOOTER */
+div.container.body-content > footer {
+  background: white;
+  overflow: hidden;
+}
+div.container.body-content > footer > div.footer {
+  overflow: hidden;
+  border-top: 2px solid;
+  padding: 0;
+  padding: 10px;
+  margin: 0 auto;
+  border-color: lightgrey;
+  background: white;
+  margin-bottom: 8px;
+}
+
+/* DOCUMENTATION AREA ELEMENTS STYLING */
+
+/* ANCHOR LINK SHORTCUT ON LEFT */
+div.custom-menu-data a.anchorjs-link {
+  margin-left: -18px !important;
+  top: -2px !important;
+  font-size: 20px !important;
+}
+
+/* VIEW EXAMPLE OF CLASS/ENUM BUTTON ON RIGHT */
+div.custom-menu-data.custom-menu-data-first > h5 > span.custom-class-example {
+  cursor: pointer;
+  position: absolute;
+  top: -75px;
+  float: right;
+  right: 0;
+}
+
+/* VIEW SOURCE LINK ON RIGHT */
+div.custom-source-code-link-container span.pull-right.mobile-hide > a {
+  z-index: 100;
+  position: absolute;
+  border: solid 1px salmon;
+  margin-top: 8px;
+  margin-top: -16px;
+  right: 8px;
+}
+
+/* CODE EDITOR */
+.codewrapper .lang-csharp.hljs {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+}
+
+/* HIDE ELEMENTS LOADING */
+.hideonload {
+  visibility: hidden;
+}
+
+/* RIGHTGRID REMOVAL */
+div.article.row.grid-right {
+  margin: 0;
+  padding: 0;
+}
+
 .markdown.level0.summary,
 .markdown.level1.summary,
 .markdown.level2.summary,
 .markdown.level3.summary,
 .markdown.level4.summary {
-  color: rgb(22, 120, 46);
-  font-size: 16px;
-  font-style: italic;
-  line-height: 1;
+  color: var(--grey);
   margin: 0;
   padding: 0;
+}
+
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+article h4 {
+  margin-top: 4px;
 }
 
 /*.h1-class-codewrapper span[data-text="public"],
@@ -69,45 +290,63 @@ img#logo {
   height: 0;
 }*/
 
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6 {
-  margin-top: 6px;
-  margin-bottom: 4px;
-}
-
-.codewrapper .lang-csharp.hljs {
-  white-space: pre-wrap !important;
-  word-break: break-word !important;
-}
-
-.hideonload {
-  visibility: hidden;
-}
-
-div.article-row-container {
-  margin-left: 300px;
-}
-div.article.row.grid-right {
-  margin: 0;
-  padding: 0;
-}
-
 /* CUSTOM - OWN IMPLEMENTED CSS CLASSES*/
-h1.h1-custom-display.className {
-  margin: 0;
-  padding: 0;
-  line-height: 1;
+
+/* CLASS COMMENT SUMMARY AT TOP */
+div.h1-class-summary-container {
+  margin-top: 2.5em;
 }
 
-.custom-menu-data {
-  width :100%;
+div.summary.h1-class-summary * {
+  color: var(--green);
+  font-family: system-ui;
+  font-size: 20px;
+}
+
+/* CLASS/ENUM NAME */
+h1.h1-custom-display {
+  margin-top: 0;
+  font-size: 32px;
+}
+
+h1.h1-custom-display > * {
+  color: var(--red);
+  font-size: 24px;
+}
+h1.h1-custom-display > .classNameHeading {
+  font-size: 28px;
+  color: var(--purple);
+}
+
+p.classMargin {
+  color: var(--grey);
+}
+
+/* CLASS CONTENT CONTAINER -  ALL METHODS, PROPERTIES AND MORE... */
+div.custom-class-content-inline {
+  padding-left: 30px;
+}
+
+/* MODAL: CUSTOM MENU DATA */
+div.custom-menu-data-first {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+div.custom-menu-data-first ~ .custom-menu-data {
+  background: red !important;
+  padding: 0;
+  margin: 0;
+}
+
+div.custom-menu-data {
+  width: 100%;
   position: relative;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin: 0;
+  margin-bottom: 40px;
+}
+div.custom-menu-summary-data {
+  margin: 0;
 }
 
 .custom-menu-data-container {
@@ -125,11 +364,25 @@ h1.h1-custom-display.className {
   z-index: 100;
 }
 
+.custom-keywords {
+  color: var(--red);
+}
+
 .custom-name-onclick,
 .custom-arguments-onclick,
 .custom-returntype-onclick {
-  color: rgb(130, 80, 223);
+  color: var(--red);
+  user-select: none;
   cursor: pointer;
+}
+.custom-returntype-onclick > * {
+  color: var(--red);
+  user-select: none;
+  cursor: pointer;
+}
+
+.custom-name-onclick {
+  color: var(--purple);
 }
 
 .syslib-tab-menu-data--close {

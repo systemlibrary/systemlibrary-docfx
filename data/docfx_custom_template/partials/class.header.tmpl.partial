@@ -1,6 +1,6 @@
 {{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}}
 
-<h6 style="margin-top: 10px; margin-bottom: 20px;"><strong>{{__global.namespace}}</strong>: {{{namespace.specName.0.value}}} <span class="h6-assembly-name" style="display: none; visibility: hidden;">{{assemblies.0}}.dll</span></h6>
+<h6 style="margin-top: 10px; margin-bottom: 20px;"><strong style='visibility: hidden; display:none;'>{{__global.namespace}}</strong>{{{namespace.specName.0.value}}} <span class="h6-assembly-name" style="display: none; visibility: hidden;">{{assemblies.0}}.dll</span></h6>
 
 <div class="markdown level0 conceptual h1-class-conceptual">{{{conceptual}}}</div>
 
@@ -117,7 +117,7 @@
 {{/remarks}}
 
 
-<div class="custom-menu-data">
+<div class="custom-menu-data custom-menu-data-first">
   <h5 id="{{id}}_examples"><span class="custom-class-example custom-class-example-onclick">{{__global.examples}}</span></h5>
 
   <div class="custom-menu-data-container">
@@ -211,6 +211,7 @@
       </div>
     {{/return}}
   </div>
-
 </div>
 {{/syntax}}
+
+<div class='custom-class-content-inline'>

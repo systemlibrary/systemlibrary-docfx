@@ -5,9 +5,17 @@
 {{#children}}
 <h3 id="{{id}}">{{>partials/classSubtitle}}</h3>
 {{#children}}
+
+{{#summary}}
+	<div class="custom-menu-summary-data">
+		<div class="markdown level1 summary member-summary">{{{summary}}}</div>
+		<div class="markdown level1 conceptual member-summary-conceptual">{{{conceptual}}}</div>
+	</div>
+{{/summary}}
+
 {{^_disableContribution}}
 {{#sourceurl}}
-<div class="custom-source-code-link-container">
+<div class="custom-source-code-link-container custom-source-code-link--{{id}}">
 <span class="small pull-right mobile-hide">
   <a href="{{sourceurl}}">{{__global.viewSource}}</a>
 </span>
@@ -102,14 +110,6 @@
     	{{/syntax}}
 	</div>
 </div>
-
-{{#summary}}
-	<div class="custom-menu-summary-data">
-		<div class="markdown level1 summary member-summary">{{{summary}}}</div>
-		<div class="markdown level1 conceptual member-summary-conceptual">{{{conceptual}}}</div>
-	</div>
-{{/summary}}
-
 
 
 {{#syntax}}
@@ -311,7 +311,20 @@
 			text = text.replace('>', '').replace('<', '').replace('.', '').replace(']', '').replace('[', '');
 			text = text.replace(' ', '').replace('(', '').replace(')', '').replace(',', '');
 			text = text.replace('=', '').replace('?', '').replace(';', '').replace('!', '');
-			return text.toLowerCase();
+
+			var genericIndex = text.indexOf('&lt');
+			if(genericIndex > 0) {
+				text = text.substring(0, genericIndex) + "_generic_";
+			} else {
+				text = text.replace('&', '');
+			}
+
+			text = text.toLowerCase();
+
+			if(text.includes('attributeusage')) {
+				text = 'attributeusage';
+			}
+			return text;
 		}
 		return "";
 	}
@@ -330,18 +343,33 @@
 			var parts = value.split(' ');
 			var classNameIndex = getClassNameIndex(parts);
 
+			var startIndex = 0;
+			var tempIndex = classNameIndex;
+			while(tempIndex > 1) {
+				startIndex++;
+				tempIndex--;
+			}
+
 			for (var j = 0; j < parts.length; j++) {
-				if (j > classNameIndex || parts[j] === "sealed" || parts[j] === "public") {
+
+				if(j < startIndex) {
+					parts[j] = "";
+				}
+				else if (j > classNameIndex || parts[j] === "sealed" || parts[j] === "public") {
 					parts[j] = "";
 				} else if (j === classNameIndex) {
 					parts[classNameIndex] = getClassName(parts, classNameIndex);
 				} else {
-					parts[j] = "<span class='classNameHeader className--" + cleanCssName(parts[j]) + "'>" + parts[j] + "</span> ";
+					var cleanedClassSuffix = cleanCssName(parts[j]);
+					if(cleanedClassSuffix !== null && cleanedClassSuffix.length > 1)	{
+						parts[j] = "<span class='classNameHeader className--" + cleanedClassSuffix + "'>" + parts[j] + "</span> ";
+						console.log(parts[j]);
+					}
 				}
 			}
 
 			var innerHtml = parts.join('');
-			items[i].innerHTML = innerHtml;
+			items[i].innerHTML = innerHtml + "<p class='classMargin'>{</p>";
 		}
 	}
 	//CLASS FUNCTIONS END
@@ -468,7 +496,7 @@
 			}
 
 			parts = parts.filter(x => typeof (x) !== 'undefined' && x !== "" && x !== null && x !== " ");
-
+			
 			/*var argumentsPart = parts[parts.length-1];
 			if(argumentsPart) {
 				argumentsPart = "<span class='custom-arguments custom-arguments-onclick'>" + argumentsPart + "</span>";
@@ -669,3 +697,6 @@
 
 
 </script>
+
+{{!end div: custom-class-content-inline}}
+</div>
