@@ -476,7 +476,14 @@
 			var value = items[i].innerHTML;
 			if (!value || value.length < 5 || !value.includes(' ') || !value.includes('(')) {
 				items[i].classList.add("non-function-element");
-				items[i].innerHTML = items[i].innerHTML.replace('public', '');
+				if(value.includes('{') && value.includes('}')) {
+					items[i].classList.add("property-name");
+				} else {
+					if(value.includes('protected ') || value.includes('private ') || value.includes('public ')) {
+						items[i].classList.add("field-name");
+					}
+				}
+				items[i].innerHTML = items[i].innerHTML.replace('public ', '').replace('override ', '').replace('protected ', '');
 				continue;
 			}
 
@@ -513,6 +520,12 @@
 			}
 
 			var innerHtml = parts.join(' ');
+
+			innerHtml = innerHtml.toString()
+				.replace('override', '')
+				.replace('override', '')
+				.replace('protected', '')
+				.replace('protected', '');
 			items[i].innerHTML = innerHtml;
 		}
 	}
@@ -681,13 +694,14 @@
 
 	//FUNCTION FUNCTIONS END
 	setTimeout(updateFunctionNames, 5);
-	setTimeout(updateClassNames, 5);
+	setTimeout(updateClassNames, 12);
 
 	setTimeout(() => addEventDisplayMenuDataOnClickPart('class-example'), 33);
 	setTimeout(() => addEventDisplayMenuDataOnClickPart('class-arguments'), 35);
 	setTimeout(() => addEventDisplayMenuDataOnClickPart('name'), 40);
-	setTimeout(() => addEventDisplayMenuDataOnClickPart('arguments'), 45);
-	setTimeout(() => addEventDisplayMenuDataOnClickPart('returntype'), 50);
+	//NOTE: Disabled clicking on args and return type - the sample should give enough info
+	//setTimeout(() => addEventDisplayMenuDataOnClickPart('arguments'), 45);
+	//setTimeout(() => addEventDisplayMenuDataOnClickPart('returntype'), 50);
 
 	setTimeout(() => hideAllEmptyMarkdowns(), 55);
 
