@@ -82,7 +82,7 @@ h3#fields {
   .navbar-header {
     text-align: center;
   }
- 
+
   div.navbar-header button.navbar-toggle {
     visibility: hidden;
     display: none;
@@ -217,12 +217,17 @@ div.container.body-content > footer > div.footer {
 }
 
 /* DOCUMENTATION AREA ELEMENTS STYLING */
-.col-md-10 .content h4 {
+article.content h4:not([class]) * {
   color: var(--red);
 }
 
-.col-md-10 .content h4:not([class]) p {
-  color: var(--red);
+article.content > section > p:not([class]) {
+  color: var(--grey);
+  margin-bottom: 8px;
+}
+
+article.content > section:not([class]) {
+  margin-bottom: 2em;
 }
 
 .content > h6 > a.xref {
