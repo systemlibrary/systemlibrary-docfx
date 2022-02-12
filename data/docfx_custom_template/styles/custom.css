@@ -7,6 +7,7 @@
   --dark-blue: #0a3069;
   --black: #24292f;
   --font: monospace;
+  --yellow: #fff8c5;
 }
 
 * {
@@ -129,7 +130,6 @@ div.article-row-container div.article {
 body > div#wrapper div.container.hide-when-search,
 body > div#wrapper div.container.body-content {
   margin: 0 auto;
-  border: solid 1px salmon;
 }
 
 /* BREAD CRUMBS */
@@ -218,9 +218,10 @@ div.custom-menu-data.custom-menu-data-first > h5 > span.custom-class-example {
 div.custom-source-code-link-container span.pull-right.mobile-hide > a {
   z-index: 100;
   position: absolute;
-  border: solid 1px salmon;
-  margin-top: 8px;
-  margin-top: -16px;
+  font-size: 14px;
+  font-family: var(--font);
+  border-bottom: 1px solid var(--grey);
+  margin-top: -18px;
   right: 8px;
 }
 
@@ -366,6 +367,15 @@ div.custom-menu-summary-data {
 
 .custom-keywords {
   color: var(--red);
+}
+
+.div.custom-menu-data > h4.h4-custom-functionName {
+  user-select: none;
+}
+
+div.custom-menu-summary-data:hover,
+div.custom-menu-data > h4:hover {
+  background: var(--yellow);
 }
 
 .custom-name-onclick,
