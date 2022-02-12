@@ -561,13 +561,18 @@ div.custom-menu-data > h4:hover {
 div.col-md-10 > article.content.wrap > ol:not([class]) {
   list-style: none;
 }
+div.col-md-10 > article.content.wrap > ol > li {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
 
-div.col-md-10
-  > article.content.wrap
-  > ol
-  > li {
-    color: var(--purple);
-    font-size: 14px;
+div.col-md-10 > article.content.wrap > ol > li:hover {
+  background: var(--yellow);
+}
+
+div.col-md-10 > article.content.wrap > ol > li > a {
+  color: var(--purple);
+  font-size: 14px;
 }
 
 div.col-md-10
