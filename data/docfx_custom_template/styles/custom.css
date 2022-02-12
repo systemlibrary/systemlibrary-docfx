@@ -432,3 +432,13 @@ div.custom-menu-data > h4:hover {
   width: 24px;
   background: aqua;
 }
+
+
+/* CUSTOMIZE CODE HIGHLIGHT */
+.codewrapper .hljs-keyword {
+  color: var(--red);
+}
+
+.codewrapper .hljs-comment {
+  color: var(--green);
+}
