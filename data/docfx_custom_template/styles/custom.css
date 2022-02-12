@@ -321,12 +321,14 @@ h1.h1-custom-display > .classNameHeading {
 
 p.classMargin {
   color: var(--grey);
+  font-size: 20px !important;
 }
 
 /* CLASS CONTENT CONTAINER -  ALL METHODS, PROPERTIES AND MORE... */
 div.custom-class-content-inline {
   padding-left: 30px;
 }
+
 
 /* MODAL: CUSTOM MENU DATA */
 div.custom-menu-data-first {

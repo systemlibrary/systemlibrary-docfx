@@ -694,9 +694,9 @@
 	setTimeout(addEventsToTabCloseButtons, 60);
 
 	//setTimeout(removeEmptyPopups, 75);
-
-
 </script>
 
 {{!end div: custom-class-content-inline}}
 </div>
+
+<p class='classMargin'>}</p>
