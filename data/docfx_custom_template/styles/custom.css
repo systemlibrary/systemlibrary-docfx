@@ -14,7 +14,7 @@
   font-family: var(--font);
   color: var(--black);
   line-height: 140%;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 /* HIDE DEFAULT COMPONENTS */
@@ -81,7 +81,7 @@ h3#fields {
 }
 
 #wrapper > header span.navbar-title {
-  font-size: 32px;
+  font-size: 20px;
   padding-left: 14px;
 }
 
@@ -197,12 +197,16 @@ div.container.body-content > footer > div.footer {
 }
 
 /* DOCUMENTATION AREA ELEMENTS STYLING */
+.content > h6 > a.xref {
+  color: var(--black);
+  font-size: 14px;
+}
 
 /* ANCHOR LINK SHORTCUT ON LEFT */
 div.custom-menu-data a.anchorjs-link {
   margin-left: -18px !important;
   top: -2px !important;
-  font-size: 20px !important;
+  font-size: 18px !important;
 }
 
 /* VIEW EXAMPLE OF CLASS/ENUM BUTTON ON RIGHT */
@@ -250,6 +254,14 @@ div.article.row.grid-right {
   color: var(--grey);
   margin: 0;
   padding: 0;
+}
+
+.markdown.level0.summary *,
+.markdown.level1.summary *,
+.markdown.level2.summary *,
+.markdown.level3.summary *,
+.markdown.level4.summary * {
+  color: var(--grey);
 }
 
 h3,
@@ -301,27 +313,32 @@ div.h1-class-summary-container {
 div.summary.h1-class-summary * {
   color: var(--green);
   font-family: system-ui;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 /* CLASS/ENUM NAME */
 h1.h1-custom-display {
   margin-top: 0;
-  font-size: 32px;
+  font-size: 18px;
+}
+h1.h1-custom-display span.class-generic {
+  font-size: 24px;
+  margin-left: 2px;
 }
 
 h1.h1-custom-display > * {
   color: var(--red);
-  font-size: 24px;
+  font-size: 18px;
 }
+
 h1.h1-custom-display > .classNameHeading {
-  font-size: 28px;
+  font-size: 24px;
   color: var(--purple);
 }
 
 p.classMargin {
   color: var(--grey);
-  font-size: 20px !important;
+  font-size: 16px !important;
 }
 
 /* CLASS CONTENT CONTAINER -  ALL METHODS, PROPERTIES AND MORE... */
@@ -348,6 +365,11 @@ div.custom-menu-data {
   margin: 0;
   margin-bottom: 40px;
 }
+
+.custom-menu-data > h4.h4-custom-functionName.non-function-element {
+  font-size: 14px;
+}
+
 div.custom-menu-summary-data {
   margin: 0;
 }
