@@ -557,3 +557,31 @@ div.custom-menu-data > h4:hover {
 .codewrapper .hljs-comment {
   color: var(--green);
 }
+
+div.col-md-10 > article.content.wrap > ol:not([class]) {
+  list-style: none;
+}
+
+div.col-md-10
+  > article.content.wrap
+  > ol
+  > li {
+    color: var(--purple);
+    font-size: 14px;
+}
+
+div.col-md-10
+  > article.content.wrap
+  > ol
+  > li.index-navigation-item--namespace {
+  margin-top: 1em;
+}
+
+div.col-md-10
+  > article.content.wrap
+  > ol
+  > li.index-navigation-item--namespace
+  * {
+  color: var(--black);
+  font-size: 18px;
+}
