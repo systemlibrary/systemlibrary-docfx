@@ -618,7 +618,22 @@
 							//Hide current Menu Data if clicking the "function name" again
 							menuData.style.display = "none";
 							menuData.classList.toggle('active');
+
+							//Show footer when modal is not active
+							var footer = document.getElementById("page-footer");
+							if(footer && footer.classList) {
+								if(footer.classList.contains('hidden')) {
+									footer.classList.toggle('hidden');
+								}
+							}
 						} else {
+							//Hide footer when modal is active
+							var footer = document.getElementById("page-footer");
+							if(footer && footer.classList) {
+								if(!footer.classList.contains('hidden')) {
+									footer.classList.toggle('hidden');
+								}
+							}
 							//Hide all existing Menu Data's
 							var menuDatas = document.getElementsByClassName(menuDataClass);
 							if (menuDatas && menuDatas.length) {
