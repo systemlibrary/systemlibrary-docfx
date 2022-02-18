@@ -260,9 +260,15 @@
 	}
 
 	//CLASS FUNCTIONS
-	function getClassNameIndex(parts) {
+	function getClassOrInterfaceNameIndex(parts) {
 		for (var i = 0; i < parts.length; i++) {
 			if (parts[i] === "class") {
+				return i + 1;
+			}
+			if(parts[i] === "interface") {
+				return i + 1;
+			}
+			if(parts[i] === "enum") {
 				return i + 1;
 			}
 		}
@@ -331,17 +337,16 @@
 
 	function updateClassNames() {
 		var items = getItems(".h1-custom-display.className");
-
+		//.text-break.h1-class-header
 		for (var i = 0; i < items.length; i++) {
 			var value = items[i].innerHTML;
-
 			if (!value || value.length < 4 || !value.includes(' ')) {
 				console.warn("Class is wrong: " + value);
 				continue;
 			}
 
 			var parts = value.split(' ');
-			var classNameIndex = getClassNameIndex(parts);
+			var classNameIndex = getClassOrInterfaceNameIndex(parts);
 
 			var startIndex = 0;
 			var tempIndex = classNameIndex;
@@ -363,7 +368,6 @@
 					var cleanedClassSuffix = cleanCssName(parts[j]);
 					if(cleanedClassSuffix !== null && cleanedClassSuffix.length > 1)	{
 						parts[j] = "<span class='classNameHeader className--" + cleanedClassSuffix + "'>" + parts[j] + "</span> ";
-						console.log(parts[j]);
 					}
 				}
 			}

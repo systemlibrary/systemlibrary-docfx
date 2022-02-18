@@ -1,19 +1,19 @@
 # REQUIRED OPTIONS
-$csprojFileFullPath = "C:\syslib\systemlibrary-core-common-web\source\SystemLibrary.Common.Web\SystemLibrary.Common.Web.csproj"
+$csprojFileFullPath = "C:\syslib\systemlibrary-common-episerver\source\SystemLibrary.Common.Episerver\SystemLibrary.Common.Episerver.csproj"
 
-$outputFolderFullPath = "C:\syslib\systemlibrary-core-common-web\docs\" # set to $null if you want outputFolder to be within the project folder
-#$outputFolderFullPath = "C:\temp\Docs\"
+#$outputFolderFullPath = "C:\syslib\systemlibrary-common-episerver\docs\" # set to $null if you want outputFolder to be within the project folder
+$outputFolderFullPath = "C:\temp\Docs\"
 
 $docfxConsoleExeFullPath = "C:\syslib\Packages\docfx.console.2.58.0\tools\docfx.exe" # download docfx.console as nuget package to some project, any project, and reference the .exe here
 
-$siteTitle = "System Library Common Web"
-$footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-core-common-web"
-$footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Web/"
+$siteTitle = "System Library Common Episerver"
+$footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-episerver/"
+$footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Episerver/"
 $footerWebsiteUrl = "https://www.systemlibrary.com/"
-$footerSiteTitle = "System Library Common Web"
+$footerSiteTitle = "System Library Common Episerver"
 
-$relativeHostingPath = "/systemlibrary-core-common-web/"
-#$relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
+#$relativeHostingPath = "/systemlibrary-common-episerver/"
+$relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
 # If using 'github pages' it should be the name of the repo with prefix and suffix /
 # It is the path of where css/js is loaded from, from the "root" of your IIS site
 # Simply checking network tab in chrome while browsing your site will reveal what it should be or should not be

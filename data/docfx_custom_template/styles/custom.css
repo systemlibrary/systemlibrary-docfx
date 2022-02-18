@@ -222,7 +222,7 @@ div.container.body-content > footer > div.footer {
 
 /* DOCUMENTATION AREA ELEMENTS STYLING */
 article.content h4:not([class]) * {
-  color: var(--red);
+  color: var(--purple);
 }
 
 article.content > section > p:not([class]) {
@@ -253,7 +253,7 @@ div.custom-menu-data a.anchorjs-link {
 div.custom-menu-data.custom-menu-data-first > h5 > span.custom-class-example {
   cursor: pointer;
   position: absolute;
-  top: -75px;
+  top: -58px;
   float: right;
   right: 0;
 }
@@ -299,6 +299,11 @@ div.article.row.grid-right {
   .article.row.grid {
     margin-top: 8px !important;
   }
+}
+
+div.custom-menu-summary-data > .markdown.level1.summary.member-summary > p {
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 
 .markdown.level0.summary,
@@ -444,6 +449,10 @@ div.custom-class-content-inline {
 }
 
 /* MODAL: CUSTOM MENU DATA */
+.custom-menu-data > div.custom-menu-data-container {
+  padding-bottom: 3em !important;
+}
+
 div.custom-menu-data-first {
   margin: 0 !important;
   padding: 0 !important;
@@ -573,6 +582,11 @@ div.custom-menu-data > h4:hover {
   color: var(--red);
   font-family: var(--font-code);
   font-weight: 500;
+}
+
+.custom-keywords,
+.custom-returntype {
+  padding-right: 2px;
 }
 
 .custom-name {
