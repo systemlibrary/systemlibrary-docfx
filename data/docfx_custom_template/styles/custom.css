@@ -102,7 +102,7 @@ article.content {
 }
 @media (min-width: 1380px) {
   div.article-row-container {
-    margin-left: 330px;
+    margin-left: 385px;
   }
 }
 @media (max-width: 1379px) {
@@ -167,7 +167,7 @@ body > div#wrapper div.container.hide-when-search > ul {
 @media (min-width: 1380px) {
   div.sidenav > div.sidetoggle > #sidetoc > div > div.sidefilter,
   div.sidenav > div.sidetoggle > #sidetoc > div > div.sidetoc {
-    width: 330px;
+    width: 385px;
   }
 }
 @media (max-width: 768px) {
@@ -195,6 +195,10 @@ div.sidenav > div.sidetoggle > #sidetoc div.sidetoc a,
 div.sidenav > div.sidetoggle > #sidetoc div.sidetoc > .toc a {
   color: var(--dark-blue);
   font-size: 16px;
+}
+
+div.sidenav > div.sidetoggle > #sidetoc div.sidetoc > .toc ul.nav.level2 a {
+  font-size: 14px;
 }
 
 img#logo {
@@ -436,7 +440,12 @@ h1.h1-custom-display span.class-generic {
   font-family: var(--font-code);
   font-weight: 500;
 }
-
+h1.h1-custom-display {
+  color: var(--red);
+  font-size: 16px;
+  font-family: var(--font-code);
+  font-weight: 500;
+}
 h1.h1-custom-display > * {
   color: var(--red);
   font-size: 16px;
@@ -462,7 +471,7 @@ p.classMargin--end {
 
 /* CLASS CONTENT CONTAINER -  ALL METHODS, PROPERTIES AND MORE... */
 div.custom-class-content-inline {
-  padding-left: 30px;
+  padding-left: 38px;
 }
 @media screen and (max-width: 768px) {
   .custom-class-content-inline {
@@ -583,6 +592,11 @@ div.custom-menu-data > h4:hover {
   cursor: pointer;
   user-select: none;
   text-decoration: underline;
+}
+
+.docfxhide-attribute {
+  display: none;
+  visibility: hidden;
 }
 
 .custom-class-example:hover,
