@@ -127,7 +127,7 @@ function getSetupNavigationListItem() {
     $installFileFullPath = $projectDirectory + "Install.md";
 
     if ((Test-Path -Path $installFileFullPath) -eq $true) {
-        $href = ($relativeHostingPath + "\Install.html")
+        $hrefInstall = ($relativeHostingPath + "\Install.html");
 
         if ($outputFolderFullPath -ne $null -and $outputFolderFullPath -ne "") { 
             $mdContent = Get-Content -Path $installFileFullPath
@@ -136,19 +136,18 @@ function getSetupNavigationListItem() {
 
             $scriptsDir = $PSScriptRoot + "\..\scripts\";
             
-            $html = Get-Content -Path ($scriptsDir + "Install.template.html");
+            $htmlContent = Get-Content -Path ($scriptsDir + "Install.template.html");
 
-            [string]$htmlMdContent = $html.Replace("@md-content-encoded", $mdContentEncoded);
-
+            [string]$htmlMdContent = $htmlContent.Replace("@md-content-encoded", $mdContentEncoded);
 
             New-Item -Path ($outputFolderFullPath + "Install.html") -ItemType "file" -Value "$htmlMdContent" -Force -ErrorAction SilentlyContinue
 
             Copy-Item -Path ($scriptsDir +"2.0.0.showdown.min.js") -Destination ($outputFolderFullPath + "2.0.0.showdown.min.js") -Force -Recurse -ErrorAction SilentlyContinue
         }
 
-        return "<li class='install' title='Install'><a class='index-navigation-item' href='" + $href + "'>Install Documentation</a></li>"
+        return "<li class='install' title='Install'><a class='index-navigation-item' href='" + $hrefInstall + "'>Install Documentation</a></li>";
     }
-    return "<li>Install.md is missing at root of project</li>";
+    return "";
 }
 
 function getNavigationListItem($namespaces, $baseName, $href) {
