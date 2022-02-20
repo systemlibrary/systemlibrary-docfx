@@ -732,4 +732,4 @@
 {{!end div: custom-class-content-inline}}
 </div>
 
-<p class='classMargin'>}</p>
+<p class='classMargin classMargin--end'>}</p>
