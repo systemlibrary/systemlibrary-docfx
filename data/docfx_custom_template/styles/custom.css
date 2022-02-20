@@ -226,6 +226,10 @@ div.container.body-content > footer > div.footer {
 }
 
 /* DOCUMENTATION AREA ELEMENTS STYLING */
+.content.wrap > h1 {
+  margin-bottom: 16px;
+}
+
 article.content h4:not([class]) * {
   color: var(--purple);
 }
