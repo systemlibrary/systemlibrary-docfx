@@ -1,12 +1,12 @@
 <html>
 
 <head>
-	<meta charset='utf-8'>
-	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-	<meta name='viewport' content='width=device-width'>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width'>
     <script src='2.0.0.showdown.min.js'></script>
     <style>
-	    /* Credits: https://gist.github.com/timblair/1171018*/
+        /* Credits: https://gist.github.com/timblair/1171018*/
         body {
             font-family: Georgia, Palatino, serif;
             color: #444444;
@@ -22,6 +22,7 @@
             margin-top: 2.25em;
             min-height: unset;
         }
+
         h1,
         h2,
         h3,
@@ -144,32 +145,36 @@
             padding: 0.5em 1em;
             border: 1px solid #CCC;
         }
-        #md-content > ol {
+
+        #md-content>ol {
             padding-left: 1.5em;
         }
-        #md-content > ul {
+
+        #md-content>ul {
             padding-left: 1.5em;
         }
+
         body {
             margin: 0 auto !important;
         }
+
         a.navbar-brand {
             display: inline-block !important;
             width: 100%;
         }
 
-        a.navbar-brand > img#logo {
+        a.navbar-brand>img#logo {
             width: unset !important;
             max-width: 50%;
             display: inline !important;
         }
-        a.navbar-brand > span.navbar-title {
+
+        a.navbar-brand>span.navbar-title {
             display: inline !important;
             color: white !important;
         }
-        
     </style>
-	
+
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
     <link rel="stylesheet" href="styles/docfx.css">
@@ -178,29 +183,30 @@
 </head>
 
 <body>
-<div id="wrapper">
-      <header>
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              
-              <a class="navbar-brand" href="index.html">
-                <img id="logo" class="svg" src="logo.png" alt="">
-                <span class="navbar-title">Back to Home</span>
-              </a>
-		  </div>
-	  </div>
-	  </nav>
-	  </header>
-		<div id='md-content'></div>
-	</div>
+    <div id="wrapper">
+        <header>
+            <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <a class="navbar-brand" href="index.html">
+                            <img id="logo" class="svg" src="logo.png" alt="">
+                            <span class="navbar-title">Back to Home</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div id='md-content'></div>
+    </div>
     <script>var mdcontent = "@md-content-encoded";</script>
+
     <script>
         var decodeHTML = function (html) {
             var txt = document.createElement('textarea');
@@ -213,5 +219,26 @@
 
         var container = document.getElementById('md-content');
         container.innerHTML = html;
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+
+  <script>
+        var allCodes = document.getElementsByTagName('code');
+        if (allCodes !== null && allCodes.length && allCodes.length > 0) {
+            for (var i = 0; i < allCodes.length; i++) {
+                var code = allCodes[i];
+                if (code && code.classList === null || code.classList.length === 0) {
+                    var parent = code.parentNode;
+                    var pre = document.createElement('pre');
+                    var div = document.createElement('div');
+                    parent.replaceChild(pre, code);
+                    pre.appendChild(code);
+                    code.classList.add('language-csharp'); code.classList.add('hljs');
+                }
+            }
+            setTimeout(() => hljs.highlightAll(), 10);
+        }
     </script>
 </body>

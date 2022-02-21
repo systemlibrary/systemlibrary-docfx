@@ -140,9 +140,9 @@ function getSetupNavigationListItem() {
 
             [string]$htmlMdContent = $htmlContent.Replace("@md-content-encoded", $mdContentEncoded);
 
-            New-Item -Path ($outputFolderFullPath + "Install.html") -ItemType "file" -Value "$htmlMdContent" -Force -ErrorAction SilentlyContinue
+            $res1 = New-Item -Path ($outputFolderFullPath + "Install.html") -Value "$htmlMdContent" -Force -ErrorAction SilentlyContinue
 
-            Copy-Item -Path ($scriptsDir +"2.0.0.showdown.min.js") -Destination ($outputFolderFullPath + "2.0.0.showdown.min.js") -Force -Recurse -ErrorAction SilentlyContinue
+            $res2 = Copy-Item -Path ($scriptsDir + "2.0.0.showdown.min.js") -Destination ($outputFolderFullPath + "2.0.0.showdown.min.js") -Force -Recurse -ErrorAction SilentlyContinue
         }
 
         return "<li class='install' title='Install'><a class='index-navigation-item' href='" + $hrefInstall + "'>Install Documentation</a></li>";
