@@ -408,6 +408,16 @@ for full license information.}}
 	function functionIsGeneric(parts, functionNameIndex) {
 		var part = parts[functionNameIndex];
 		var isGeneric = part.indexOf("&gt;") >= 0 || part.indexOf("&lt;") >= 0;
+
+		if(isGeneric) {
+			var genericStart = part.indexOf("&gt;");
+			var argumentsStart = part.indexOf('(');
+
+			if(argumentsStart > 0 && genericStart > 0)
+			{
+				return genericStart < argumentsStart;
+			}
+		}
 		return isGeneric;
 	}
 

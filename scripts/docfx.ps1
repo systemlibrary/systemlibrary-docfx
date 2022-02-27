@@ -54,6 +54,17 @@ else {
     }
 }
 
+# CLEAN OUTPUT FOLDER
+try {
+    if ($outputFolderFullPath -ne $null -and $outputFolderFullPath -ne "") {
+        Remove-Item -Recurse -Force $outputFolderFullPath -ErrorAction SilentlyContinue
+    }
+    Out "Cleaned up output dir..."
+}
+catch {
+    Out "Error cleaning old files in the outfolder, continue..."
+}
+
 # ADJUST OUTPUT FILES
 Move-Item -Path $projectSiteDirectory$projectName"_index.html" -Destination $projectSiteDirectory$projectName\index.html -Force
 Out ("ADJUST: " + $projectSiteDirectory + $projectName)
@@ -130,13 +141,17 @@ function getSetupNavigationListItem() {
         $hrefInstall = ($relativeHostingPath + "\Install.html");
 
         if ($outputFolderFullPath -ne $null -and $outputFolderFullPath -ne "") { 
-            $mdContent = Get-Content -Path $installFileFullPath
+            $mdContent = Get-Content -Path $installFileFullPath -Raw
+
+            $mdContent = $mdContent.Replace('`', "!====!");
+            $mdContent = $mdContent.Replace("""", "!????!");
+            $mdContent = $mdContent.Replace("'", "!@@@@!");
 
             $mdContentEncoded = [System.Net.WebUtility]::HtmlEncode($mdContent)
 
             $scriptsDir = $PSScriptRoot + "\..\scripts\";
             
-            $htmlContent = Get-Content -Path ($scriptsDir + "Install.template.html");
+            $htmlContent = Get-Content -Path ($scriptsDir + "Install.template.html") -Raw;
 
             [string]$htmlMdContent = $htmlContent.Replace("@md-content-encoded", $mdContentEncoded);
 
