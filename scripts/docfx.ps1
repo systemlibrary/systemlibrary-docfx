@@ -157,7 +157,11 @@ function getSetupNavigationListItem() {
 
             $res1 = New-Item -Path ($outputFolderFullPath + "Install.html") -Value "$htmlMdContent" -Force -ErrorAction SilentlyContinue
 
-            $res2 = Copy-Item -Path ($scriptsDir + "2.0.0.showdown.min.js") -Destination ($outputFolderFullPath + "2.0.0.showdown.min.js") -Force -Recurse -ErrorAction SilentlyContinue
+            # $res2 = Copy-Item -Path ($scriptsDir + "2.0.0.showdown.min.js") -Destination ($outputFolderFullPath + "2.0.0.showdown.min.js") -Force -Recurse -ErrorAction SilentlyContinue
+            $res3 = Copy-Item -Path ($scriptsDir + "remarkable.js") -Destination  ($outputFolderFullPath + "remarkable.js") -Force -Recurse -ErrorAction SilentlyContinue
+
+            $res3 = Copy-Item -Path ($scriptsDir + "highlight.11.4.0.min.js") -Destination  ($outputFolderFullPath + "highlight.11.4.0.min.js") -Force -Recurse -ErrorAction SilentlyContinue
+            $res3 = Copy-Item -Path ($scriptsDir + "highlight.11.4.0.min.css") -Destination  ($outputFolderFullPath + "highlight.11.4.0.min.css") -Force -Recurse -ErrorAction SilentlyContinue
         }
 
         return "<li class='install' title='Install'><a class='index-navigation-item' href='" + $hrefInstall + "'>Install Documentation</a></li>";
