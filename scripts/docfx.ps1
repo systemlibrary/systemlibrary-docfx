@@ -9,7 +9,6 @@ $projectDisplayName = GetFileDisplayName $csprojFileFullPath
 $logFileFullPath = ($projectDirectory + $projectName + "-log.txt")
 
 $docfxJson = ($projectDirectory + $projectName + "_docfx.json")
-Out "Initialized"
 
 try {
     Copy-Item -Path $docfxDataDir"docfx.json" -Destination $docfxJson -Force
@@ -26,8 +25,8 @@ try {
     ReplaceTextInFile $docfxJson "[%projectDirectory%]" $projectDirectory.replace('\', '/')
 }
 catch {
-    Warn ("Copy to " + $destinationDir + " from " + $currentDir + " failed")
-    Err "Error occured during copying temp files to your project. Please make sure they do not exist: docfx.json, toc.yml, _docfx_filter.yml, and index.md"
+    Warn ("Copy to " + $projectDirectory + $projectName + " failed")
+    Err "Error occured during copying temp files to your project folder. Do you have a typo in project directory? Some path or file is invalid/does not exist"
     exit
 }
 
@@ -53,6 +52,17 @@ else {
             Write-Host $res
         }
     }
+}
+
+# CLEAN OUTPUT FOLDER
+try {
+    if ($outputFolderFullPath -ne $null -and $outputFolderFullPath -ne "") {
+        Remove-Item -Recurse -Force $outputFolderFullPath -ErrorAction SilentlyContinue
+    }
+    Out "Cleaned up output dir..."
+}
+catch {
+    Out "Error cleaning old files in the outfolder, continue..."
 }
 
 # ADJUST OUTPUT FILES
@@ -124,8 +134,41 @@ function getCssClass($ns, $baseName) {
     return $cssClass
 }
 
+function getSetupNavigationListItem() {
+    $installFileFullPath = $projectDirectory + "Install.md";
 
-#$relativeHostingPath + $($_.Name)
+    if ((Test-Path -Path $installFileFullPath) -eq $true) {
+        $hrefInstall = ($relativeHostingPath + "\Install.html");
+
+        if ($outputFolderFullPath -ne $null -and $outputFolderFullPath -ne "") { 
+            $mdContent = Get-Content -Path $installFileFullPath -Raw
+
+            $mdContent = $mdContent.Replace('`', "!====!");
+            $mdContent = $mdContent.Replace("""", "!????!");
+            $mdContent = $mdContent.Replace("'", "!@@@@!");
+
+            $mdContentEncoded = [System.Net.WebUtility]::HtmlEncode($mdContent)
+
+            $scriptsDir = $PSScriptRoot + "\..\scripts\";
+            
+            $htmlContent = Get-Content -Path ($scriptsDir + "Install.template.html") -Raw;
+
+            [string]$htmlMdContent = $htmlContent.Replace("@md-content-encoded", $mdContentEncoded);
+
+            $res1 = New-Item -Path ($outputFolderFullPath + "Install.html") -Value "$htmlMdContent" -Force -ErrorAction SilentlyContinue
+
+            # $res2 = Copy-Item -Path ($scriptsDir + "2.0.0.showdown.min.js") -Destination ($outputFolderFullPath + "2.0.0.showdown.min.js") -Force -Recurse -ErrorAction SilentlyContinue
+            $res3 = Copy-Item -Path ($scriptsDir + "remarkable.js") -Destination  ($outputFolderFullPath + "remarkable.js") -Force -Recurse -ErrorAction SilentlyContinue
+
+            $res3 = Copy-Item -Path ($scriptsDir + "highlight.11.4.0.min.js") -Destination  ($outputFolderFullPath + "highlight.11.4.0.min.js") -Force -Recurse -ErrorAction SilentlyContinue
+            $res3 = Copy-Item -Path ($scriptsDir + "highlight.11.4.0.min.css") -Destination  ($outputFolderFullPath + "highlight.11.4.0.min.css") -Force -Recurse -ErrorAction SilentlyContinue
+        }
+
+        return "<li class='install' title='Install'><a class='index-navigation-item' href='" + $hrefInstall + "'>Install Documentation</a></li>";
+    }
+    return "";
+}
+
 function getNavigationListItem($namespaces, $baseName, $href) {
     $cssClass = getCssClass $namespaces $baseName
 
@@ -147,7 +190,7 @@ function getName($class, $list) {
     return ""
 }
 
-$htmlDocumentationList = "<ol>" + (
+$htmlDocumentationList = "<ol>" + (getSetupNavigationListItem) + (
     $names | ForEach-Object {
         $baseName = ($_)
         $name = getName $baseName $documentationFiles
