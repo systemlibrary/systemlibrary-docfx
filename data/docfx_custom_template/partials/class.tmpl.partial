@@ -507,7 +507,7 @@ for full license information.}}
 				continue;
 			}
 
-			if (value.includes('[DocfxHide]')) {
+			if (value.includes('[DocFxHide]')) {
 				items[i].classList.add("docfxhide-attribute");
 				continue;
 			}

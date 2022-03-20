@@ -10,6 +10,8 @@ $logFileFullPath = ($projectDirectory + $projectName + "-log.txt")
 
 $docfxJson = ($projectDirectory + $projectName + "_docfx.json")
 
+$ignoreClass = New-Object System.Collections.ArrayList
+
 try {
     Copy-Item -Path $docfxDataDir"docfx.json" -Destination $docfxJson -Force
     Copy-Item -Path $docfxDataDir"toc.yml" -Destination $projectDirectory$projectName"_toc.yml" -Force
@@ -67,7 +69,6 @@ catch {
 
 # ADJUST OUTPUT FILES
 Move-Item -Path $projectSiteDirectory$projectName"_index.html" -Destination $projectSiteDirectory$projectName\index.html -Force
-Out ("ADJUST: " + $projectSiteDirectory + $projectName)
 Out "Copied index.html to the docs folder"
 # CREATE INDEX NAVIGATION LIST
 $documentationFiles = GetFiles $projectSiteDirectory\$projectName
@@ -196,8 +197,21 @@ $htmlDocumentationList = "<ol>" + (getSetupNavigationListItem) + (
         $name = getName $baseName $documentationFiles
         $href = ($relativeHostingPath + $name)
 
-        $li = getNavigationListItem $namespaces $baseName $href
-        $($li)
+        $className = $baseName.split(".")[-1]
+        $ignored = $false
+        if ($ignoreClassesContaining -ne $null -and $ignoreClassesContaining.Count -gt 0) {
+            foreach ($c in $ignoreClassesContaining) {
+                if ($className.Contains($c)) {
+                    $ignoreClass.Add($className)
+                    $ignored = $true
+                }
+            }
+        }
+
+        if ($ignored -eq $false) {
+            $li = getNavigationListItem $namespaces $baseName $href
+            $($li)
+        }
     }
 ) + "</ol>"
 
@@ -232,7 +246,7 @@ Out "Replaced all relative hosting paths in all html files"
 # MOVE TO PROJECT SITE ROOT
 Move-Item -Path $projectSiteDirectory$projectName\* -Destination $projectSiteDirectory -Force
 Remove-Item -Recurse -Force $projectSiteDirectory$projectName -ErrorAction SilentlyContinue
-Out "Moved all files to root site"
+Out "Moved all files to site directory"
 
 # COPY TO OUTPUT FOLDER
 try {
@@ -250,6 +264,16 @@ catch {
     Err "Error occured reading and moving all site files to outputfolder - Try again? Delete the folder " + $outputFolderFullPath + ", then try again?"
     exit
 }
+
+if ($ignoreClass -ne $null -and $ignoreClass.Count -gt 0) {
+    foreach ($c in $ignoreClass) {
+        if ($c -ne $null -and $c -ne "") {
+            $fullRemovalPath = ($outputFolderFullPath + "*" + $c + "*")
+            Remove-Item $fullRemovalPath -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
+    
 
 # CLEANUP
 if ($cleanUp -eq $true) {
