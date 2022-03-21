@@ -178,7 +178,6 @@ function getNavigationListItem($namespaces, $baseName, $href) {
     if ($cssClass -ne "") {
         $title = "namespace"
     }
-
     return "<li class='" + $cssClass + "' title='" + $title + "'><a class='index-navigation-item' href='" + $href + "'>" + $baseName + "</a></li>"
 }
 
@@ -191,6 +190,18 @@ function getName($class, $list) {
     return ""
 }
 
+function addClassName($ignoreClassesContaining, $className) {
+    if ($ignoreClassesContaining -ne $null -and $ignoreClassesContaining.Count -gt 0) {
+        foreach ($c in $ignoreClassesContaining) {
+            if ($className.Contains($c)) {
+                $ignoreClass.Add($className)
+                return $true
+            }
+        }
+    }
+    return $false
+}
+
 $htmlDocumentationList = "<ol>" + (getSetupNavigationListItem) + (
     $names | ForEach-Object {
         $baseName = ($_)
@@ -198,23 +209,18 @@ $htmlDocumentationList = "<ol>" + (getSetupNavigationListItem) + (
         $href = ($relativeHostingPath + $name)
 
         $className = $baseName.split(".")[-1]
-        $ignored = $false
-        if ($ignoreClassesContaining -ne $null -and $ignoreClassesContaining.Count -gt 0) {
-            foreach ($c in $ignoreClassesContaining) {
-                if ($className.Contains($c)) {
-                    $ignoreClass.Add($className)
-                    $ignored = $true
-                }
-            }
-        }
 
-        if ($ignored -eq $false) {
+        $ignore = addClassName $ignoreClassesContaining $className
+
+        if ($ignore -eq $true) {
+            Out ("Ignoring: " + $className)
+        }
+        else {
             $li = getNavigationListItem $namespaces $baseName $href
             $($li)
         }
-    }
+    } 
 ) + "</ol>"
-
 
 $projectIndexHtml = ($projectSiteDirectory + "\" + $projectName + "\index.html")
 
@@ -266,14 +272,20 @@ catch {
 }
 
 if ($ignoreClass -ne $null -and $ignoreClass.Count -gt 0) {
+    $tocFullPath = ($outputFolderFullPath + "toc.html")
+
     foreach ($c in $ignoreClass) {
         if ($c -ne $null -and $c -ne "") {
             $fullRemovalPath = ($outputFolderFullPath + "*" + $c + "*")
             Remove-Item $fullRemovalPath -Force -ErrorAction SilentlyContinue
+
+            $old =("title=""" + $c + """")
+            $new = ($old + " class=""docfxhide-attribute""")
+            
+            ReplaceTextInFile $tocFullPath $old $new
         }
     }
 }
-    
 
 # CLEANUP
 if ($cleanUp -eq $true) {

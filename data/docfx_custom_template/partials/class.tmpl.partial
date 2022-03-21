@@ -7,6 +7,7 @@ for full license information.}}
 <h3 id="{{id}}">{{>partials/classSubtitle}}</h3>
 {{#children}}
 
+<div class="custom-container">
 {{#summary}}
 <div class="custom-menu-summary-data">
 	<div class="markdown level1 summary member-summary">{{{summary}}}</div>
@@ -109,6 +110,7 @@ for full license information.}}
 		{{/return}}
 		{{/syntax}}
 	</div>
+</div>
 </div>
 
 
@@ -508,7 +510,16 @@ for full license information.}}
 			}
 
 			if (value.includes('[DocFxHide]')) {
-				items[i].classList.add("docfxhide-attribute");
+				let parent = items[i].parentNode;
+				if(parent) {
+					if(parent.parentNode !== null && parent.parentNode.classList.contains("custom-container")) {
+						parent.parentNode.classList.add("docfxhide-attribute");
+					} else {
+						parent.classList.add("docfxhide-attribute");
+					}
+				} else {
+					items[i].classList.add("docfxhide-attribute");
+				}
 				continue;
 			}
 
