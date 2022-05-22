@@ -2,6 +2,6 @@
 
 <a class="navbar-brand" href="{{_rel}}[%relativeHostingPath%]index.html">
   <img id="logo" class="svg" src="{{_rel}}{{{_appLogoPath}}}{{^_appLogoPath}}[%relativeHostingPath%]logo.png{{/_appLogoPath}}" alt="{{_appName}}" >
+  <span class="navbar-title">[%siteTitle%]</span>
 </a>
 
-<span class="navbar-title">[%siteTitle%]</span>

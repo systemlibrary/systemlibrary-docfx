@@ -12,6 +12,8 @@ $footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Web/"
 $footerWebsiteUrl = "https://www.systemlibrary.com/"
 $footerSiteTitle = "System Library Common Web"
 
+$ignoreClassesContaining = @('DocFxHide')
+
 $relativeHostingPath = "/systemlibrary-common-web/"
 #$relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
 # If using 'github pages' it should be the name of the repo with prefix and suffix /

@@ -178,7 +178,8 @@ function getNavigationListItem($namespaces, $baseName, $href) {
     if ($cssClass -ne "") {
         $title = "namespace"
     }
-    return "<li class='" + $cssClass + "' title='" + $title + "'><a class='index-navigation-item' href='" + $href + "'>" + $baseName + "</a></li>"
+    $realName = $baseName.Replace('-1', "<>");
+    return "<li class='" + $cssClass + "' title='" + $title + "'><a class='index-navigation-item' href='" + $href + "'>" + $realName + "</a></li>"
 }
 
 function getName($class, $list) {
@@ -202,7 +203,7 @@ function addClassName($ignoreClassesContaining, $className) {
     return $false
 }
 
-$htmlDocumentationList = "<ol>" + (getSetupNavigationListItem) + (
+$htmlDocumentationList = "<ol class='navigation-list-item'>" + (getSetupNavigationListItem) + (
     $names | ForEach-Object {
         $baseName = ($_)
         $name = getName $baseName $documentationFiles
@@ -232,6 +233,9 @@ ReplaceTextInFile $projectIndexHtml "[%footerGithubUrl%]" $footerGithubUrl
 ReplaceTextInFile $projectIndexHtml "[%footerNugetUrl%]" $footerNugetUrl
 ReplaceTextInFile $projectIndexHtml "[%footerWebsiteUrl%]" $footerWebsiteUrl
 ReplaceTextInFile $projectIndexHtml "[%footerSiteTitle%]" $footerSiteTitle
+ReplaceTextInFile $projectIndexHtml "article-row-container" "article-row-container article-row-container--index"
+ReplaceTextInFile $projectIndexHtml "sidenav hide-when-search" "sidenav hide-when-search sidenav--index"
+
 Out "Added navigation list to index.html"
 
 if ($null -eq $relativeHostingPath) {
