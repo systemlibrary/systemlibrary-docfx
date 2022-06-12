@@ -564,6 +564,18 @@ for full license information.}}
 				.replace('protected', '');
 			items[i].innerHTML = innerHtml;
 		}
+
+		//Show 'view source' link for the class constructor next to 'Example'
+		if(items != null && items.length > 0) {
+			if(items[0] != null && items[0].id != null && items[0].id.includes('__ctor_') === true) {
+				var viewSources = getItems('.custom-source-code-link-container');
+				if(viewSources != null && viewSources.length > 0) {
+					if(viewSources.length > 1) {
+						viewSources[0].classList.add('custom-source-code-link-container--class');
+					}
+				}
+			}
+		}
 	}
 
 	function addEventsToTabCloseButtons() {
@@ -744,6 +756,7 @@ for full license information.}}
 
 	function hideSourceLinksForDocfxHideAttribute() {
 		var items = getItems('.custom-source-code-link-container');
+
 		if (items != null && items.length > 0) {
 			for (var i = 0; i < items.length; i++) {
 				var next = items[i].nextElementSibling;
@@ -781,7 +794,9 @@ for full license information.}}
 	//setTimeout(removeEmptyPopups, 50);
 </script>
 
-{{!end div: custom-class-content-inline}}
-</div>
-
 <p class='classMargin classMargin--end'>}</p>
+
+{{!end div: custom-class-content-inline}}
+	</div>
+	
+</div>

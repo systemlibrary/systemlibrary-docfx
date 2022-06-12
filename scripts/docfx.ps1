@@ -61,10 +61,10 @@ try {
     if ($outputFolderFullPath -ne $null -and $outputFolderFullPath -ne "") {
         Remove-Item -Recurse -Force $outputFolderFullPath -ErrorAction SilentlyContinue
     }
-    Out "Cleaned up output dir..."
+    Out "Cleaned output directory"
 }
 catch {
-    Out "Error cleaning old files in the outfolder, continue..."
+    Out "Error cleaning old files in the outfolder, continue"
 }
 
 # ADJUST OUTPUT FILES
@@ -225,6 +225,7 @@ $htmlDocumentationList = "<ol class='navigation-list-item'>" + (getSetupNavigati
 
 $projectIndexHtml = ($projectSiteDirectory + "\" + $projectName + "\index.html")
 
+
 ReplaceTextInFile $projectIndexHtml "[%navigation%]" $htmlDocumentationList
 ReplaceTextInFile $projectIndexHtml "[%projectDisplayName%]" $projectDisplayName
 ReplaceTextInFile $projectIndexHtml "[%relativeHostingPath%]" $relativeHostingPath
@@ -249,7 +250,13 @@ foreach ($htmlFile in $documentationFiles) {
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerNugetUrl%]" $footerNugetUrl
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerWebsiteUrl%]" $footerWebsiteUrl
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerSiteTitle%]" $footerSiteTitle
+    if ($ignoreClassesContaining -ne $null -and $ignoreClassesContaining.Count -gt 0) {
+        foreach ($c in $ignoreClassesContaining) {
+            ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile (">" + $c + "<") "><"
+        }
+    }
 }
+
 Start-Sleep -Milliseconds 25
 Out "Replaced all relative hosting paths in all html files"
 
@@ -283,7 +290,7 @@ if ($ignoreClass -ne $null -and $ignoreClass.Count -gt 0) {
             $fullRemovalPath = ($outputFolderFullPath + "*" + $c + "*")
             Remove-Item $fullRemovalPath -Force -ErrorAction SilentlyContinue
 
-            $old =("title=""" + $c + """")
+            $old = ("title=""" + $c + """")
             $new = ($old + " class=""docfxhide-attribute""")
             
             ReplaceTextInFile $tocFullPath $old $new
@@ -300,7 +307,7 @@ if ($cleanUp -eq $true) {
     Remove-Item $projectDirectory$projectName"_toc.yml" -Force -ErrorAction SilentlyContinue
     Remove-Item -Force $projectDirectory$projectName"_index.md" -ErrorAction SilentlyContinue
     Remove-Item -Force $projectDirectory$projectName"_filter.yml" -ErrorAction SilentlyContinue
-    Write-Host "Cleaned" -ForegroundColor DarkCyan
+    Write-Host "Cleaned temporary files" -ForegroundColor DarkCyan
 }
 else {
     Write-Host "Clean: skipped" -ForegroundColor DarkCyan

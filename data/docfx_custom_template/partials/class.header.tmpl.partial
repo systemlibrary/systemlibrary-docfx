@@ -120,7 +120,7 @@
 <div class="custom-menu-data custom-menu-data-first">
   <h5 id="{{id}}_examples"><span class="custom-class-example custom-class-example-onclick">{{__global.examples}}</span></h5>
 
-  <div class="custom-menu-data-container">
+  <div class="custom-menu-data-container custom-menu-data-container--example">
     {{#example}}
     <div class="custom-menu-data-class-example" style="display: none;">
       <div class="syslib-tab-menu-data--close">X</div>
