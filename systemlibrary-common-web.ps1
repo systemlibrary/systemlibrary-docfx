@@ -18,7 +18,7 @@ $relativeHostingPath = "/systemlibrary-common-web/"
 #$relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
 # If using 'github pages' it should be the name of the repo with prefix and suffix /
 # It is the path of where css/js is loaded from, from the "root" of your IIS site
-# Simply checking network tab in chrome while browsing your site will reveal what it should be or should not be
+# Simply checking network tab in chrome while browsing your site will reveal what it should be, as youll get 404/red for css/js requests
 
 # OPTIONAL OPTIONS
 $cleanUp = $true # delete temp files generated during building documentation files
