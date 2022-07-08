@@ -4,7 +4,7 @@ $csprojFileFullPath = "C:\syslib\systemlibrary-common-net\source\SystemLibrary.C
 $outputFolderFullPath = "C:\syslib\systemlibrary-common-net\docs\" # set to $null if you want outputFolder to be within the project folder
 #$outputFolderFullPath = "C:\temp\Docs\"
 
-$docfxConsoleExeFullPath = "C:\syslib\Packages\docfx.console.2.58.0\tools\docfx.exe" # download docfx.console as nuget package to some project, any project, and reference the .exe here
+$docfxConsoleExeFullPath = "C:\syslib\Packages\docfx.console\2.59.3\tools\docfx.exe" # download docfx.console as nuget package to some project, any project, and reference the .exe here
 
 $siteTitle = "System Library Common .Net"
 $footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-net"
