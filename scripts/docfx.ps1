@@ -294,6 +294,12 @@ foreach ($htmlFile in $documentationFiles) {
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerNugetUrl%]" $footerNugetUrl
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerWebsiteUrl%]" $footerWebsiteUrl
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerSiteTitle%]" $footerSiteTitle
+
+    if ($emptyNamespacesListItem -ne $null -and $emptyNamespacesListItem.Count -gt 0) {
+        $emptyNamespacesCommaSeperatedList = $global:emptyNamespaceName -join ","
+        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%empty-namespaces%]" $emptyNamespacesCommaSeperatedList
+    }
+
     if ($ignoreClassesContaining -ne $null -and $ignoreClassesContaining.Count -gt 0) {
         foreach ($c in $ignoreClassesContaining) {
             ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile (">" + $c + "<") "><"
