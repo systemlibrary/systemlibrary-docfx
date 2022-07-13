@@ -12,6 +12,13 @@ $docfxJson = ($projectDirectory + $projectName + "_docfx.json")
 
 $ignoreClass = New-Object System.Collections.ArrayList
 
+$global:prevNamespaceLi = ""
+$global:prevNamespaceName = ""
+$global:prevNamespaceCount = -1
+$global:emptyNamespacesListItem = New-Object System.Collections.ArrayList
+$global:emptyNamespaceName = New-Object System.Collections.ArrayList
+
+
 try {
     Copy-Item -Path $docfxDataDir"docfx.json" -Destination $docfxJson -Force
     Copy-Item -Path $docfxDataDir"toc.yml" -Destination $projectDirectory$projectName"_toc.yml" -Force
@@ -33,8 +40,8 @@ catch {
 }
 
 # VALIDATING OPTIONS
-$res  = Test-Path -Path $docfxConsoleExeFullPath -PathType Leaf
-if($res -eq $False) {
+$res = Test-Path -Path $docfxConsoleExeFullPath -PathType Leaf
+if ($res -eq $False) {
     Warn "Cannot find docfx console exe file, try rebuilding your solution in Visual Studio/Restore nuget packages"
     Err ("Cannot find the docfx console exe at path: " + $docfxConsoleExeFullPath)
     return;
@@ -92,9 +99,9 @@ for ($i = 0; $i -le $documentationFiles.Length - 1; $i++) {
 
     if ($null -ne $baseName -and $baseName.EndsWith("-1") -eq $false) {
         $next = $documentationFiles[$i + 1].BaseName
+
         if ($null -ne $next -and $next.StartsWith($baseName) -and $next.Contains("-1") -eq $false) {
             $namespaces.Add($baseName);
-            $i = $i + 1
         }
     }
 }
@@ -199,7 +206,7 @@ function getName($class, $list) {
     return ""
 }
 
-function addClassName($ignoreClassesContaining, $className) {
+function ignoreClassName($ignoreClassesContaining, $className) {
     if ($ignoreClassesContaining -ne $null -and $ignoreClassesContaining.Count -gt 0) {
         foreach ($c in $ignoreClassesContaining) {
             if ($className.Contains($c)) {
@@ -211,28 +218,50 @@ function addClassName($ignoreClassesContaining, $className) {
     return $false
 }
 
+function previousNamespaceIsEmpty($li, $baseName) {
+    if ($li.Tostring().Contains("namespace") -eq $true) {
+        if ($global:prevNamespaceCount -eq 0 -and $global:prevNamespaceLi -ne "") {
+            $global:emptyNamespacesListItem.Add($global:prevNamespaceLi.ToString());
+            $global:emptyNamespaceName.Add($global:prevNamespaceName);
+        }
+        $global:prevNamespaceLi = $li;
+        $global:prevNamespaceName = $baseName;
+        $global:prevNamespaceCount = 0
+    }
+    else {
+        $global:prevNamespaceCount = $global:prevNamespaceCount + 1
+    }
+    return $null
+}
+
 $htmlDocumentationList = "<ol class='navigation-list-item'>" + (getSetupNavigationListItem) + (
     $names | ForEach-Object {
         $baseName = ($_)
         $name = getName $baseName $documentationFiles
         $href = ($relativeHostingPath + $name)
-
+        
         $className = $baseName.split(".")[-1]
 
-        $ignore = addClassName $ignoreClassesContaining $className
+        $ignore = ignoreClassName $ignoreClassesContaining $className
 
         if ($ignore -eq $true) {
             Out ("Ignoring: " + $className)
         }
         else {
             $li = getNavigationListItem $namespaces $baseName $href
+            $preventYieldingResult = (previousNamespaceIsEmpty $li $baseName)
             $($li)
         }
     } 
 ) + "</ol>"
 
-$projectIndexHtml = ($projectSiteDirectory + "\" + $projectName + "\index.html")
+# If last item is a empty namespace, add it to "empty list"
+if ($global:prevNamespaceCount -eq 0 -and $global:prevNamespaceLi -ne "") {
+    $global:emptyNamespacesListItem.Add($global:prevNamespaceLi.ToString());
+    $global:emptyNamespaceName.Add($global:prevNamespaceName);
+}
 
+$projectIndexHtml = ($projectSiteDirectory + "\" + $projectName + "\index.html")
 
 ReplaceTextInFile $projectIndexHtml "[%navigation%]" $htmlDocumentationList
 ReplaceTextInFile $projectIndexHtml "[%projectDisplayName%]" $projectDisplayName
@@ -244,6 +273,13 @@ ReplaceTextInFile $projectIndexHtml "[%footerWebsiteUrl%]" $footerWebsiteUrl
 ReplaceTextInFile $projectIndexHtml "[%footerSiteTitle%]" $footerSiteTitle
 ReplaceTextInFile $projectIndexHtml "article-row-container" "article-row-container article-row-container--index"
 ReplaceTextInFile $projectIndexHtml "sidenav hide-when-search" "sidenav hide-when-search sidenav--index"
+
+# Remove empty namespaces on Index.html (front page)
+if ($emptyNamespacesListItem -ne $null -and $emptyNamespacesListItem.Count -gt 0) {
+    foreach ($emptyNamespaceLi in $emptyNamespacesListItem) {
+        ReplaceTextInFile $projectIndexHtml $emptyNamespaceLi ""
+    }
+}
 
 Out "Added navigation list to index.html"
 
@@ -278,7 +314,7 @@ try {
     if ($outputFolderFullPath -ne $null -and $outputFolderFullPath -ne "") {
         Start-Sleep -Milliseconds 25
 
-        $outputFiles = GetFiles $projectSiteDirectory
+        #$outputFiles = GetFiles $projectSiteDirectory
 
         Copy-Item -Path $projectSiteDirectory\* -Destination $outputFolderFullPath -Force -Recurse -ErrorAction SilentlyContinue
 
@@ -313,8 +349,9 @@ if ($cleanUp -eq $true) {
     Remove-Item -Recurse -Force $projectDirectory\"docfx_custom_template" -ErrorAction SilentlyContinue
     Remove-Item $docFxJson -Force -ErrorAction SilentlyContinue
     Remove-Item $projectDirectory$projectName"_toc.yml" -Force -ErrorAction SilentlyContinue
-    Remove-Item -Force $projectDirectory$projectName"_index.md" -ErrorAction SilentlyContinue
-    Remove-Item -Force $projectDirectory$projectName"_filter.yml" -ErrorAction SilentlyContinue
+    Remove-Item $projectDirectory$projectName"_index.md" -Force -ErrorAction SilentlyContinue
+    Remove-Item $projectDirectory$projectName"_filter.yml" -Force -ErrorAction SilentlyContinue
+    
     Write-Host "Cleaned temporary files" -ForegroundColor DarkCyan
 }
 else {
