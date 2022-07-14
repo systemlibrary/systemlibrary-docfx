@@ -20,9 +20,7 @@ for full license information.}}
   }
 
   function hideNamespacesInTocOnLoad() {
-    console.log("RUNNING");
     if (customEmptyNamespacesContainerCompleted == true) {
-      console.log("EXIT");
       return;
     }
     var customEmptyNamespacesContainer = document.getElementById('custom-empty-namespaces');
