@@ -6,9 +6,6 @@ $csprojFileFullPath = "C:\syslib\systemlibrary-common-web\source\SystemLibrary.C
 $outputFolderFullPath = "C:\syslib\systemlibrary-common-web\docs\" # set to $null if you want outputFolder to be within the project folder
 #$outputFolderFullPath = "C:\temp\Docs\"
 
-# Upgrade docfx.exe? Download latest from nuget package manager in any project, and copy paste the downloaded files
-$docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.3\docfx.exe")
-
 $siteTitle = "System Library Common Web"
 $footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-web/"
 $footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Web/"
@@ -24,7 +21,11 @@ $relativeHostingPath = "/systemlibrary-common-web/"
 # Simply checking network tab in chrome while browsing your site will reveal what it should be, as youll get 404/red for css/js requests
 
 # OPTIONAL OPTIONS
-$cleanUp = $true # delete temp files generated during building documentation files
+# Upgrade docfx.exe? Download latest from nuget package manager in any project, and copy paste the downloaded files
+$docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.3\docfx.exe")
+
+# Delete temp files generated during building documentation files
+$cleanUp = $true 
 
 # EXECUTE
 . ($PSScriptRoot + "\scripts\functions.ps1")

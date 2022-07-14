@@ -6,9 +6,6 @@ $csprojFileFullPath = "C:\syslib\systemlibrary-common-episerver\source\SystemLib
 #$outputFolderFullPath = "C:\syslib\systemlibrary-common-episerver\docs\" # set to $null if you want outputFolder to be within the project folder
 $outputFolderFullPath = "C:\temp\Docs\"
 
-# Upgrade docfx.exe? Download latest from nuget package manager in any project, and copy paste the downloaded files
-$docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.3\docfx.exe")
-
 $siteTitle = "System Library Common Episerver"
 $footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-episerver/"
 $footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Episerver/"
@@ -24,7 +21,11 @@ $relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is suffic
 # Simply checking network tab in chrome while browsing your site will reveal what it should be or should not be
 
 # OPTIONAL OPTIONS
-$cleanUp = $true # delete temp files generated during building documentation files
+# Upgrade docfx.exe? Download latest from nuget package manager in any project, and copy paste the downloaded files
+$docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.3\docfx.exe")
+
+# Delete temp files generated during building documentation files
+$cleanUp = $true 
 
 # EXECUTE
 . ($PSScriptRoot + "\scripts\functions.ps1")
