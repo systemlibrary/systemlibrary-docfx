@@ -21,6 +21,10 @@ foreach ($htmlFile in $htmlFiles) {
         foreach ($skip in $skipDocumentationFor) {
             ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile (">" + $skip + "<") "><"
         }
+
+        # This must be updated to also support removal of "links to sub-stuff if namespace search is being used..."
+        # and support of "full namespace and class name: systemlibrary.common.net.dump" should then be removed link fo "dump" on "link.."
+        # split and take last part of name "dump", and replace >dump< with ><....
     }
 }
 

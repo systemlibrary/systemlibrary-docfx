@@ -15,7 +15,7 @@ $footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Net/"
 $footerWebsiteUrl = "https://www.systemlibrary.com/"
 $footerSiteTitle = "System Library Common Net"
 
-$skipDocumentationFor = @('DocFxHide', 'SystemLibrary.Common.Net.Global.Dump')
+$skipDocumentationFor = @('DocFxHide', 'Dump')
 
 #$relativeHostingPath = "/systemlibrary-common-net/"
 $relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
