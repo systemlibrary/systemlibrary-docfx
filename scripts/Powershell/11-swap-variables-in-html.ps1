@@ -40,9 +40,23 @@ foreach ($htmlFile in $htmlFiles) {
                     $descNewValue = $desc + " class='docfxhide-attribute'"
 
                     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile ($desc) ($descNewValue)
+
+                    # A nested class "one level deep", try remove such skipped parts on the "namespace overview page"
+                    if($parts.Length -gt 1) {
+                        $nestedClass = $parts[$parts.Length-2] + "." + $parts[$parts.Length-1]
+                        $nestedClassDescription = $nestedClass + "--description"
+
+                        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile (">" + $nestedClass + "<") "><"
+
+                        $nestedClassDescriptionOld = "id=" + [char]34 + $nestedClassDescription + [char]34
+                        $nestedClassDescriptionNew = $nestedClassDescriptionOld + " class='docfxhide-attribute'"
+
+                        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile ($nestedClassDescriptionOld) ($nestedClassDescriptionNew)
+                    }
                 }
             }
         }
+
     }
 }
 
