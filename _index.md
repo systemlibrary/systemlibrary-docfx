@@ -1,3 +1,0 @@
-# [%projectDisplayName%]
-
-[%navigation%]

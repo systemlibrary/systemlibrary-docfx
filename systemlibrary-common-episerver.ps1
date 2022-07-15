@@ -12,7 +12,7 @@ $footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Episerver
 $footerWebsiteUrl = "https://www.systemlibrary.com/"
 $footerSiteTitle = "System Library Common Episerver"
 
-$ignoreClassesContaining = @('DocFxHide', 'RemoveSuggestedContentTypes', 'HideCategoryListDescriptor', 'CmsEditorController', 'FontAwesomeSolid', 'FontAwesomeBrands', 'FontAwesomeRegular')
+$ignoreClassesContaining = @('DocFxHide', 'RemoveSuggestedContentTypes', 'HideCategoryListDescriptor', 'ContentIconAttributeController', 'CmsEditorController', 'FontAwesomeSolid', 'FontAwesomeBrands', 'FontAwesomeRegular')
 
 #$relativeHostingPath = "/systemlibrary-common-episerver/"
 $relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
@@ -28,5 +28,4 @@ $docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.3\docfx.exe")
 $cleanUp = $true 
 
 # EXECUTE
-. ($PSScriptRoot + "\scripts\functions.ps1")
 . ($PSScriptRoot + "\scripts\docfx.ps1")
