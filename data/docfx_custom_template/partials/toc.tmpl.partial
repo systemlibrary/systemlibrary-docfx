@@ -56,36 +56,37 @@ for full license information.}}
                       }
                     }
                   }
-                  else {
+                }
+                else {
 
-                    //Simple 'title' search for ClassName only
-                    var q = '[title="' + query + '"]';
-                    var href = toc.querySelector(q);
-                    if (typeof (href) !== 'undefined' && href && href.classList) {
-                      var parent = href.parentNode;
-                      if (parent && parent.remove) {
-                        parent.remove();
-                      }
+                  //Simple 'title' search for ClassName only
+                  var q = '[title="' + query + '"]';
+                  var href = toc.querySelector(q);
+                  if (typeof (href) !== 'undefined' && href && href.classList) {
+                    var parent = href.parentNode;
+                    if (parent && parent.remove) {
+                      parent.remove();
                     }
                   }
                 }
               }
             }
-
-            sideTocShowOnLoad();
           }
+
+          sideTocShowOnLoad();
         }
       }
     }
+  }
 
 
-    setTimeout(() => sideTocShowOnLoad(), 225);
-    setTimeout(() => hideNamespacesInTocOnLoad(), 225);
-    setTimeout(() => hideNamespacesInTocOnLoad(), 188);
-    setTimeout(() => hideNamespacesInTocOnLoad(), 155);
-    setTimeout(() => hideNamespacesInTocOnLoad(), 132);
-    setTimeout(() => hideNamespacesInTocOnLoad(), 99);
-    setTimeout(() => hideNamespacesInTocOnLoad(), 66);
-    setTimeout(() => hideNamespacesInTocOnLoad(), 33);
+  setTimeout(() => sideTocShowOnLoad(), 225);
+  setTimeout(() => hideNamespacesInTocOnLoad(), 225);
+  setTimeout(() => hideNamespacesInTocOnLoad(), 188);
+  setTimeout(() => hideNamespacesInTocOnLoad(), 155);
+  setTimeout(() => hideNamespacesInTocOnLoad(), 132);
+  setTimeout(() => hideNamespacesInTocOnLoad(), 99);
+  setTimeout(() => hideNamespacesInTocOnLoad(), 66);
+  setTimeout(() => hideNamespacesInTocOnLoad(), 33);
 
 </script>
