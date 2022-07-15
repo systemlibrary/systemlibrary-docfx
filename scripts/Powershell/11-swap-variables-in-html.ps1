@@ -11,15 +11,13 @@ foreach ($htmlFile in $htmlFiles) {
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerWebsiteUrl%]" $footerWebsiteUrl
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerSiteTitle%]" $footerSiteTitle
 
-    #Does it hold with one list of htmlFilesSkipped... which contains both namespaces and class names...
-    # would that be sufficient for the javascript to hide stuff from TOC?
-    if ($null -ne $removedNamespaceHtmlFiles -and $removedNamespaceHtmlFiles.Count -gt 0) {
-        $removedNamespaceHtmlFilesCommaSeparatedList = $removedNamespaceHtmlFiles -join ","
-        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%empty-namespaces%]" $removedNamespaceHtmlFilesCommaSeparatedList
-    }
-    #[%ignored-classes%]
-
+    # Send "skip Documentation For"-query option into DOM, so Javascript can use same "logic" to hide elements in SideToc
     if ($null -ne $skipDocumentationFor -and $skipDocumentationFor.Count -gt 0) {
+
+        $skipDocumentationForSeparatedCommaList = $skipDocumentationFor -join ","
+        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%custom-skipDocumentationFor%]" $skipDocumentationForSeparatedCommaList
+
+        # NOTE: This doesnt work anymore in latest docfx, a hrefs contains WBR elements in between capital and lower letters
         foreach ($skip in $skipDocumentationFor) {
             ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile (">" + $skip + "<") "><"
         }

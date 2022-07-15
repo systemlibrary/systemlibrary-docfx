@@ -97,12 +97,6 @@ for ($i = 0; $i -le $namespaceHtmlFiles.Length - 1; $i++) {
 
 $htmlFiles = $htmlFilesSorted | Select-Object
 
-Out ("SOOOOORTED")
-foreach ($a in $htmlFiles) {
-    Out $a.BaseName
-}
-Out ("SOOOOORTED END")
-
 $removedNamespaceHtmlFiles = @()
 
 for ($i = 0; $i -lt $htmlFiles.Length; $i++) {
