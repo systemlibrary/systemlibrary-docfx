@@ -12,29 +12,24 @@ for full license information.}}
 </div>
 
 <script>
-  var applySkipDocumentationForQueryCompleted = false;
-
   function sideTocShowOnLoad() {
     var sidetoc = document.getElementById('sidetoc');
     sidetoc.classList.remove('hideonload');
   }
 
-  function hideNamespacesInTocOnLoad() {
-    if (applySkipDocumentationForQueryCompleted == true) {
-      return;
-    }
+  function hideLinksQueryBasedInToc() {
     var skipDocumentationForContainer = document.getElementById('custom-skipDocumentationFor');
     if (skipDocumentationForContainer) {
+
       var innerHtml = skipDocumentationForContainer.innerHTML;
       if (innerHtml && innerHtml.length > 1) {
 
         var toc = document.getElementById('toc');
-
         if (toc && toc.querySelector) {
-          applySkipDocumentationForQueryCompleted = true;
 
           var queries = innerHtml.split(',');
           if (queries && queries.length > 0) {
+
             for (var i = 0; i < queries.length; i++) {
               var query = queries[i].replace(/(\r\n|\n|\r)/gm, "");
               if (query && query.length > 1) {
@@ -58,8 +53,6 @@ for full license information.}}
                   }
                 }
                 else {
-
-                  //Simple 'title' search for ClassName only
                   var q = '[title="' + query + '"]';
                   var href = toc.querySelector(q);
                   if (typeof (href) !== 'undefined' && href && href.classList) {
@@ -79,14 +72,6 @@ for full license information.}}
     }
   }
 
-
-  setTimeout(() => sideTocShowOnLoad(), 225);
-  setTimeout(() => hideNamespacesInTocOnLoad(), 225);
-  setTimeout(() => hideNamespacesInTocOnLoad(), 188);
-  setTimeout(() => hideNamespacesInTocOnLoad(), 155);
-  setTimeout(() => hideNamespacesInTocOnLoad(), 132);
-  setTimeout(() => hideNamespacesInTocOnLoad(), 99);
-  setTimeout(() => hideNamespacesInTocOnLoad(), 66);
-  setTimeout(() => hideNamespacesInTocOnLoad(), 33);
+  setTimeout(() => sideTocShowOnLoad(), 500);
 
 </script>

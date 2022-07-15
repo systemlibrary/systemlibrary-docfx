@@ -13,18 +13,36 @@ foreach ($htmlFile in $htmlFiles) {
 
     # Send "skip Documentation For"-query option into DOM, so Javascript can use same "logic" to hide elements in SideToc
     if ($null -ne $skipDocumentationFor -and $skipDocumentationFor.Count -gt 0) {
-
         $skipDocumentationForSeparatedCommaList = $skipDocumentationFor -join ","
         ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%custom-skipDocumentationFor%]" $skipDocumentationForSeparatedCommaList
 
-        # NOTE: This doesnt work anymore in latest docfx, a hrefs contains WBR elements in between capital and lower letters
         foreach ($skip in $skipDocumentationFor) {
-            ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile (">" + $skip + "<") "><"
+            if($skip.Contains(".") -eq $false) {
+                ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile (">" + $skip + "<") "><"
+            }
         }
 
-        # This must be updated to also support removal of "links to sub-stuff if namespace search is being used..."
-        # and support of "full namespace and class name: systemlibrary.common.net.dump" should then be removed link fo "dump" on "link.."
-        # split and take last part of name "dump", and replace >dump< with ><....
+        if($namespaceHtmlFiles -contains $htmlFile) {
+            foreach ($skip in $skipDocumentationFor) {
+                if($skip.Contains(".") -eq $true) {
+
+                    $desc = "id=" + [char]34 + $skip + "--description"+ [char]34
+                    $descNewValue = $desc + " class='docfxhide-attribute'"
+
+                    ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile ($desc) ($descNewValue)
+
+                    $parts = $skip.Split(".")
+                    $skipClass = $parts[$parts.Length - 1]
+                    ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile (">" + $skipClass + "<") "><"
+
+                    $skipClassDesc = $skipClass + "--description"
+                    $desc = "id=" + [char]34 + $skipClassDesc + [char]34
+                    $descNewValue = $desc + " class='docfxhide-attribute'"
+
+                    ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile ($desc) ($descNewValue)
+                }
+            }
+        }
     }
 }
 

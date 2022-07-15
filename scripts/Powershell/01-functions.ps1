@@ -35,7 +35,7 @@ function GetFileDisplayName([string] $fileFullPath) {
 function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new) {
     $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
     if ($null -eq $content) {
-        Start-Sleep -Milliseconds 20
+        Start-Sleep -Milliseconds 10
         $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
         if ($null -eq $content) {
             Err ("Could not find content when replacing " + $old + " in file " + $fileFullPath.ToString())
