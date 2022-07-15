@@ -19,12 +19,6 @@ $indexHtmlOrderedList = "<ol class='navigation-list-item'>" + $installListItem +
             $cssClass = "index-navigation-item--namespace"
         }
 
-        # for ($i = 0; $i -lt $namespaceHtmlFiles.Length; $i++) {
-        #     if ($namespaceHtmlFiles[$i].BaseName -eq $_.BaseName) {
-                
-        #     }
-        # }
-
         $li = createListItem $_.BaseName $href $cssClass
 
         $($li)
