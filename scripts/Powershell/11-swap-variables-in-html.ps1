@@ -14,19 +14,22 @@ foreach ($htmlFile in $htmlFiles) {
     # Send "skip Documentation For"-query option into DOM, so Javascript can use same "logic" to hide elements in SideToc
     if ($null -ne $skipDocumentationFor -and $skipDocumentationFor.Count -gt 0) {
         $skipDocumentationForSeparatedCommaList = $skipDocumentationFor -join ","
+
+        $skipDocumentationForSeparatedCommaList = $skipDocumentationForSeparatedCommaList.Replace("<", "__-1_");
+        $skipDocumentationForSeparatedCommaList = $skipDocumentationForSeparatedCommaList.Replace(">", "__-2_");
+
         ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%custom-skipDocumentationFor%]" $skipDocumentationForSeparatedCommaList
 
         foreach ($skip in $skipDocumentationFor) {
-            if($skip.Contains(".") -eq $false) {
+            if ($skip.Contains(".") -eq $false) {
                 ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile (">" + $skip + "<") "><"
             }
         }
 
-        if($namespaceHtmlFiles -contains $htmlFile) {
+        if ($namespaceHtmlFiles -contains $htmlFile) {
             foreach ($skip in $skipDocumentationFor) {
-                if($skip.Contains(".") -eq $true) {
-
-                    $desc = "id=" + [char]34 + $skip + "--description"+ [char]34
+                if ($skip.Contains(".") -eq $true) {
+                    $desc = "id=" + [char]34 + $skip + "--description" + [char]34
                     $descNewValue = $desc + " class='docfxhide-attribute'"
 
                     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile ($desc) ($descNewValue)
@@ -42,8 +45,8 @@ foreach ($htmlFile in $htmlFiles) {
                     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile ($desc) ($descNewValue)
 
                     # A nested class "one level deep", try remove such skipped parts on the "namespace overview page"
-                    if($parts.Length -gt 1) {
-                        $nestedClass = $parts[$parts.Length-2] + "." + $parts[$parts.Length-1]
+                    if ($parts.Length -gt 1) {
+                        $nestedClass = $parts[$parts.Length - 2] + "." + $parts[$parts.Length - 1]
                         $nestedClassDescription = $nestedClass + "--description"
 
                         ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile (">" + $nestedClass + "<") "><"

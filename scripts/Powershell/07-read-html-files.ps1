@@ -16,13 +16,16 @@ if ($skipDocumentationFor -ne $null -and $skipDocumentationFor.Count -gt 0) {
             $fileName = $_.BaseName
 
             for ($i = 0; $i -lt $skipDocumentationFor.Count; $i++) {
-                if ($skipDocumentationFor[$i].Contains(".")) {
-                    if ($fileName.StartsWith($skipDocumentationFor[$i])) {
+
+                $skipThisDoc = $skipDocumentationFor[$i].Replace("<T>", "-1");
+
+                if ($skipThisDoc.Contains(".")) {
+                    if ($fileName.StartsWith($skipThisDoc)) {
                         return $true;
                     }
                 }
                 else {
-                    if ($fileName.EndsWith($skipDocumentationFor[$i])) {
+                    if ($fileName.EndsWith($skipThisDoc)) {
                         return $true;
                     }
                 }

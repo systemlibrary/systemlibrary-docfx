@@ -43,7 +43,7 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
         exit
     }
     $content.Replace($old, $new) | Set-Content $fileFullPath -Force
-    Start-Sleep -Milliseconds 2
+    Start-Sleep -Milliseconds 3
 }
 
 function HasError($results) {
