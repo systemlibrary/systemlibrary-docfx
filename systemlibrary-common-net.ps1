@@ -4,7 +4,7 @@ Set-Location $PSScriptRoot
 $csprojFileFullPath = "C:\syslib\systemlibrary-common-net\source\SystemLibrary.Common.Net\SystemLibrary.Common.Net.csproj"
 
 $outputFolderFullPath = "C:\syslib\systemlibrary-common-net\docs\" # set to $null if you want outputFolder to be within the project folder
-#$outputFolderFullPath = "C:\temp\Docs\"
+$outputFolderFullPath = "C:\temp\Docs\"
 
 $siteTitle = "System Library Common .Net"
 $footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-net"
@@ -13,7 +13,7 @@ $footerWebsiteUrl = "https://www.systemlibrary.com/"
 $footerSiteTitle = "System Library Common Net"
 
 $relativeHostingPath = "/systemlibrary-common-net/"
-#$relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
+$relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
 # If using 'github pages' it should be the name of the repo with prefix and suffix /
 # It is the path of where css/js is loaded from, from the "root" of your IIS site
 # Simply checking network tab in chrome while browsing your site will reveal what it should be, as youll get 404/red for css/js requests

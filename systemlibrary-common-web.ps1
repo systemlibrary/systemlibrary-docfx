@@ -25,7 +25,7 @@ $docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.3\docfx.exe")
 # OPTIONAL OPTIONS
 $cleanUp = $true # delete temp files generated during building documentation files
 
-$skipDocumentationFor = @('MediaType', 'ClientResponse<T>', 'CalleeCancelledRequestException') # case sensitive
+$skipDocumentationFor = @('MediaType', 'LogLevel', 'ClientResponse<T>', 'CalleeCancelledRequestException', 'RetryRequestException') # case sensitive
 
 # EXECUTE
 . ($PSScriptRoot + "\scripts\docfx.ps1")

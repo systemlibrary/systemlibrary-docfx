@@ -25,7 +25,26 @@ $docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.3\docfx.exe")
 # OPTIONAL OPTIONS
 $cleanUp = $true # delete temp files generated during building documentation files
 
-$skipDocumentationFor = @('DocFxHide', 'SystemLibrary.Common.Episerver.Cms.Editor.Controller', 'SystemLibrary.Common.Episerver.Cms.EditorDescriptor', 'RemoveSuggestedContentTypes', 'HideCategoryListDescriptor', 'ContentIconAttributeController', 'CmsEditorController', 'SystemLibrary.Common.Episerver.Attributes.ContentIconAttribute.FontAwesomeSolid', 'SystemLibrary.Common.Episerver.Attributes.ContentIconAttribute.FontAwesomeBrands', 'SystemLibrary.Common.Episerver.Attributes.ContentIconAttribute.FontAwesomeRegular') # case sensitive
+$skipDocumentationFor = @('DocFx',
+'SystemLibrary.Common.Episerver.Cms.Properties.MessageController',
+'SystemLibrary.Common.Episerver.Cms.Properties.MessageEditorDescriptor',
+'SystemLibrary.Common.Episerver.Cms.Properties.MessageProperty',
+'SystemLibrary.Common.Episerver.Cms.Attributes.BoxSelectionController',
+'SystemLibrary.Common.Episerver.Cms.Attributes.BoxSelectionFactory',
+'SystemLibrary.Common.Episerver.Cms.Attributes.JsonEditController',
+'SystemLibrary.Common.Episerver.Cms.Attributes.JsonEditFactory',
+'SystemLibrary.Common.Episerver.Cms.Descriptors.HideCategoryListDescriptor',
+'SystemLibrary.Common.Episerver.Cms.Properties.ParentLinkReferenceController',
+'SystemLibrary.Common.Episerver.Cms.Properties.ParentLinkReferenceEditorDescriptor',
+'SystemLibrary.Common.Episerver.Cms.Properties.ParentLinkReferenceProperty',
+'SystemLibrary.Common.Episerver.Initialize.RemoveSuggestedContentTypes',
+'SystemLibrary.Common.Episerver.Extensions.CommonEpiserverApplicationServicesOptions',
+'SystemLibrary.Common.Episerver.Extensions.CommonEpiserverApplicationBuilderOptions',
+'SystemLibrary.Common.Episerver.Cms.CmsEditController',
+'SystemLibrary.Common.Episerver.Cms.Abstract.BaseController'
+
+
+) # case sensitive
 
 # EXECUTE
 . ($PSScriptRoot + "\scripts\docfx.ps1")
