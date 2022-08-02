@@ -9,46 +9,47 @@
 	* download from nuget.org or through Nuget Package Manager in Visual studio
 
 ## Description
-- Create a DocFX library documentation for your .csproj file
-- Host the documentation flies on a server or locally in IIS for example
-- You can customize "data/docfx_custom_template" if you want to, but it is "messy" at current state
-- You can also customize "data/docfx_custom_template/custom.css" as that file is added last, but the code has been copy-pasted from Chrome and not polished...
+- Export your C# comments on all public classes, properties and methods into HTML files
+- Customize data/docfx_custom_template if you want to change parts of it or replace it with the regular docfx template that comes with DocFx.console nuget package
+- Customize css through data/docfx_custom_template/custom.css as that file is loaded last
 
 ## Additional Info
-- The docfx template has been slightly modified
-	- "Improve this Doc" is removed
-	- code (hljs code html nodes) can only highlight C# or HTML
-	- a bunch of custom styling has been made from the default "docfx template"
-	- a custom navigation list is used on index.html as entry
-	- example, arguments and return information per method is currently added to a "tab menu"
+- The normal DocFx template is too messy, displaying tons of unuseful information, hard to find and read example code for a simple function
+	- "Improve this doc" is removed
+	- Unuseful information such as the inheritance tree is removed
+    	- Seeing that all objects "end up" inheriting Object is not useful
+  	- All params to each function is hidden
+    	- We care about the name of the function and its return type, if it matches our need, we click on it to view the sample code, how to invoke the method, or simply using our Visual Studio to invoke the method
+  	- Code is highlighted by hljs 
+  	- A lot of custom styling has been made to reflect somewhat the "github code style"
+    	- We are used to read code that looks like github or like our Visual Studio styling, then DocFx has its own style? Thats just awful
+  	- A new Index.html is created based on all generated html files
+  	- A Install.html will be created if a "install.md" exists in the root of your project
+    	- Install.html will have a link at the top in the "Index.html"
+
+
 - If you want a new clean template?
 	- Google 'docfx template export default'
 	- Run the command
 	- Delete all files in "docfx_custom_template" folder
 	- Add all files that was output from the command to the "docfx_custom_template" folder
 	
-## Futuristic vision
-- All protected members are hidden
-- All "this[]" index operator implementations are hidden
-- Might adjust the layout to look and feel more like the github source, as all coders are familiar with it
- and the docs are for developers who sit 24/7 looking at code...
 
 ## Install
-- Download the code from this repo, either as zip, clone, copy paste 1 and 1 file...
+- There's no installation apart from just downloading the whole repo, clone, zip...
 
 ## Usage
 - Copy "systemlibrary-common-net.ps1" to new file name of your own choice
 - Open the new file in Powershell Editor
-- Change the top required variables, such as $csprojFileFullPath, etc...
+- Change the variables
 - Run the script
-- Either:
-	- a) Host the files in IIS on your local computer, as there's tons of javascript that requires it, cannot open directly the html files
-	- b) Push to for instance github repo, to the root of the repo in a folder named "docs", then activate 'github pages' 
+- The output of the script can then be hosted in IIS for instance or push to /docs folder in your github repo and activate 'github pages'
+  - There are tons of javascrpits, so it must be hosted in a Web Hosting Software, not just open the html files in a browser
 
 
 ## Example
 - An example of the documentation created:
-- https://systemlibrary.github.io/systemlibrary-common-net/SystemLibrary.Common.Net.html
+- https://systemlibrary.github.io//systemlibrary-common-net/index.html
 
 ## Lisence
 - It's free forever, copy paste as you'd like...
