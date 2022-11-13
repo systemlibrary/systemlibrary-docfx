@@ -42,8 +42,15 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
         }
         exit
     }
-    $content.Replace($old, $new) | Set-Content $fileFullPath -Force
-    Start-Sleep -Milliseconds 3
+    try {
+        $content.Replace($old, $new) | Set-Content $fileFullPath -Force
+    }
+    catch {
+        Warn ("Trying replacing again in 10ms - as file could not be set, yet...");
+        Start-Sleep -Milliseconds 10
+        $content.Replace($old, $new) | Set-Content $fileFullPath -Force
+    }
+    Start-Sleep -Milliseconds 5
 }
 
 function HasError($results) {

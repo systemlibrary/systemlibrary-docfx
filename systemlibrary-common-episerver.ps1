@@ -43,7 +43,8 @@ $skipDocumentationFor = @('DocFx',
 'SystemLibrary.Common.Episerver.Extensions.CommonEpiserverApplicationServicesOptions',
 'SystemLibrary.Common.Episerver.Extensions.CommonEpiserverApplicationBuilderOptions',
 'SystemLibrary.Common.Episerver.Cms.CmsEditController',
-'SystemLibrary.Common.Episerver.Cms.Abstract.BaseController'
+'SystemLibrary.Common.Episerver.Cms.Abstract.BaseController',
+'SystemLibrary.Common.Episerver.Cms.Abstract.BaseMultiSelectionFactory'
 ) # case sensitive
 
 # EXECUTE
