@@ -19,7 +19,7 @@ $relativeHostingPath = "/systemlibrary-common-net/"
 # Simply checking network tab in chrome while browsing your site will reveal what it should be, as youll get 404/red for css/js requests
 
 # Upgrade docfx.exe? Download latest from nuget package manager in any project, and copy paste the downloaded files
-$docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.3\docfx.exe")
+$docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.4\docfx.exe")
 
 
 # OPTIONAL OPTIONS

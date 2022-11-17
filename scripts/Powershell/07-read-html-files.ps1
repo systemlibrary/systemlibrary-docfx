@@ -1,12 +1,13 @@
 # Read all HTML files generated, except Index and TOC...
-$allHtmlFiles = GetFiles $projectSiteDirectory\$projectName | Where-Object { 
+$allHtmlFiles = GetFiles $projectSiteDirectory$projectName | Where-Object { 
     $fileName = $_.Name
     return $fileName -ne "toc.html" -and $fileName -ne "index.html" -and $fileName.contains("_") -eq $false
 }
 
 if ($allHtmlFiles -eq $null -or $allHtmlFiles.Count -eq 0 ) {
-    Err "No html files were found. Do you have minimum one public class in your project?"
-    exit
+    Err "No html files were found. Do you have minimum one public class in your project? Try using latest docfx.console package?"
+    Err $projectSiteDirectory$projectName
+    exit 1
 }
 
 # List all HTML files that will be skipped based on PS configuration
