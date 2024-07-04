@@ -25,7 +25,7 @@ $docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.4\docfx.exe")
 # OPTIONAL OPTIONS
 $cleanUp = $true # delete temp files generated during building documentation files
 
-$skipDocumentationFor = @('DocFxHide') # case sensitive
+$skipDocumentationFor = @('DocFxHide', 'DateTimeOffsetJsonConverter') # case sensitive
 
 # EXECUTE
 . ($PSScriptRoot + "\scripts\docfx.ps1")

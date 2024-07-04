@@ -48,7 +48,11 @@ $skipDocumentationFor = @('DocFx',
 'SystemLibrary.Common.Episerver.Configuration',
 'SystemLibrary.Common.Episerver.ConnectionStringsConfiguration',
 'SystemLibrary.Common.Episerver.PropertiesConfiguration',
-'SystemLibrary.Common.Episerver.EditConfiguration'
+'SystemLibrary.Common.Episerver.EditConfiguration',
+'SystemLibrary.Common.Episerver.Cms.Properties.MessageConfiguration',
+'SystemLibrary.Common.Episerver.FontAwesome',
+'SystemLibrary.Common.Episerver.AppSettings.Configuration',
+'SystemLibrary.Common.Episerver.Cms.Attributes.ParentLinkReferenceFactory'
 
 ) # case sensitive
 
