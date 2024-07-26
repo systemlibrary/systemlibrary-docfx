@@ -187,8 +187,10 @@
   {{/definition}}
 {{/implements}}
 {{#remarks}}
-<h5 id="{{id}}_remarks">{{__global.remarks}}</h5>
-<div class="markdown level1 remarks">{{{remarks}}}</div>
+<div class="custom-remarks4">
+  <h5 id="{{id}}_remarks">{{__global.remarks}}</h5>
+  <div class="markdown level1 remarks">{{{remarks}}}</div>
+</div>
 {{/remarks}}
 {{#example}}
   <div class="comment-examples-container"><h5 id="{{id}}_examples"><strong>{{__global.examples}}</strong></h5></div>

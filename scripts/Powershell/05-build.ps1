@@ -9,7 +9,8 @@ if (HasError $results -eq $true) {
     Warn "Tip: Close the powershell editor and reopen and try again"
     Warn "Tip: Recompile in Visual Studio and try again"
     Warn "Tip: Delete obj/bin/.vs and recompile in Visual Studio and try again"
-    Warn "Tip: Getting the 'Last build hasn't loaded  model index.md' error? Re-try a few times or delete the obj and bin folders as docfx caches up and bugs evnetually... then try again"
+    Warn "Tip: Got a typo in any of the tmpl.partial files from docfx?"
+    Warn "Tip: Getting the 'Last build hasn't loaded model index.md' error? Re-try a few times or delete the obj and bin folders as docfx caches up and bugs eventually... then try again"
     Err "Error occured, cannot continue"
     # TODO: Add cleanup of built files if erroring, except the log file....
     # TODO: Add a clean obj upon building docs - so it doesnt add up, the cache for docfx inside the obj folder of the project...

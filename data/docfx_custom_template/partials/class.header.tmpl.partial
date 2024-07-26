@@ -6,6 +6,17 @@
 
 <div class="h1-class-summary-container">
   <div class="markdown level0 summary h1-class-summary">{{{summary}}}</div>
+  {{#remarks}}
+  <div class="custom-remarks-container">
+    <div class="custom-remarks custom-remarks1">
+      <h5 id="{{id}}_remarks">{{__global.remarks}}</h5>
+    </div>
+    <div class="custom-remarks custom-remarks1 text">
+      <div class="custom-remarks-menu-data--close">X</div>
+      <div class="markdown level0 remarks">{{{remarks}}}</div>
+    </div>
+  </div>
+	{{/remarks}}
 </div>
 
 <h1 id="{{id}}" data-uid="{{uid}}" class="text-break h1-class-header">{{>partials/title}}</h1>
@@ -111,10 +122,6 @@
   </tbody>
 </table>
 {{/syntax.typeParameters.0}}
-{{#remarks}}
-<h5 id="{{id}}_remarks"><strong>{{__global.remarks}}</strong></h5>
-<div class="markdown level0 remarks">{{{remarks}}}</div>
-{{/remarks}}
 
 
 <div class="custom-menu-data custom-menu-data-first">

@@ -38,8 +38,10 @@
 <h6><strong>{{__global.package}}</strong>: {{{value.specName.0.value}}}</h6>
 {{/package.0}}
 {{#remarks}}
-<h5 id="{{id}}_remarks"><strong>{{__global.remarks}}</strong></h5>
-<div class="markdown level0 remarks">{{{remarks}}}</div>
+<div class="custom-remarks3">
+  <h5 id="{{id}}_remarks"><strong>{{__global.remarks}}</strong></h5>
+  <div class="markdown level0 remarks">{{{remarks}}}</div>
+</div>
 {{/remarks}}
 {{#example}}
   <div class="comment-examples-container"><h5 id="{{id}}_examples"><strong>{{__global.examples}}</strong></h5></div>
