@@ -1,4 +1,5 @@
 if ($cleanUp -eq $true) {
+    Start-Sleep -Milliseconds 50
     Remove-Item -Recurse -Force $projectSiteDirectory -ErrorAction SilentlyContinue
     Remove-Item -Recurse -Force $projectDocDirectory -ErrorAction SilentlyContinue
     Remove-Item -Recurse -Force $projectDirectory\"docfx_custom_template" -ErrorAction SilentlyContinue

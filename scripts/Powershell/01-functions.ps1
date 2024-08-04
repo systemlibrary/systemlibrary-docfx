@@ -37,20 +37,25 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
     if ($null -eq $content) {
         Start-Sleep -Milliseconds 10
         $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
+        if($null -eq $content) {
+            Start-Sleep -Milliseconds 50
+            $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
+        }
         if ($null -eq $content) {
-            Err ("Could not find content when replacing " + $old + " in file " + $fileFullPath.ToString())
+            Err ("Could not find content when replacing " + $old  + " with new: " + $new + " in file " + $fileFullPath.ToString())
         }
         exit
     }
+    Start-Sleep -Milliseconds 2
     try {
         $content.Replace($old, $new) | Set-Content $fileFullPath -Force
     }
     catch {
-        Warn ("Trying replacing again in 10ms - as file could not be set, yet...");
-        Start-Sleep -Milliseconds 10
+        Warn ("Trying replacing again in 50ms - as file could not be set, yet...");
+        Start-Sleep -Milliseconds 50
         $content.Replace($old, $new) | Set-Content $fileFullPath -Force
     }
-    Start-Sleep -Milliseconds 5
+    Start-Sleep -Milliseconds 7
 }
 
 function HasError($results) {

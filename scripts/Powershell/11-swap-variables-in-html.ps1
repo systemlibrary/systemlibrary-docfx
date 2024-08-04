@@ -1,7 +1,10 @@
-
 if ($null -eq $relativeHostingPath) {
     $relativeHostingPath = ""
 }
+
+Start-Sleep -Milliseconds 250
+
+Out "Swapping HTML in the docfx generated HTML files"
 
 foreach ($htmlFile in $htmlFiles) {
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%relativeHostingPath%]" $relativeHostingPath
