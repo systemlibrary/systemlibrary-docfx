@@ -26,6 +26,7 @@
   	- A new Index.html is created based on all generated html files
   	- A Install.html will be created if a "install.md" exists in the root of your project
     	- Install.html will have a link at the top in the "Index.html"
+  	- A Download link will be created at Install.html if a "demo.zip" exists in the root of your project
 
 
 - If you want a new clean template?

@@ -29,3 +29,14 @@ if ($ignoreClass -ne $null -and $ignoreClass.Count -gt 0) {
 }
 
 Out "Html files copied to output directory"
+
+$parentProjectDirectory = (Get-Item $projectDirectory).Parent.FullName
+
+$demoFullPath = $parentProjectDirectory + "/demo.zip";
+
+if (Test-Path $demoFullPath) {
+    Copy-Item -Path $demoFullPath -Destination ($outputFolderFullPath + "demo.zip") -Force
+    Out ("demo.zip sample copied to docs, continue")
+} else {
+    Out ("No demo.zip sample exist, continue")
+}
