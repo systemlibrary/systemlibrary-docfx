@@ -9,7 +9,7 @@ function createListItem($baseName, $href, $cssClass) {
     return "<li class='" + $cssClass + "' title='" + $title + "'><a class='index-navigation-item' href='" + $href + "'>" + $cleanName + "</a></li>"
 }
 
-$indexHtmlOrderedList = "<ol class='navigation-list-item'>" + $installListItem + (
+$indexHtmlOrderedList = "<ol class='navigation-list-item'>" + ($manualListItem + $installListItem) + (
     $htmlFiles | ForEach-Object {
         $href = ($relativeHostingPath + $_.Name)
 

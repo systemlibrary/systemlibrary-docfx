@@ -5,9 +5,9 @@ $allHtmlFiles = GetFiles $projectSiteDirectory$projectName | Where-Object {
 }
 
 if ($allHtmlFiles -eq $null -or $allHtmlFiles.Count -eq 0 ) {
-    Err "No html files were found. Do you have minimum one public class in your project? Try using latest docfx.console package?"
-    Err $projectSiteDirectory$projectName
-    exit 1
+   Err "No html files were found. Do you have minimum one public class in your project? Try using latest docfx.console package?"
+   Err $projectSiteDirectory$projectName
+   exit 1
 }
 
 # List all HTML files that will be skipped based on PS configuration
@@ -20,14 +20,25 @@ if ($skipDocumentationFor -ne $null -and $skipDocumentationFor.Count -gt 0) {
 
                 $skipThisDoc = $skipDocumentationFor[$i].Replace("<T>", "-1");
 
-                if ($skipThisDoc.Contains(".")) {
-                    if ($fileName.StartsWith($skipThisDoc)) {
+                if ($skipThisDoc.Contains("*")) 
+                {
+                    $tmpSkipThisDoc = $skipThisDoc.Replace("*", "");
+
+                    if ($fileName.Contains($tmpSkipThisDoc)) {
                         return $true;
                     }
                 }
-                else {
-                    if ($fileName.EndsWith($skipThisDoc)) {
-                        return $true;
+                else 
+                {
+                    if ($skipThisDoc.Contains(".")) {
+                        if ($fileName.StartsWith($skipThisDoc)) {
+                            return $true;
+                        }
+                    }
+                    else {
+                        if ($fileName.EndsWith($skipThisDoc)) {
+                            return $true;
+                        }
                     }
                 }
             }

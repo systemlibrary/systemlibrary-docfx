@@ -35,8 +35,11 @@ $parentProjectDirectory = (Get-Item $projectDirectory).Parent.FullName
 $demoFullPath = $parentProjectDirectory + "/demo.zip";
 
 if (Test-Path $demoFullPath) {
+    # We want to really say we found a demo.zip in case it is not the meaning
     Copy-Item -Path $demoFullPath -Destination ($outputFolderFullPath + "demo.zip") -Force
-    Out ("demo.zip sample copied to docs, continue")
+    Warn ("-------demo.zip--------")
+    Warn ("demo.zip sample copied to docs, continue")
+    Warn ("-------demo.zip--------")
 } else {
     Out ("No demo.zip sample exist, continue")
 }

@@ -35,10 +35,10 @@ function GetFileDisplayName([string] $fileFullPath) {
 function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new) {
     $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
     if ($null -eq $content) {
-        Start-Sleep -Milliseconds 10
+        Start-Sleep -Milliseconds 25
         $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
         if($null -eq $content) {
-            Start-Sleep -Milliseconds 50
+            Start-Sleep -Milliseconds 75
             $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
         }
         if ($null -eq $content) {
@@ -46,14 +46,21 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
         }
         exit
     }
-    Start-Sleep -Milliseconds 2
+    Start-Sleep -Milliseconds 7
     try {
         $content.Replace($old, $new) | Set-Content $fileFullPath -Force
     }
     catch {
         Warn ("Trying replacing again in 50ms - as file could not be set, yet...");
         Start-Sleep -Milliseconds 50
-        $content.Replace($old, $new) | Set-Content $fileFullPath -Force
+        try {
+            $content.Replace($old, $new) | Set-Content $fileFullPath -Force
+        }
+        catch {
+            Warn ("Trying replacing again in 200ms - last retry...");
+            Start-Sleep -Milliseconds 200
+            $content.Replace($old, $new) | Set-Content $fileFullPath -Force
+        }
     }
     Start-Sleep -Milliseconds 7
 }

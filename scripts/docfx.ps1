@@ -18,20 +18,24 @@ if ($LASTEXITCODE -eq 1) { EXIT }
 
 if ($LASTEXITCODE -ne 1) { 
 
-    . ($PSScriptRoot + "\Powershell\08-create-install-list-item.ps1")
+    . ($PSScriptRoot + "\Powershell\08-create-manual-list-item.ps1")
 
-    . ($PSScriptRoot + "\Powershell\09-create-index-ordered-list.ps1")
+    . ($PSScriptRoot + "\Powershell\09-create-manual-list.ps1")
 
-    . ($PSScriptRoot + "\Powershell\10-create-index-html.ps1")
+    . ($PSScriptRoot + "\Powershell\10-create-install-list-item.ps1")
 
-    . ($PSScriptRoot + "\Powershell\11-swap-variables-in-html.ps1")
+    . ($PSScriptRoot + "\Powershell\11-create-index-ordered-list.ps1")
 
-    . ($PSScriptRoot + "\Powershell\12-move-to-site-directory.ps1")
+    . ($PSScriptRoot + "\Powershell\12-create-index-html.ps1")
 
-    . ($PSScriptRoot + "\Powershell\13-copy-to-output-directory.ps1")
+    . ($PSScriptRoot + "\Powershell\13-swap-variables-in-html.ps1")
+
+    . ($PSScriptRoot + "\Powershell\14-move-to-site-directory.ps1")
+
+    . ($PSScriptRoot + "\Powershell\15-copy-to-output-directory.ps1")
 }
 
-. ($PSScriptRoot + "\Powershell\14-clean-up.ps1")
+. ($PSScriptRoot + "\Powershell\16-clean-up.ps1")
 
 if ($LASTEXITCODE -eq 1) { EXIT }
 

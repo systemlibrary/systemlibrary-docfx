@@ -1,8 +1,16 @@
 function createInstallListItem() {
-    $installFileFullPath = $projectDirectory + "Install.md";
+    # $installFileFullPath = $projectDirectory + "Install.md";
+
+    $installFileFullPath = Get-ChildItem -Path $projectDirectory -Recurse -File -Filter "Install.md" |
+    Where-Object {
+        $_.FullName -match "[\\/]Install\.md$" -and
+        ($_.FullName -replace [regex]::Escape($projectDirectory), '') -split '[\\/]' | Measure-Object | Select-Object -ExpandProperty Count | ForEach-Object { $_ -le 3 }
+    } |
+    Select-Object -First 1 -ExpandProperty FullName
 
     if ((Test-Path -Path $installFileFullPath) -eq $true) {
         $hrefInstall = "/Install.html"
+        Out "Install.md found"
         if ($relativeHostingPath -ne $null -and $relativeHostingPath -ne "") {
             if ($relativeHostingPath.EndsWith("/") -eq $true) {
                 $hrefInstall = ($relativeHostingPath + "Install.html");
@@ -23,7 +31,7 @@ function createInstallListItem() {
 
             $scriptsDir = $PSScriptRoot + "\..\..\scripts\";
             
-            $htmlContent = Get-Content -Path ($scriptsDir + "Install.template.html") -Raw;
+            $htmlContent = Get-Content -Path ($scriptsDir + "Markdown.template.html") -Raw;
 
             [string]$htmlMdContent = $htmlContent.Replace("@md-content-encoded", $mdContentEncoded);
 
