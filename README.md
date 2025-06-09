@@ -67,4 +67,10 @@ If you want a new clean template, but with just the install, markdown and demo.z
 - https://systemlibrary.github.io//systemlibrary-common-net/index.html
 
 ## Lisence
-- It's free forever, copy paste as you'd like...
+- It's free forever, copy paste as you'd like, use at your own risk...
+
+### Third parties
+- DocFx (MIT): https://dotnet.github.io/docfx/
+- showdown (BSD): https://www.npmjs.com/package/showdown
+- highlight.js (BSD): https://www.npmjs.com/package/highlight.js
+- remarkable (MIT): https://github.com/jonschlinkert/remarkable

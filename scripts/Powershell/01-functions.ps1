@@ -37,14 +37,19 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
     if ($null -eq $content) {
         Start-Sleep -Milliseconds 25
         $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
-        if($null -eq $content) {
-            Start-Sleep -Milliseconds 75
+        if ($null -eq $content) {
+            Start-Sleep -Milliseconds 66
             $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
         }
         if ($null -eq $content) {
-            Err ("Could not find content when replacing " + $old  + " with new: " + $new + " in file " + $fileFullPath.ToString())
+            Start-Sleep -Milliseconds 66
+            $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
         }
-        exit
+        if ($null -eq $content) {
+            Err ("Could not find content when replacing " + $old + " with new: " + $new + " in file " + $fileFullPath.ToString())
+        }
+        # TODO Why do we exit here instead of return?
+        return
     }
     Start-Sleep -Milliseconds 7
     try {
@@ -87,4 +92,224 @@ function HasError($results) {
         }
     }
     return $false
+}
+
+function createListItemHeading($heading) {
+    return "<h4 class='class heading index-navigation-item'>" + $heading + "</h4>"
+}
+
+function createListItemForClass($baseName, $liHref, $cssClass) {
+    $cleanName = $baseName.Replace('-1', "<>");
+
+    $title = "class"
+    if ($cssClass -ne "") {
+        $title = "namespace"
+    }
+    return "<li class='" + $cssClass + "' title='" + $title + "'><a class='index-navigation-item' href='" + $liHref + "'>" + $cleanName + "</a></li>"
+}
+
+function createOrderedList($items) {
+
+    if ($items -eq $null) {
+        return "";
+    }
+    
+    $previousDirName = "";
+    $tmpOrderedList = "<ol class='navigation-list-item'>" + (
+        $items | ForEach-Object {
+            # Already a list item string
+            if ($_ -is [string] -and $_.StartsWith("<li")) {
+                $($_)
+            }
+            # Is a full relative or absolute path to a file
+            else {
+                if ($_ -is [string]) {
+                    $parent = Split-Path $_ -Parent
+                    $dirName = Split-Path $parent -Leaf
+
+                    if ($dirName -ne $previousDirName) {
+                        $dirHeading = createListItemHeading $dirName
+                        $($dirHeading)
+                        $previousDirName = $dirName
+                    }
+
+                    $name = [System.IO.Path]::GetFileName($_).Replace(".html", "");
+
+                    $upperCount = ([regex]::Matches($name, '[A-Z]')).Count
+
+                    if ($upperCount -le 4) {
+                        $name = ([regex]::Replace($name, '([A-Z])(?=[a-z])', ' $1')).Trim()
+                    }
+                    
+                    $createdLi1 = createListItemForClass $name $_ ""
+
+                    $($createdLi1)
+                }   
+                else {
+                    # A file object
+                    $lihref = $relativeHostingPath + $_.Name
+                    $cssClass = ""
+    
+                    if ($namespaceHtmlFiles -contains $_) {
+                        $cssClass = "index-navigation-item--namespace"
+                    }
+    
+                    $createdLi = createListItemForClass $_.BaseName $lihref $cssClass
+                    $($createdLi)
+                }
+            }
+        }
+    ) + "</ol>"
+
+    return $tmpOrderedList
+}
+
+# Returns full path of markdown or null
+function GetMarkdownFile ([string] $relativeFullFileName) {
+    if (-not ($relativeFullFileName -match '^[\\/]')) {
+        Err ($relativeFullFileName + " should start with a slash")
+        return $null
+    }
+    
+    $fileName = [System.IO.Path]::GetFileName($relativeFullFileName)
+
+    $path = Get-ChildItem -Path $projectDirectory -Recurse -File -Filter $fileName |
+    Where-Object {
+        $_.FullName -match "$([regex]::Escape($relativeFullFileName))$" -and
+        ($_.FullName -replace [regex]::Escape($projectDirectory), '') -split '[\\/]' | Measure-Object | Select-Object -ExpandProperty Count | ForEach-Object { $_ -le 3 }
+    } |
+    Select-Object -First 1 -ExpandProperty FullName
+
+    if ($path -ne $null -and (Test-Path -Path $path) -eq $true) {
+        return $path
+    }
+    return $null
+}
+
+$convertedMdFiles = @()
+
+function ConvertMdToHtml([string] $markdownFile, [string] $relativeFullFileName) {
+    if ($convertedMdFiles -contains $markdownFile) {
+        return
+    }
+    $convertedMdFiles += $markdownFile
+
+    $mdContent = Get-Content -Path $markdownFile -Raw
+
+    $mdContent = $mdContent.Replace('`', "!====!");
+    $mdContent = $mdContent.Replace("""", "!????!");
+    $mdContent = $mdContent.Replace("'", "!@@@@!");
+
+    $scriptsDir = $PSScriptRoot + "\..\..\scripts\";
+
+    $tocHtmlContent = ""
+
+    if ($mdContent.Contains("!!TOC!!")) {
+
+        $markdownDir = [System.IO.Path]::GetDirectoryName($markdownFile)
+        $markdownFiles = Get-ChildItem -Path $markdownDir -Recurse -Filter *.md | Select-Object -ExpandProperty FullName
+        $markdownHtmlFiles = @()
+
+        foreach ($md in $markdownFiles) {
+            if ($convertedMdFiles -contains $md) {
+                continue
+            }
+            
+            $relativeMdPath = $md.Substring($markdownDir.Length).TrimStart('\', '/')
+
+            ConvertMdToHtml $md $relativeMdPath
+        
+            $htmlHref = $relativeMdPath.Replace(".md", ".html")
+        
+            if ($relativeHostingPath -ne $null -and $relativeHostingPath -ne "") {
+                $htmlHref = ($relativeHostingPath + $htmlHref).Replace("\", "/")
+            }
+            else {
+                $htmlHref = ($outputFolderFullPath + $htmlHref).Replace("/", "\")
+            }
+        
+            $markdownHtmlFiles += $htmlHref
+        }
+
+        $tocHtmlContent = createOrderedList $markdownHtmlFiles
+
+        $tocHtmlContent = $tocHtmlContent.Replace("\", "\\");
+    }
+
+    $htmlContent = Get-Content -Path ($scriptsDir + "Markdown.template.html") -Raw;
+
+    $mdContentEncoded = [System.Net.WebUtility]::HtmlEncode($mdContent)
+
+    $mdContentEncoded = $mdContentEncoded.Replace("!!TOC!!", $tocHtmlContent);
+
+    [string]$htmlMdContent = $htmlContent.Replace("@md-content-encoded", $mdContentEncoded);
+
+    [string]$htmlFile = $relativeFullFileName.Replace(".md", ".html");
+  
+    $mdToOutputHtmlFilePath = ($outputFolderFullPath + $htmlFile)
+
+    if ($relativeHostingPath -ne $null -and $relativeHostingPath -ne "") {
+        $mdToOutputHtmlFilePath = $mdToOutputHtmlFilePath.Replace("\/", "/");
+        $mdToOutputHtmlFilePath = $mdToOutputHtmlFilePath.Replace("\", "/");
+    }
+    else {
+        $mdToOutputHtmlFilePath = $mdToOutputHtmlFilePath.Replace("\/", "\");
+        $mdToOutputHtmlFilePath = $mdToOutputHtmlFilePath.Replace("/", "\");
+    }
+
+    $scriptsRelativeDir = [System.IO.Path]::GetDirectoryName($mdToOutputHtmlFilePath)
+
+    $ignored = New-Item -Path $mdToOutputHtmlFilePath -Value "$htmlMdContent" -Force -ErrorAction SilentlyContinue
+    
+    #$ignored = Copy-Item -Path ($scriptsDir + "remarkable.js") -Destination  ($scriptsRelativeDir + "/remarkable.js") -Force -Recurse -ErrorAction SilentlyContinue
+    #$ignored = Copy-Item -Path ($scriptsDir + "highlight.11.4.0.min.js") -Destination  ($scriptsRelativeDir + "/highlight.11.4.0.min.js") -Force -Recurse -ErrorAction SilentlyContinue
+    #$ignored = Copy-Item -Path ($scriptsDir + "highlight.11.4.0.min.css") -Destination  ($scriptsRelativeDir + "/highlight.11.4.0.min.css") -Force -Recurse -ErrorAction SilentlyContinue
+    
+    $ignored = Copy-Item -Path ($scriptsDir + "remarkable.1.7.4.min.js") -Destination  ($scriptsRelativeDir + "/remarkable.1.7.4.min.js") -Force -Recurse -ErrorAction SilentlyContinue
+    $ignored = Copy-Item -Path ($scriptsDir + "highlight.11.11.1.min.js") -Destination  ($scriptsRelativeDir + "/highlight.11.11.1.min.js") -Force -Recurse -ErrorAction SilentlyContinue
+    $ignored = Copy-Item -Path ($scriptsDir + "highlight.11.11.1.min.css") -Destination  ($scriptsRelativeDir + "/highlight.11.11.1.min.css") -Force -Recurse -ErrorAction SilentlyContinue
+}
+
+function MdToHref([string] $relativeFullFileName) {
+    $markdownFile = GetMarkdownFile $relativeFullFileName
+
+    if ($markdownFile -eq $null) {
+        Out ($relativeFullFileName + " is not found, skipped...")
+        return $null
+    }
+
+    ConvertMdToHtml $markdownFile $relativeFullFileName
+
+    $href = $relativeFullFileName.Replace(".md", ".html");
+
+    if ($relativeHostingPath -ne $null -and $relativeHostingPath -ne "") {
+        $href = ($relativeHostingPath + $href).Replace("\/", "/");
+    }
+    else {
+        $href = ($outputFolderFullPath + $href).Replace("\/", "\");
+    }
+
+    return $href
+}
+
+# Returns a <li><a href></a></li> or "" if markdown file do not exist
+# It will also take that markdown and convert to HTML and copy the HTML to the output destination
+function CreateListItem([string] $relativeFullFileName, [string]$title = "") {
+    $global:convertedMdFiles = @()
+
+    [string]$hrefSrc = MdToHref $relativeFullFileName
+
+    if ($hrefSrc -eq $null) {
+        return ""
+    }
+
+    [string]$fileName = [System.IO.Path]::GetFileName($relativeFullFileName);
+
+    [string]$name = [System.IO.Path]::GetFileNameWithoutExtension($fileName);
+
+    [string]$cssclass = $name.ToLower();
+
+    $li = "<li class='$cssclass' title='$title'><a class='index-navigation-item' href='$hrefSrc'>$name</a></li>";
+
+    return $li;
 }
