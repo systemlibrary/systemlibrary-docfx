@@ -13,7 +13,7 @@ foreach ($htmlFile in $htmlFiles) {
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerNugetUrl%]" $footerNugetUrl
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerWebsiteUrl%]" $footerWebsiteUrl
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerSiteTitle%]" $footerSiteTitle
-
+  
     # Send "skip Documentation For"-query option into DOM, so Javascript can use same "logic" to hide elements in SideToc
     if ($null -ne $skipDocumentationFor -and $skipDocumentationFor.Count -gt 0) {
         $skipDocumentationForSeparatedCommaList = $skipDocumentationFor -join ","
@@ -62,7 +62,10 @@ foreach ($htmlFile in $htmlFiles) {
                 }
             }
         }
+    }
 
+    if ($showViewSourceLinks -eq $false) {
+        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "custom-source-code-link-container" "custom-source-code-link-container custom-source-code-link-container--hidden"
     }
 }
 

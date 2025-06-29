@@ -51,23 +51,23 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
         # TODO Why do we exit here instead of return?
         return
     }
-    Start-Sleep -Milliseconds 7
+    Start-Sleep -Milliseconds 5
     try {
-        $content.Replace($old, $new) | Set-Content $fileFullPath -Force
+        $content.Replace($old, $new) | Set-Content $fileFullPath -Force -ErrorAction Stop
     }
     catch {
-        Warn ("Trying replacing again in 50ms - as file could not be set, yet...");
-        Start-Sleep -Milliseconds 50
+        Warn ("Trying replacing again in 25ms - as file could not be set, yet...");
+        Start-Sleep -Milliseconds 25
         try {
-            $content.Replace($old, $new) | Set-Content $fileFullPath -Force
+            $content.Replace($old, $new) | Set-Content $fileFullPath -Force  -ErrorAction Stop
         }
         catch {
-            Warn ("Trying replacing again in 200ms - last retry...");
-            Start-Sleep -Milliseconds 200
+            Warn ("Trying replacing again in 75ms - last retry...");
+            Start-Sleep -Milliseconds 75
             $content.Replace($old, $new) | Set-Content $fileFullPath -Force
         }
     }
-    Start-Sleep -Milliseconds 7
+    Start-Sleep -Milliseconds 5
 }
 
 function HasError($results) {
@@ -95,11 +95,14 @@ function HasError($results) {
 }
 
 function createListItemHeading($heading) {
+    $heading = $heading.Replace("-1", "&lt;T&gt;");
+    $heading = $heading.Replace("-2", "&lt;T&gt;");
     return "<h4 class='class heading index-navigation-item'>" + $heading + "</h4>"
 }
 
 function createListItemForClass($baseName, $liHref, $cssClass) {
-    $cleanName = $baseName.Replace('-1', "<>");
+    $cleanName = $baseName.Replace("-1", "&lt;T&gt;");
+    $cleanName = $cleanName.Replace("-2", "&lt;T&gt;");
 
     $title = "class"
     if ($cssClass -ne "") {
@@ -109,7 +112,6 @@ function createListItemForClass($baseName, $liHref, $cssClass) {
 }
 
 function createOrderedList($items) {
-
     if ($items -eq $null) {
         return "";
     }
@@ -308,6 +310,9 @@ function CreateListItem([string] $relativeFullFileName, [string]$title = "") {
     [string]$name = [System.IO.Path]::GetFileNameWithoutExtension($fileName);
 
     [string]$cssclass = $name.ToLower();
+
+    $name = $name.Replace("-1", "&lt;T&gt;");
+    $name = $name.Replace("-2", "&lt;T&gt;");
 
     $li = "<li class='$cssclass' title='$title'><a class='index-navigation-item' href='$hrefSrc'>$name</a></li>";
 

@@ -2,7 +2,7 @@ Out ("Building...")
 
 Set-Location $projectDirectory
 
-$results = & $docfxConsoleExeFullPath @($docfxJson, "-o " + $outputFolderFullPath, "-l " + $logFileFullPath + " --loglevel error")
+$results = & $docfxConsoleExeFullPath $docfxJson "-o" $outputFolderFullPath "-l" $logFileFullPath "--loglevel" "error"
 
 if (HasError $results -eq $true) {
     Remove-Item $logFileFullPath -Force -ErrorAction SilentlyContinue

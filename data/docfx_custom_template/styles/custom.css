@@ -929,7 +929,7 @@ div.col-md-10 > article.content.wrap > ol > li:hover {
 
 div.col-md-10 > article.content.wrap > ol > li > a {
   color: var(--purple);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 18px;
 }
 
@@ -1301,4 +1301,13 @@ article.content.wrap > h1.text-break {
 .custom-remarks .markdown.level1.remarks ul {
   list-style: none;
   padding-left: 0;
+}
+
+.custom-source-code-link-container--hidden {
+  display: none;
+}
+
+/* Bug: DocFx sometimes exposes public extension methods as part of the class itself, they seem to be getting div without a class */
+div.custom-class-content-inline > div:not([class]) {
+  display: none;
 }

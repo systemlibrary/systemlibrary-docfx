@@ -11,6 +11,7 @@ $footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-framew
 $footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Framework/"
 $footerWebsiteUrl = "https://www.systemlibrary.com/"
 $footerSiteTitle = "System Library Common Framework"
+$showViewSourceLinks = $true
 
 #$relativeHostingPath = "/systemlibrary-common-framework/"
 $relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
@@ -22,16 +23,19 @@ $relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is suffic
 $docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.4\docfx.exe")
 
 # OPTIONAL OPTIONS
-$cleanUp = $true # delete temp files generated during building documentation files
+$cleanUp = $false # delete temp files generated during building documentation files
 
 # Skip rules on the full output: Name.Space.Class
-# - contain a * => contains (case-sensitive)
-# - else contain a . => starts with (case-sensitive)
+# - string contains wildcard? => contains (case-sensitive)
+# - else string contains dot? => starts with (case-sensitive)
 # - else => ends with (case-sensitive)
 $skipDocumentationFor = @('LogWriter', 
 '*.Benchmark*',
 '*.Tests*',
-'*.ApiTests*'
+'*.ApiTests*',
+'*.BaseTest*',
+'DelegateJsonConverter',
+'DelegateJsonConverter'
 ) # case sensitive
 
 # EXECUTE

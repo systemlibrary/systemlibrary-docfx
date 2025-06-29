@@ -9,6 +9,8 @@ if ($cleanUp -eq $true) {
     Remove-Item $projectDirectory$projectName"_toc.yml" -Force -ErrorAction SilentlyContinue
     Remove-Item $projectDirectory$projectName"_index.md" -Force -ErrorAction SilentlyContinue
     Remove-Item $projectDirectory$projectName"_filter.yml" -Force -ErrorAction SilentlyContinue
+
+    Remove-Item $projectDirectory$projectName"-log.txt" -Force -ErrorAction SilentlyContinue
     
     Out "Cleaned temporary files"
 }
