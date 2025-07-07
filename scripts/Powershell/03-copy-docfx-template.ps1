@@ -15,7 +15,7 @@ try {
     ReplaceTextInFile $docfxJson "[%projectName%]" $projectName
     ReplaceTextInFile $docfxJson "[%projectDirectory%]" $projectDirectory.replace('\', '/')
 
-    Out ("Docfx Template Copied")
+    Out (("Docfx template copied to " + $projectDirectory))
 }
 catch {
     Warn ("Copy to " + $projectDirectory + $projectName + " failed")

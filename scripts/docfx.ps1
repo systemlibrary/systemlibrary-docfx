@@ -1,12 +1,24 @@
+if ($LASTEXITCODE -eq 1) { 
+    $LASTEXITCODE = 0
+}
+
 . ($PSScriptRoot + "\Powershell\01-functions.ps1")
 
 . ($PSScriptRoot + "\Powershell\02-variables.ps1")
 
+if ($LASTEXITCODE -eq 1) { 
+    Err "variable initialization errored"
+    EXIT 
+}
+
 . ($PSScriptRoot + "\Powershell\03-copy-docfx-template.ps1")
 
-. ($PSScriptRoot + "\Powershell\04-validate-settings.ps1")
+if ($LASTEXITCODE -eq 1) { 
+    Err "copy-docfx-template errored"
+    EXIT 
+}
 
-if ($LASTEXITCODE -eq 1) { EXIT }
+. ($PSScriptRoot + "\Powershell\04-validate-settings.ps1")
 
 . ($PSScriptRoot + "\Powershell\05-build.ps1")
 

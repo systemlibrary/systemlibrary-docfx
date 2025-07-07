@@ -24,6 +24,14 @@ function GetFolderPath([string] $fullFilePath) {
 
 # Returns a file object from a string path
 function GetFileName([string] $fileFullPath) {
+    if ($fileFullPath -eq $null -or $fileFullPath.Length -le 1) {
+        Err "GetFileName was invoked with empty"
+        return $null;
+    }
+    if (-not (Test-Path -LiteralPath $fileFullPath)) { 
+        Err ($fileFullPath + " do not exist")
+        return $null 
+    }
     return (Get-ChildItem $fileFullPath).BaseName
 }
 
@@ -64,7 +72,12 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
         catch {
             Warn ("Trying replacing again in 75ms - last retry...");
             Start-Sleep -Milliseconds 75
-            $content.Replace($old, $new) | Set-Content $fileFullPath -Force
+            try {
+                $content.Replace($old, $new) | Set-Content $fileFullPath -Force
+            }
+            catch {
+                Err ("Error replacing " + $old + " with " + $new + " in file " + $fileFullPath)
+            }
         }
     }
     Start-Sleep -Milliseconds 5
@@ -79,6 +92,7 @@ function HasError($results) {
         foreach ($result in $results) {
             if ($result.ToString().Contains("Build failed") -or 
                 $result.ToString().Contains("[Failure]") -eq $true -or 
+                $result.ToString().Contains("Msbuild failed") -eq $true -or 
                 $result.ToString().Contains("Method not found") -eq $true -or
                 $result.ToString().Contains("Error:")
             ) {
@@ -90,6 +104,7 @@ function HasError($results) {
     else {
         $res = $results.ToString().Contains("Build failed") 
         -or $results.ToString().Contains("[Failure]") -eq $true 
+        -or $results.ToString().Contains("Msbuild failed") -eq $true 
         -or $results.ToString().Contains("Method not found") -eq $true 
         -or $results.ToString().Contains("Error:") -eq $true
 
