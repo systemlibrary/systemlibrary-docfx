@@ -77,14 +77,21 @@ function HasError($results) {
 
     if ($results -is [array]) {
         foreach ($result in $results) {
-            if ($result.ToString().Contains("Build failed.") -or $result.ToString().Contains("Error:")) {
+            if ($result.ToString().Contains("Build failed") -or 
+                $result.ToString().Contains("[Failure]") -eq $true -or 
+                $result.ToString().Contains("Method not found") -eq $true -or
+                $result.ToString().Contains("Error:")
+            ) {
                 Err $result
                 return $true
             }
         }
     }
     else {
-        $res = $results.ToString().Contains("Build failed") -or $results.ToString().Contains("Error:") -eq $true
+        $res = $results.ToString().Contains("Build failed") 
+        -or $results.ToString().Contains("[Failure]") -eq $true 
+        -or $results.ToString().Contains("Method not found") -eq $true 
+        -or $results.ToString().Contains("Error:") -eq $true
 
         if ($res -eq $true) {
             Err $res
