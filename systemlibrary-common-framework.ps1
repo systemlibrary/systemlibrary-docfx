@@ -19,9 +19,6 @@ $relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is suffic
 # It is the path of where css/js is loaded from, from the "root" of your IIS site
 # Simply checking network tab in chrome while browsing your site will reveal what it should be, as youll get 404/red for css/js requests
 
-# Upgrade docfx.exe? Download latest from nuget package manager in any project, and copy paste the downloaded files
-$docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.4\docfx.exe")
-
 # OPTIONAL OPTIONS
 $cleanUp = $true # delete temp files generated during building documentation files
 

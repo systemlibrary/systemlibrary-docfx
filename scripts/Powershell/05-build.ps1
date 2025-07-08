@@ -2,8 +2,6 @@ Out ("Building...")
 
 Set-Location $projectDirectory
 
-#$results = & $docfxConsoleExeFullPath $docfxJson "-o" $outputFolderFullPath "-l" $logFileFullPath "--loglevel" "info" "--property" "Configuration=Release"
-
 $results = & docfx $docfxJson `
     -o $outputFolderFullPath `
     -l $logFileFullPath `
