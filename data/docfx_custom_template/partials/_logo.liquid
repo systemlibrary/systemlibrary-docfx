@@ -1,10 +1,16 @@
-{% comment -%}Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the
-project root for full license information.{% endcomment -%}
-<a class="navbar-brand" href="{{_rel}}/index.html">
-  {%- if _appLogoPath -%}
-  <img id="logo" class="svg" src="{{_appLogoPath}}" alt="{{_appName}}">
-  {%- else -%}
-  <img id="logo" class="svg" src="[%relativeHostingPath%]logo.png" alt="{{_appName}}">
-  {%- endif -%}
+{% comment -%}Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.{% endcomment -%}
+<a class="navbar-brand" href="{{_rel}}[%relativeHostingPath%]index.html" onclick="return slcf__handleNavBrandClick(event)">
+  <img id="logo" class="svg" src="{{_rel}}{{{_appLogoPath}}}{{^_appLogoPath}}[%relativeHostingPath%]logo.png{{/_appLogoPath}}" alt="{{_appName}}" >
+  <span class="navbar-title">[%siteTitle%]</span>
 </a>
-<span></span>
+
+<script>
+function slcf__handleNavBrandClick(e) {
+  if (window.history.length > 1) {
+    e.preventDefault();
+    history.back();
+    return false;
+  }
+  return true;
+}
+</script>

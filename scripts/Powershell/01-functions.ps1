@@ -45,17 +45,16 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
 
     if ($null -eq $content -or $content -eq "") {
         Start-Sleep -Milliseconds 8
-        $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
+        $content = Get-Content $fileFullPath -Raw -ErrorAction SilentlyContinue
         if ($null -eq $content -or $content -eq "") {
-            Start-Sleep -Milliseconds 24
-            $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
+            Start-Sleep -Milliseconds 33
+            $content = Get-Content $fileFullPath -Raw -ErrorAction SilentlyContinue
         }
         if ($null -eq $content -or $content -eq "") {
-            Start-Sleep -Milliseconds 48
-            $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
+            Start-Sleep -Milliseconds 66
+            $content = Get-Content $fileFullPath -Raw -ErrorAction SilentlyContinue
         }
         if ($null -eq $content -or $content -eq "") {
-            Write-Host "Checked file Length: $($content.Length)"
             Warn ("Content is null or blank when replacing: " + $old + " with new: " + $new + " in file " + [System.IO.Path]::GetFileName($fileFullPath))
             # No content in file, nothing to replace, continue...
             return

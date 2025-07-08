@@ -9,16 +9,16 @@
 {{name.0.value}}
 {{/inClass}}
 {{#inStruct}}
-Struct {{name.0.value}}
+{{name.0.value}}
 {{/inStruct}}
 {{#inInterface}}
-Interface {{name.0.value}}
+{{name.0.value}}
 {{/inInterface}}
 {{#inEnum}}
-Enum {{name.0.value}}
+{{name.0.value}}
 {{/inEnum}}
 {{#inDelegate}}
-Delegate {{name.0.value}}
+{{name.0.value}}
 {{/inDelegate}}
 {{#inConstructor}}
 Constructor {{name.0.value}}

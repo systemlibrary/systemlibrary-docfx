@@ -23,7 +23,7 @@ $(function () {
 
   breakText();
   renderTabs();
-  
+
 
   window.refresh = function (article) {
     // Update markup result
@@ -997,7 +997,7 @@ $(function () {
     }
 
     function readTabsQueryStringParam() {
-      var qs = parseQueryString();
+      var qs = parseQueryString(window.location.search);
       var t = qs.tabs;
       if (t === undefined || t === '') {
         return [];
@@ -1006,7 +1006,7 @@ $(function () {
     }
 
     function updateTabsQueryStringParam(state) {
-      var qs = parseQueryString();
+      var qs = parseQueryString(window.location.search);
       qs.tabs = state.selectedTabs.join();
       var url = location.protocol + "//" + location.host + location.pathname + "?" + toQueryString(qs) + location.hash;
       if (location.href === url) {
@@ -1142,10 +1142,7 @@ $(function () {
      */
     function breakPlainText(text) {
       if (!text) return text;
-      if(text.includes(' ')) 
-        return text.replace(/([a-z])([A-Z])|(\.)(\w)/g, '$1$3<wbr>$2$4')
-
-      return text;
+      return text.replace(/([a-z])([A-Z])|(\.)(\w)/g, '$1$3<wbr>$2$4')
     }
 
     /**
@@ -1153,7 +1150,7 @@ $(function () {
      * If the jQuery element contains tags, this function will not change the element.
      */
     $.fn.breakWord = function () {
-      if (this.html() == this.text()) {
+      if (!this.html().match(/(<\w*)((\s\/>)|(.*<\/\w*>))/g)) {
         this.html(function (index, text) {
           return breakPlainText(text);
         })
