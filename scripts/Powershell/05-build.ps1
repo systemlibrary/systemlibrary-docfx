@@ -2,7 +2,13 @@ Out ("Building...")
 
 Set-Location $projectDirectory
 
-$results = & $docfxConsoleExeFullPath $docfxJson "-o" $outputFolderFullPath "-l" $logFileFullPath "--loglevel" "warning" "--property" "Configuration=Release"
+#$results = & $docfxConsoleExeFullPath $docfxJson "-o" $outputFolderFullPath "-l" $logFileFullPath "--loglevel" "info" "--property" "Configuration=Release"
+
+$results = & docfx $docfxJson `
+    -o $outputFolderFullPath `
+    -l $logFileFullPath `
+    --logLevel warning `
+    --template "C:\syslib\systemlibrary-docfx\data\docfx_custom_template"
 
 if (HasError $results -eq $true) {
     Remove-Item $logFileFullPath -Force -ErrorAction SilentlyContinue
@@ -24,4 +30,5 @@ else {
     }
 }
 
+# CREATE THE INDEX.HTML FRONTPAGE FOR ALL DOCS
 Move-Item -Path $projectSiteDirectory$projectName"_index.html" -Destination $projectSiteDirectory$projectName\index.html -Force -ErrorAction SilentlyContinue

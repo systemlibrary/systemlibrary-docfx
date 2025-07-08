@@ -1,7 +1,7 @@
 Set-Location $PSScriptRoot
 
 # REQUIRED OPTIONS
-$csprojFileFullPath = "C:\syslib\systemlibrary-common-framework-private\source\SystemLibrary.Common.Framework.sln"
+$csprojFileFullPath = "C:\syslib\systemlibrary-common-framework-private\source\systemlibrary.common.framework.net\systemlibrary.common.framework.net.csproj"
 
 #$outputFolderFullPath = "C:\syslib\systemlibrary-common-framework\docs\" # set to $null if you want outputFolder to be within the project folder
 $outputFolderFullPath = "C:\temp\Docs\"
@@ -23,7 +23,7 @@ $relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is suffic
 $docfxConsoleExeFullPath = ($PSScriptRoot + "\docfx.console.2.59.4\docfx.exe")
 
 # OPTIONAL OPTIONS
-$cleanUp = $false # delete temp files generated during building documentation files
+$cleanUp = $true # delete temp files generated during building documentation files
 
 # Skip rules on the full output: Name.Space.Class
 # - string contains wildcard? => contains (case-sensitive)
@@ -34,7 +34,6 @@ $skipDocumentationFor = @('LogWriter',
 '*.Tests*',
 '*.ApiTests*',
 '*.BaseTest*',
-'DelegateJsonConverter',
 'DelegateJsonConverter'
 ) # case sensitive
 

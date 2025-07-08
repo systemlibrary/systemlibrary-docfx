@@ -1,10 +1,10 @@
 try {
     if ($null -ne $outputFolderFullPath -and $outputFolderFullPath -ne "") {
-        Start-Sleep -Milliseconds 25
+        Start-Sleep -Milliseconds 50
 
-        Copy-Item -Path $projectSiteDirectory\* -Destination $outputFolderFullPath -Force -Recurse -ErrorAction SilentlyContinue
+        Copy-Item -Path $projectSiteDirectory -Destination $outputFolderFullPath -Force -Recurse
 
-        Start-Sleep -Milliseconds 25
+        Start-Sleep -Milliseconds 50
     }
 }
 catch {
@@ -38,8 +38,9 @@ if (Test-Path $demoFullPath) {
     # We want to really say we found a demo.zip in case it is not the meaning
     Copy-Item -Path $demoFullPath -Destination ($outputFolderFullPath + "demo.zip") -Force
     Warn ("-------demo.zip--------")
-    Warn ("demo.zip sample copied to docs, continue")
+    Warn ("/demo.zip copied to docs")
     Warn ("-------demo.zip--------")
-} else {
-    Out ("No demo.zip sample exist, continue")
+}
+else {
+    Out ("/demo.zip is not found, skipped...")
 }

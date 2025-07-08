@@ -7,14 +7,14 @@ if ($LASTEXITCODE -eq 1) {
 . ($PSScriptRoot + "\Powershell\02-variables.ps1")
 
 if ($LASTEXITCODE -eq 1) { 
-    Err "variable initialization errored"
+    Err "02-variables errored"
     EXIT 
 }
 
-. ($PSScriptRoot + "\Powershell\03-copy-docfx-template.ps1")
+. ($PSScriptRoot + "\Powershell\03-copy-docfx-files.ps1")
 
 if ($LASTEXITCODE -eq 1) { 
-    Err "copy-docfx-template errored"
+    Err "03-copy-docfx-files errored"
     EXIT 
 }
 
@@ -45,9 +45,6 @@ if ($LASTEXITCODE -ne 1) {
 
 if ($LASTEXITCODE -eq 1) { EXIT }
 
-Start-Sleep -Milliseconds 5
-
-Out ("Built documentation to directory: " + $outputFolderFullPath)
-
+Out ("Documentation is ready at: " + $outputFolderFullPath)
 
 Write-Host ("Success") -ForegroundColor DarkGreen

@@ -2,17 +2,36 @@ if ($null -eq $relativeHostingPath) {
     $relativeHostingPath = ""
 }
 
-Start-Sleep -Milliseconds 250
+Start-Sleep -Milliseconds 150
 
 Out "Swapping HTML in the docfx generated HTML files"
 
 foreach ($htmlFile in $htmlFiles) {
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%relativeHostingPath%]" $relativeHostingPath
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%siteTitle%]" $siteTitle
-    ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerGithubUrl%]" $footerGithubUrl
-    ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerNugetUrl%]" $footerNugetUrl
-    ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerWebsiteUrl%]" $footerWebsiteUrl
     ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerSiteTitle%]" $footerSiteTitle
+    
+    # Remove footer options if null/blank
+    if ($footerNugetUrl -ne $null -and $footerNugetUrl -ne "") {
+        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerNugetUrl%]" $footerNugetUrl
+    }
+    else {
+        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "<span>Package: <a href='[%footerNugetUrl%]'>nuget</a></span><br>" ""
+    }
+
+    if ($footerGithubUrl -ne $null -and $footerGithubUrl -ne "") {
+        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerGithubUrl%]" $footerGithubUrl
+    }
+    else {
+        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "<span>Source: <a href='[%footerGithubUrl%]'>github</a></span><br>" ""
+    }
+
+    if ($footerWebsiteUrl -ne $null -and $footerWebsiteUrl -ne "") {
+        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "[%footerWebsiteUrl%]" $footerWebsiteUrl
+    }
+    else {
+        ReplaceTextInFile $projectSiteDirectory\$projectName\$htmlFile "<span>Website: <a href='[%footerWebsiteUrl%]'>[%footerSiteTitle%]</a></span>" ""
+    }
   
     # Send "skip Documentation For"-query option into DOM, so Javascript can use same "logic" to hide elements in SideToc
     if ($null -ne $skipDocumentationFor -and $skipDocumentationFor.Count -gt 0) {

@@ -41,37 +41,39 @@ function GetFileDisplayName([string] $fileFullPath) {
 }
 
 function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new) {
-    $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
-    if ($null -eq $content) {
-        Start-Sleep -Milliseconds 25
+    $content = Get-Content  $fileFullPath -Raw -ErrorAction SilentlyContinue
+
+    if ($null -eq $content -or $content -eq "") {
+        Start-Sleep -Milliseconds 8
         $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
-        if ($null -eq $content) {
-            Start-Sleep -Milliseconds 66
+        if ($null -eq $content -or $content -eq "") {
+            Start-Sleep -Milliseconds 24
             $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
         }
-        if ($null -eq $content) {
-            Start-Sleep -Milliseconds 66
+        if ($null -eq $content -or $content -eq "") {
+            Start-Sleep -Milliseconds 48
             $content = Get-Content $fileFullPath -ErrorAction SilentlyContinue
         }
-        if ($null -eq $content) {
-            Err ("Could not find content when replacing " + $old + " with new: " + $new + " in file " + $fileFullPath.ToString())
+        if ($null -eq $content -or $content -eq "") {
+            Write-Host "Checked file Length: $($content.Length)"
+            Warn ("Content is null or blank when replacing: " + $old + " with new: " + $new + " in file " + [System.IO.Path]::GetFileName($fileFullPath))
+            # No content in file, nothing to replace, continue...
+            return
         }
-        # TODO Why do we exit here instead of return?
-        return
     }
-    Start-Sleep -Milliseconds 5
+    Start-Sleep -Milliseconds 3
     try {
         $content.Replace($old, $new) | Set-Content $fileFullPath -Force -ErrorAction Stop
     }
     catch {
-        Warn ("Trying replacing again in 25ms - as file could not be set, yet...");
-        Start-Sleep -Milliseconds 25
+        Warn ("Trying replacing again in 10ms - as file could not be set, yet...");
+        Start-Sleep -Milliseconds 10
         try {
             $content.Replace($old, $new) | Set-Content $fileFullPath -Force  -ErrorAction Stop
         }
         catch {
-            Warn ("Trying replacing again in 75ms - last retry...");
-            Start-Sleep -Milliseconds 75
+            Warn ("Trying replacing again in 50ms - last retry...");
+            Start-Sleep -Milliseconds 50
             try {
                 $content.Replace($old, $new) | Set-Content $fileFullPath -Force
             }
@@ -80,7 +82,7 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
             }
         }
     }
-    Start-Sleep -Milliseconds 5
+    Start-Sleep -Milliseconds 2
 }
 
 function HasError($results) {
@@ -323,7 +325,7 @@ function CreateListItem([string] $relativeFullFileName, [string]$title = "") {
 
     [string]$hrefSrc = MdToHref $relativeFullFileName
 
-    if ($hrefSrc -eq $null) {
+    if ($hrefSrc -eq $null -or $hrefSrc -eq "") {
         return ""
     }
 

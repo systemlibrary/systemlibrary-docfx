@@ -1,73 +1,70 @@
-# SystemLibrary DocFX for Libraries
+# SystemLibrary DocFX
 
 ## Requirements
-- .NET >= 4.8
-	* download from Google
-- PowerShell >= 2
-	* download from Google
-- DocFX.console >= 2.58
-	* download from nuget.org or through Nuget Package Manager in Visual studio
+- **.NET ≥ 4.8**  
+  Tested with .NET 8.0; originally built for 4.8.
+- **PowerShell ≥ 5.1**  
+  Included in Windows 11.
+- **DocFX.Console ≥ 2.60.1**  
+  Install:  
+  `dotnet tool update -g docfx --version 2.60.1`
 
-## Description
-- Sick tired of DocFx just not playing right, when all you want is all public classes, interfaces, properties and methods if they contain a XML comment in C# code, then export those into a decent documentation for developers by developers?
-- With the slight ability to adjust the title, nuget url, github url and banner and footer background, that's it, else it just works?
-- With the option to add a "Install.md" file which is also exported to HTML as part of the DOCFX content list?
-- With the option to add multiple markdown files as a Manual/Handbook, which are also exported to their respective HTML files, explaning implementation details and thresholds in your system or package?
+## Why?
+- Want clean, readable C# docs generated from XML comments?
+- Want to avoid the clutter of default DocFX inheritance trees showing everything inherits from `object`?
+- Want code highlighted like GitHub does, distinctly different from your IDE, so you instantly spot what’s good or bad?
+- Want a simple way to change banner and footer color, its title, logo and favicon, and that is it?
+- Want to target either a single `.csproj` or a full `.sln`?
+- Want to include extra docs like `install.md` or a handbook (multiple md files)?
+- Want docs focused on what a class does, not drowning in parameter details?
+- Want developer-focused docs that help experienced devs find info fast, without unnecessary noise?
+- Document for developers by developers - no need for walls of text explaining how to instantiate objects or call methods.
+- DocFX's default output template is too noisy and bloated, making it hard to quickly find example code, or technical details with ease.
 
-## Customize
-- Customize data/docfx_custom_template if you want to change parts of it or replace it with the regular docfx template that comes with DocFx.console nuget package
-- Customize css through data/docfx_custom_template/custom.css as that file is loaded last
+## Adjustments Made to Docfx Default Template
+- Removed "Improve this doc" link.
+- Removed inheritance tree — seeing everything inherit `Object` isn’t helpful.
+- Remarks from XML comments are hidden by default, click the Remarks link to view
+- Examples from XML comments are hidden by default, click the function name to view
+- Hiding all function parameters by default:
+  - Click a method to see usage examples if present; otherwise rely on VS IntelliSense.
+  - Focus on the class and method names and return types, if you want to explore further, you try the class and function out in Visual Studio.
+- Code highlighting via hljs with custom styles inspired by GitHub’s code style:
+  - Easier to read than default DocFX styles, giving a fresh perspective on your code.
+- Generates a `Index.html` with a Table of Content list, based on all HTML files from DocFx, where each HTML file corresponds to each class
+  - Can be extended to contain a "Install" link at the top, if an `install.md` exists.
+    - Can be extended to contain a Download Link at the top of the `Install` if a `demo.zip` exists at root of the project or solution
+    - Note: the `demo.zip` is copied to the output docs folder too
+  - Can be extended to contain a "Manual" link, a handbook, if a `~/Manual` folder exists in a project, which then exports all containing `.md` files under `~/Manual`.
+    - Preserving folder hierarchy into the documentation
+      - Example: `Manual/security/obfuscation.md` → `manual/security/obfuscation.html` with proper links.
 
-## Why
-The standard docfx tool is too messy, it is rigid, it is bloated, it displays a ton of unuseful documentation.
-It is hard to read and find example code for a simple function, as there's just too much noise in the documentation.
-We document for real developers with more than 5 years experience, no need for a wall of text on saying how to create an object and how to invoke a method.
+## Adjust The Template
+### Reset
+- Delete all files in `data/docfx_custom_template`
+- Search "docfx template export default"
+- Run export command, then move files into `data/docfx_custom_template`
+- Verify `docfx.css` is at `data/docfx_custom_template/styles/docfx.css`
 
-## Adjustments to DocFx
-- 'Improve this doc' has been removed
-- Inheritance tree is removed
-	- Seeing eventually that everything is inheriting an Object is not very useful
-- Parameter to functions are hidden
-	- Interested in how to invoke the function, simply click it to show a sample if the C# Comment contains a example, else intellisense in VS shows params
-	- We care about the name of the function and its return type, if it matches our need, we click on it to view the sample code, how to invoke the method, or simply using our Visual Studio to invoke the method
-- Code is highlighted by hljs 
-  	- A lot of custom styling has been made to reflect somewhat the "github code style"
-    	- We are used to read code that looks like github or like our Visual Studio styling, then DocFx has its own style? Thats just awful
-		- YOu want to code in non-github style, then you want to read PR, or review your own self, in github, the moment you see your code in different colors, you get a new view of the code, easily detecting anything
-- A new Index.html is created based on all generated html files
-- A Install.html will be created if a "install.md" exists in the root of your project
-	- Install.html will have a link at the top in the "Index.html"
-- All .md files locations in ~/Manual will be added to the Manual overview
-	- Folder hierarchy will be preserved in the linkage
-		- Ex: Manual/security/obfuscation.md will generate a html file at ~/manual/security/obfuscation.html and a link to this html will be shown in the ~/manual/index.html
-- A download link will be created at top of Install.html if a "demo.zip" exists at the root of your project or solution that you targetted
-	- CAREFUL: The demo.zip is also copied to the output docs
-
-## Reset to docfx default
-If you want a new clean template, but with just the install, markdown and demo.zip functionality??
-- Google 'docfx template export default'
-- Run the command
-- Delete all files in "docfx_custom_template" folder
-- Add all files that was output from the command to the "docfx_custom_template" folder
-
-## Install
-- There's no installation apart from just downloading the whole repo, clone, zip...
+### Modify
+- Edit files in `data/docfx_custom_template` to customize or replace with default template
+- Add custom CSS colors in `data/docfx_custom_template/custom.css` (loaded last)
 
 ## Usage
-- Copy "systemlibrary-common-net.ps1" to new file name of your own choice
-- Open the new file in Powershell Editor
-- Change the variables
+### Create docs
+- Clone the repo
+- Copy or rename `systemlibrary-common-framework.ps1` to your project
+- Edit variables inside the script
 - Run the script
-- The output of the script can then be hosted in IIS for instance or push to /docs folder in your github repo and activate 'github pages'
-  - There are tons of javascrpits, so it must be hosted in a Web Hosting Software, not just open the html files in a browser
-
+- Host output on IIS, GitHub Pages, or any web server  
+  (Must be served via web server due to JavaScript, not just opened as local files)
 
 ## Example
 - An example of the documentation created:
-- https://systemlibrary.github.io//systemlibrary-common-net/index.html
+- https://systemlibrary.github.io/systemlibrary-common-framework/index.html
 
-## Lisence
-- It's free forever, copy paste as you'd like, use at your own risk...
+## License
+Free forever, copy paste as you'd like, use at your own risk...
 
 ### Third parties
 - DocFx (MIT): https://dotnet.github.io/docfx/

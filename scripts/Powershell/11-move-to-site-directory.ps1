@@ -4,4 +4,6 @@ Move-Item -Path $projectSiteDirectory$projectName\* -Destination $projectSiteDir
 
 Remove-Item -Recurse -Force $projectSiteDirectory$projectName -ErrorAction SilentlyContinue
 
-Out ("Moved all html files to site directory " + $projectSiteDirectory)
+Start-Sleep -Milliseconds 20
+
+Out ("Moved all html files to site directory")
