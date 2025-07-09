@@ -6,7 +6,7 @@
 </a>
 <script>
 function slcf__handleNavBrandClick(e) {
-  if (window.history.length > 1) {
+  if (e.altKey && window.history.length > 1) {
     e.preventDefault();
     history.back();
     return false;

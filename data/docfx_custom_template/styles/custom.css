@@ -1313,3 +1313,7 @@ article.content.wrap > h1.text-break {
 div.custom-class-content-inline > div:not([class]) {
   display: none;
 }
+
+.field-static-colored {
+  color: var(--red);
+}

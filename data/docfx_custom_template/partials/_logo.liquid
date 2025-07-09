@@ -3,10 +3,9 @@
   <img id="logo" class="svg" src="{{_rel}}{{{_appLogoPath}}}{{^_appLogoPath}}[%relativeHostingPath%]logo.png{{/_appLogoPath}}" alt="{{_appName}}" >
   <span class="navbar-title">[%siteTitle%]</span>
 </a>
-
 <script>
 function slcf__handleNavBrandClick(e) {
-  if (window.history.length > 1) {
+  if (e.altKey && window.history.length > 1) {
     e.preventDefault();
     history.back();
     return false;

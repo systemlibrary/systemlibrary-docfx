@@ -44,14 +44,19 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
     $content = Get-Content  $fileFullPath -Raw -ErrorAction SilentlyContinue
 
     if ($null -eq $content -or $content -eq "") {
-        Start-Sleep -Milliseconds 8
+        Start-Sleep -Milliseconds 5
         $content = Get-Content $fileFullPath -Raw -ErrorAction SilentlyContinue
         if ($null -eq $content -or $content -eq "") {
-            Start-Sleep -Milliseconds 33
+            Start-Sleep -Milliseconds 25
             $content = Get-Content $fileFullPath -Raw -ErrorAction SilentlyContinue
         }
         if ($null -eq $content -or $content -eq "") {
-            Start-Sleep -Milliseconds 66
+            Start-Sleep -Milliseconds 75
+            $content = Get-Content $fileFullPath -Raw -ErrorAction SilentlyContinue
+        }
+
+        if ($null -eq $content -or $content -eq "") {
+            Start-Sleep -Milliseconds 333
             $content = Get-Content $fileFullPath -Raw -ErrorAction SilentlyContinue
         }
         if ($null -eq $content -or $content -eq "") {
@@ -65,23 +70,30 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
         $content.Replace($old, $new) | Set-Content $fileFullPath -Force -ErrorAction Stop
     }
     catch {
-        Warn ("Trying replacing again in 10ms - as file could not be set, yet...");
-        Start-Sleep -Milliseconds 10
+        Warn ("Retrying replacing text in file in 20ms...");
+        Start-Sleep -Milliseconds 20
         try {
             $content.Replace($old, $new) | Set-Content $fileFullPath -Force  -ErrorAction Stop
         }
         catch {
-            Warn ("Trying replacing again in 50ms - last retry...");
-            Start-Sleep -Milliseconds 50
+            Warn ("Retrying replacing text in file in 60ms...");
+            Start-Sleep -Milliseconds 60
             try {
                 $content.Replace($old, $new) | Set-Content $fileFullPath -Force
             }
             catch {
-                Err ("Error replacing " + $old + " with " + $new + " in file " + $fileFullPath)
+                Warn ("Retrying replacing text in file in 333ms...");
+                Start-Sleep -Milliseconds 333
+                try {
+                    $content.Replace($old, $new) | Set-Content $fileFullPath -Force
+                }
+                catch {
+                    Err ("Error replacing " + $old + " with " + $new + " in file " + $fileFullPath)
+                }
             }
         }
     }
-    Start-Sleep -Milliseconds 2
+    Start-Sleep -Milliseconds 5
 }
 
 function HasError($results) {
