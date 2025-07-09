@@ -15,6 +15,15 @@ for full license information.}}
     </div>
     {{/summary}}
 
+    {{^_disableContribution}}
+    {{#sourceurl}}
+    <div class="custom-source-code-link-container class-viewsource custom-source-code-link--{{id}}">
+        <span class="small pull-right mobile-hide viewsource-class">
+            <a href="{{sourceurl}}">{{__global.viewSource}}</a>
+        </span>
+    </div>{{/sourceurl}}
+    {{/_disableContribution}}
+
     {{#remarks}}
     <div class="custom-remarks-container">
         <div class="custom-remarks custom-remarks2">
@@ -28,14 +37,6 @@ for full license information.}}
     </div>
     {{/remarks}}
 
-    {{^_disableContribution}}
-    {{#sourceurl}}
-    <div class="custom-source-code-link-container custom-source-code-link--{{id}}">
-        <span class="small pull-right mobile-hide">
-            <a href="{{sourceurl}}">{{__global.viewSource}}</a>
-        </span>
-    </div>{{/sourceurl}}
-    {{/_disableContribution}}
     {{#overload}}
     <a id="{{id}}" data-uid="{{uid}}"></a>
     {{/overload}}
@@ -77,9 +78,6 @@ for full license information.}}
                 </table>
                 {{/typeParameters.0}}
 
-                <div class="codewrapper">
-                    <pre><code class="lang-{{_lang}} hljs">{{syntax.content.0.value}}</code></pre>
-                </div>
                 {{#parameters.0}}
                 <h5 class="typeParameters class-tmpl-partial-typeParameters">Methods arguments</h5>
                 <table class="table table-bordered table-striped table-condensed">
@@ -676,7 +674,7 @@ for full license information.}}
                 }
             }
         },
-            233
+            177
         );
     }
 
@@ -925,9 +923,25 @@ for full license information.}}
         });
     }
 
+    function hideRemarksInheritedFromClass() {
+        const topRemark = document.querySelector('.custom-remarks.custom-remarks1.class-remarks h5');
+
+        if (!topRemark || !topRemark.innerHTML) return;
+
+        const topHtmlRemark = topRemark.innerHTML.trim();
+
+        document.querySelectorAll('.custom-remarks.custom-remarks2').forEach(div => {
+            const h5 = div.querySelector('h5');
+            if (h5 && h5.innerHTML.trim() === topHtmlRemark) {
+                h5.classList.add('hidden');
+            }
+        });
+    }
+
     //FUNCTION FUNCTIONS END
     setTimeout(updateFunctionNames, 5);
     setTimeout(hideSummariesInheritedFromClass, 7);
+    setTimeout(hideRemarksInheritedFromClass, 8);
     setTimeout(updateClassNames, 10);
 
 

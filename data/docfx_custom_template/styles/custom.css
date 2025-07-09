@@ -228,7 +228,7 @@ body > div#wrapper div.container.body-content {
 /* BREAD CRUMBS */
 body > div#wrapper div.container.hide-when-search > ul {
   @media (min-width: 1380px) {
-    margin-left: 330px;
+    margin-left: 420px;
   }
 }
 
@@ -1174,8 +1174,9 @@ textarea {
 
 .custom-source-code-link-container--class {
   position: relative;
-  top: -2.75em;
-  left: 4.5em;
+  top: 0;
+  left: auto;
+  right: -82px;
 }
 
 div.codewrapper > p,
@@ -1317,3 +1318,4 @@ div.custom-class-content-inline > div:not([class]) {
 .field-static-colored {
   color: var(--red);
 }
+

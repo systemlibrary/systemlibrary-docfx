@@ -27,6 +27,7 @@ else {
         }
     }
 }
+Out ("Built")
 
 # CREATE THE INDEX.HTML FRONTPAGE FOR ALL DOCS
 Move-Item -Path $projectSiteDirectory$projectName"_index.html" -Destination $projectSiteDirectory$projectName\index.html -Force -ErrorAction SilentlyContinue
