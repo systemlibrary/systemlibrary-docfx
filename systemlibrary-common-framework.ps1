@@ -7,10 +7,7 @@ $csprojFileFullPath = "C:\syslib\systemlibrary-common-framework-private\source\s
 $outputFolderFullPath = "C:\temp\Docs\"
 
 $siteTitle = "System Library Common Framework"
-$footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-framework/"
-$footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Framework/"
-$footerWebsiteUrl = "https://www.systemlibrary.com/"
-$footerSiteTitle = "System Library Common Framework"
+
 $showViewSourceLinks = $true
 
 #$relativeHostingPath = "/systemlibrary-common-framework/"
@@ -20,6 +17,11 @@ $relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is suffic
 # Simply checking network tab in chrome while browsing your site will reveal what it should be, as youll get 404/red for css/js requests
 
 # OPTIONAL OPTIONS
+$footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-framework/" # set to blank or null to skip creating link
+$footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Framework/"    # set to blank or null to skip creating link
+$footerWebsiteUrl = "https://www.systemlibrary.com/"  # set to blank or null to skip creating link
+$footerSiteTitle = "System Library Common Framework"
+
 $cleanUp = $true # delete temp files generated during building documentation files
 
 # Skip rules on the full output: Name.Space.Class
