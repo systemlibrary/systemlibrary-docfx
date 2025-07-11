@@ -18,23 +18,25 @@
     "content": [
       {
         "files": [
-			"[%projectDirectory%][%projectName%]/**.yml",
-			"[%projectName%]/**.yml",
-			"[%projectName%]_index.md",
-			"index.md"
+          "[%projectDirectory%][%projectName%]/**.yml",
+          "[%projectName%]/**.yml",
+          "[%projectName%]_index.md",
+          "index.md"
         ]
       }
     ],
     "overwrite": [
       {
-		  "files": [
-				"**/index.md"
-			],
-			"exclude": [
-			    "obj/**",
-			    "bin/**",
-			    "properties/**"
-			]
+        "files": [
+          "**/index.md"
+        ],
+        "exclude": [
+          "obj/**",
+          "bin/**",
+          "App_Data/**",
+          "imports/**",
+          "properties/**"
+        ]
       }
     ],
     "dest": "[%projectDirectory%][%projectName%]_site",

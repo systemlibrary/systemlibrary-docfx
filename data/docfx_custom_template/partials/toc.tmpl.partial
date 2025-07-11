@@ -32,8 +32,6 @@ for full license information.}}
         if (toc && toc.querySelector) {
           var skipPatterns = innerHtml.split(',').map(x => x.trim()).filter(Boolean);
 
-          console.log(skipPatterns);
-
           var links = toc.getElementsByTagName('a');
           if (!links || links.length === 0) return;
 

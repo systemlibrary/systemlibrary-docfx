@@ -60,7 +60,7 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
             $content = Get-Content $fileFullPath -Raw -ErrorAction SilentlyContinue
 
             if ($null -eq $content -or $content -eq "") {
-                Start-Sleep -Milliseconds 33
+                Start-Sleep -Milliseconds 666
                 $content = Get-Content $fileFullPath -Raw -ErrorAction SilentlyContinue
             }
         }
@@ -88,13 +88,20 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
                 $content.Replace($old, $new) | Set-Content $fileFullPath -Force -ErrorAction Stop
             }
             catch {
-                Warn ("Retrying replacing text in file in 333ms...");
-                Start-Sleep -Milliseconds 333
+                Warn ("Retrying replacing text in file in 250ms...");
+                Start-Sleep -Milliseconds 250
                 try {
                     $content.Replace($old, $new) | Set-Content $fileFullPath -Force -ErrorAction Stop
                 }
                 catch {
-                    Err ("Error replacing " + $old + " with " + $new + " in file " + $fileFullPath)
+                    Warn ("Retrying replacing text in file in 750ms...");
+                    Start-Sleep -Milliseconds 750
+                    try {
+                        [System.IO.File]::WriteAllText($fileFullPath, $content.Replace($old, $new))
+                    } catch {
+                        Err $_
+                        Err ("Error replacing " + $old + " with " + $new + " in file " + $fileFullPath)
+                    }
                 }
             }
         }
