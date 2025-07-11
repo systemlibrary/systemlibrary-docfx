@@ -568,28 +568,28 @@ div.summary.h1-class-summary * {
 .h1-class-summary-container > .markdown.level0.summary.h1-class-summary > ul {
   position: relative;
   overflow: hidden;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.2;
   margin: 0;
   padding: 0;
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 }
 .h1-class-summary-container
   > .markdown.level0.summary.h1-class-summary
   ul
   > li {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .markdown.level0.summary.h1-class-summary > ul > li > p {
   padding-left: 0px !important;
 }
-
+/* The bottom paragraph in the summary, most likely */
 .markdown.level0.summary.h1-class-summary {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   color: var(--green) !important;
-  font-size: 16px;
-  line-height: 1.4;
+  font-size: 14px;
+  line-height: 1.2;
   font-weight: 400;
 }
 
