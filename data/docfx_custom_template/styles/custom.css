@@ -1319,6 +1319,3 @@ div.custom-class-content-inline > div:not([class]) {
   color: var(--red);
 }
 
-.article.row.grid-right {
-  overflow-x: hidden;
-}
