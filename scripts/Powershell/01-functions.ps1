@@ -115,6 +115,7 @@ function HasError($results) {
     }
 
     if ($results -is [array]) {
+        $tmp = $false
         foreach ($result in $results) {
             if ($result.ToString().Contains("Build failed") -or 
                 $result.ToString().Contains("[Failure]") -eq $true -or 
@@ -122,9 +123,12 @@ function HasError($results) {
                 $result.ToString().Contains("Method not found") -eq $true -or
                 $result.ToString().Contains("Error:")
             ) {
+                $tmp = $true
                 Err $result
-                return $true
             }
+        }
+        if($tmp) {
+            return $true
         }
     }
     else {

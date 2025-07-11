@@ -9,3 +9,5 @@ $projectDisplayName = GetFileDisplayName $csprojFileFullPath
 $logFileFullPath = ($projectDirectory + $projectName + "-log.txt")
 
 $docfxJson = ($projectDirectory + $projectName + "_docfx.json")
+$docfxTemplateDir = ($docfxDataDir + "docfx_custom_template")
+

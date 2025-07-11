@@ -6,10 +6,12 @@ $results = & docfx $docfxJson `
     -o $outputFolderFullPath `
     -l $logFileFullPath `
     --logLevel warning `
-    --template "C:\syslib\systemlibrary-docfx\data\docfx_custom_template"
+    --template $docfxTemplateDir # "C:\syslib\systemlibrary-docfx\data\docfx_custom_template"
 
 if (HasError $results -eq $true) {
     Remove-Item $logFileFullPath -Force -ErrorAction SilentlyContinue
+    Err $logFileFullPath
+    Err $results
     Warn "Tip: Close the powershell editor and reopen and try again"
     Warn "Tip: Recompile in Visual Studio and try again"
     Warn "Tip: Delete obj/bin/.vs and recompile in Visual Studio and try again"
