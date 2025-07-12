@@ -2,8 +2,8 @@ try {
     if ($null -ne $outputFolderFullPath -and $outputFolderFullPath -ne "") {
         Start-Sleep -Milliseconds 50
 
-        Copy-Item -Path $projectSiteDirectory -Destination $outputFolderFullPath -Force -Recurse
-
+        Copy-Item -Path "$projectSiteDirectory\*" -Destination $outputFolderFullPath -Force -Recurse
+        
         Start-Sleep -Milliseconds 50
     }
 }

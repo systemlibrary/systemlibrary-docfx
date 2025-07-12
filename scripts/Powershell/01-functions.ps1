@@ -199,20 +199,28 @@ function createOrderedList($items) {
                     if ($upperCount -le 4) {
                         $name = ([regex]::Replace($name, '([A-Z])(?=[a-z])', ' $1')).Trim()
                     }
-                    
-                    $createdLi1 = createListItemForClass $name $_ ""
 
+                    $tmpOutputFolderFullPath = $outputFolderFullPath.Replace("\\", "/");
+
+                    $hrefSrc = $_.ToString();
+
+                    $hrefSrc = $hrefSrc.Replace($outputFolderFullPath, "");
+
+                    $hrefSrc = $hrefSrc.Replace($tmpOutputFolderFullPath, "");
+
+                    $createdLi1 = createListItemForClass $name $hrefSrc ""
+                    
                     $($createdLi1)
                 }   
                 else {
                     # A file object
                     $lihref = $relativeHostingPath + $_.Name
                     $cssClass = ""
-    
+                    
                     if ($namespaceHtmlFiles -contains $_) {
                         $cssClass = "index-navigation-item--namespace"
                     }
-    
+
                     $createdLi = createListItemForClass $_.BaseName $lihref $cssClass
                     $($createdLi)
                 }
@@ -276,17 +284,20 @@ function ConvertMdToHtml([string] $markdownFile, [string] $relativeFullFileName)
             
             $relativeMdPath = $md.Substring($markdownDir.Length).TrimStart('\', '/')
 
+            if($markdownDir.EndsWith("\Manual")) 
+            {
+                if($relativeMdPath.Contains("Manual\") -eq $false)
+                {
+                    $relativeMdPath = "Manual\" + $relativeMdPath;
+                }
+            }
+
             ConvertMdToHtml $md $relativeMdPath
         
             $htmlHref = $relativeMdPath.Replace(".md", ".html")
-        
-            if ($relativeHostingPath -ne $null -and $relativeHostingPath -ne "") {
-                $htmlHref = ($relativeHostingPath + $htmlHref).Replace("\", "/")
-            }
-            else {
-                $htmlHref = ($outputFolderFullPath + $htmlHref).Replace("/", "\")
-            }
-        
+
+            $htmlHref = "/" + ($relativeHostingPath + $htmlHref).Replace("\", "/")
+
             $markdownHtmlFiles += $htmlHref
         }
 
@@ -370,6 +381,13 @@ function CreateListItem([string] $relativeFullFileName, [string]$title = "") {
 
     $name = $name.Replace("-1", "&lt;T&gt;");
     $name = $name.Replace("-2", "&lt;T&gt;");
+
+    
+    $tmpOutputFolderFullPath = $outputFolderFullPath.Replace("\\", "/");
+
+    $hrefSrc = $hrefSrc.Replace($outputFolderFullPath, "");
+
+    $hrefSrc = $hrefSrc.Replace($tmpOutputFolderFullPath, "");
 
     $li = "<li class='$cssclass' title='$title'><a class='index-navigation-item' href='$hrefSrc'>$name</a></li>";
 

@@ -7,10 +7,21 @@
             "**/*.csproj"
           ],
           "exclude": [
+            "**/.vs/**",
             "**/obj/**",
-            "**/App_Data/**",
             "**/bin/**",
+            "**/App_Data/**",
+            "**/modules/**",
             "**/imports/**",
+
+            "**/node_modules/**",
+            "**/dist/**",
+
+            "**/css/**",
+            "**/styles/**",
+            "**/images/**",
+            "**/static/**",
+            
             "**/*.Tests.csproj",
             "**/*.Benchmarks.csproj"
           ]
