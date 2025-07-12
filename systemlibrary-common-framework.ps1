@@ -8,8 +8,6 @@ $outputFolderFullPath = "C:\temp\Docs\" # set to $null if you want outputFolder 
 
 $siteTitle = "System Library Common Framework"
 
-$showViewSourceLinks = $true
-
 #$relativeHostingPath = "/systemlibrary-common-framework/"
 $relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
 # If using 'github pages' it should be the name of the repo with prefix and suffix /
@@ -17,6 +15,8 @@ $relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is suffic
 # Simply checking network tab in chrome while browsing your site will reveal what it should be, as youll get 404/red for css/js requests
 
 # OPTIONAL OPTIONS
+$showViewSourceLinks = $true
+
 $footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-framework/" # set to blank or null to skip creating link
 $footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Framework/"    # set to blank or null to skip creating link
 $footerWebsiteUrl = "https://www.systemlibrary.com/"  # set to blank or null to skip creating link
