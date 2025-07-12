@@ -1,10 +1,10 @@
 Set-Location $PSScriptRoot
 
 # REQUIRED OPTIONS
-$csprojFileFullPath = "C:\syslib\systemlibrary-common-framework-private\source\systemlibrary.common.framework.net\systemlibrary.common.framework.net.csproj"
+$csprojFileFullPath = "C:\syslib\systemlibrary-common-framework-private\source\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj"
 
-#$outputFolderFullPath = "C:\syslib\systemlibrary-common-framework\docs\" # set to $null if you want outputFolder to be within the project folder
-$outputFolderFullPath = "C:\temp\Docs\"
+#$outputFolderFullPath = "C:\syslib\systemlibrary-common-framework\docs\" 
+$outputFolderFullPath = "C:\temp\Docs\" # set to $null if you want outputFolder to be at the root project folder
 
 $siteTitle = "System Library Common Framework"
 

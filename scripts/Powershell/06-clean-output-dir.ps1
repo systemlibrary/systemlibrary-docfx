@@ -11,5 +11,5 @@ try {
     }
 }
 catch {
-    Out "Error cleaning old files in the outfolder, continue"
+    Out "Error cleaning old files in the outfolder, continuing, trying to overwrite..."
 }

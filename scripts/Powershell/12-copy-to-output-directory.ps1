@@ -9,7 +9,7 @@ try {
 }
 catch {
     Err "Error occured reading and moving all site files to outputfolder - Try again? Delete the folder " + $outputFolderFullPath + ", then try again?"
-    exit
+    EXIT
 }
 
 if ($ignoreClass -ne $null -and $ignoreClass.Count -gt 0) {

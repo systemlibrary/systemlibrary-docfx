@@ -7,7 +7,8 @@ $allHtmlFiles = GetFiles $projectSiteDirectory$projectName | Where-Object {
 if ($allHtmlFiles -eq $null -or $allHtmlFiles.Count -eq 0 ) {
    Err "No html files were found. Do you have minimum one public class in your project? Try upgrade docfx tool?"
    Err $projectSiteDirectory$projectName
-   exit 1
+   . ($PSScriptRoot + "\13-clean-up.ps1")
+   EXIT 1
 }
 
 # List all HTML files that will be skipped based on PS configuration

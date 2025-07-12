@@ -98,7 +98,8 @@ function ReplaceTextInFile([string] $fileFullPath, [string] $old, [string] $new)
                     Start-Sleep -Milliseconds 750
                     try {
                         [System.IO.File]::WriteAllText($fileFullPath, $content.Replace($old, $new))
-                    } catch {
+                    }
+                    catch {
                         Err $_
                         Err ("Error replacing " + $old + " with " + $new + " in file " + $fileFullPath)
                     }
@@ -115,19 +116,19 @@ function HasError($results) {
     }
 
     if ($results -is [array]) {
-        $tmp = $false
+        $tmpFlag = $false
         foreach ($result in $results) {
             if ($result.ToString().Contains("Build failed") -or 
                 $result.ToString().Contains("[Failure]") -eq $true -or 
                 $result.ToString().Contains("Msbuild failed") -eq $true -or 
                 $result.ToString().Contains("Method not found") -eq $true -or
-                $result.ToString().Contains("Error:")
+                $result.ToString().Contains("Error: ") -eq $true
             ) {
-                $tmp = $true
+                $tmpFlag = $true
                 Err $result
             }
         }
-        if($tmp) {
+        if ($tmpFlag -eq $true) {
             return $true
         }
     }
@@ -153,6 +154,10 @@ function createListItemHeading($heading) {
 }
 
 function createListItemForClass($baseName, $liHref, $cssClass) {
+    if ($baseName -eq $null) {
+        Warn ("baseName is null, continue...");
+        return;
+    }
     $cleanName = $baseName.Replace("-1", "&lt;T&gt;");
     $cleanName = $cleanName.Replace("-2", "&lt;T&gt;");
 

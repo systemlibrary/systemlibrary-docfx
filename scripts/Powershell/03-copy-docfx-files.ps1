@@ -15,10 +15,11 @@ try {
     ReplaceTextInFile $docfxJson "[%projectName%]" $projectName
     ReplaceTextInFile $docfxJson "[%projectDirectory%]" $projectDirectory.replace('\', '/')
 
-    Out (("Docfx template copied to " + $projectDirectory))
+    Out (("DocFx .yml files copied to project dir: " + $projectDirectory))
 }
 catch {
     Warn ("Copy to " + $projectDirectory + $projectName + " failed")
     Err "Error occured during copying temp files to your project folder. Do you have a typo in project directory? Some path or file is invalid/does not exist"
-    exit
+    . ($PSScriptRoot + "\13-clean-up.ps1")
+    EXIT 1
 }
