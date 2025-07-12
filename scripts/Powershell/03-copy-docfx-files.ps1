@@ -20,6 +20,5 @@ try {
 catch {
     Warn ("Copy to " + $projectDirectory + $projectName + " failed")
     Err "Error occured during copying temp files to your project folder. Do you have a typo in project directory? Some path or file is invalid/does not exist"
-    . ($PSScriptRoot + "\13-clean-up.ps1")
     EXIT 1
 }

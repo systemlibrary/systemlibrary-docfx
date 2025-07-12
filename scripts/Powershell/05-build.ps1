@@ -24,7 +24,6 @@ if (HasError $results -eq $true) {
     Err "Error occured, cannot continue"
     # TODO: Add cleanup of built files if erroring, except the log file....
     # TODO: Add a clean obj upon building docs - so it doesnt add up, the cache for docfx inside the obj folder of the project...
-    . ($PSScriptRoot + "\13-clean-up.ps1")
     EXIT 1
 }
 else {
