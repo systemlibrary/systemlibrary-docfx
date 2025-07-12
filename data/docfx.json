@@ -5,6 +5,14 @@
         {
           "files": [
             "**/*.csproj"
+          ],
+          "exclude": [
+            "**/obj/**",
+            "**/App_Data/**",
+            "**/bin/**",
+            "**/imports/**",
+            "**/*.Tests.csproj",
+            "**/*.Benchmarks.csproj"
           ]
         }
       ],
@@ -35,7 +43,9 @@
           "bin/**",
           "App_Data/**",
           "imports/**",
-          "properties/**"
+          "properties/**",
+          "**/*.Tests.csproj",
+          "**/*.Benchmarks.csproj"
         ]
       }
     ],
