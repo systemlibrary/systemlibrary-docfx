@@ -292,6 +292,14 @@ function ConvertMdToHtml([string] $markdownFile, [string] $relativeFullFileName)
                 }
             }
 
+            if($markdownDir.EndsWith("\Guide")) 
+            {
+                if($relativeMdPath.Contains("Guide\") -eq $false)
+                {
+                    $relativeMdPath = "Guide\" + $relativeMdPath;
+                }
+            }
+
             ConvertMdToHtml $md $relativeMdPath
         
             $htmlHref = $relativeMdPath.Replace(".md", ".html")

@@ -35,9 +35,10 @@
   - Can be extended to contain a "Install" link at the top, if an `install.md` exists.
     - Can be extended to contain a Download Link at the top of the `Install` if a `demo.zip` exists at root of the project or solution
     - Note: the `demo.zip` is copied to the output docs folder too
-  - Can be extended to contain a "Manual" link, a handbook, if a `~/Manual` folder exists in a project, which then exports all containing `.md` files under `~/Manual`.
+  - Can be extended to contain a "Manual" and/or a "Guide" link, a handbook if you will, if a `~/Manual` or `~/Guide` folder exists in a project, which then exports all containing `.md` files under `~/Manual` or `~/Guide`.
     - Preserving folder hierarchy into the documentation
       - Example: `Manual/security/obfuscation.md` → `manual/security/obfuscation.html` with proper links.
+        - Note: Manual/Guide is case sensitive
 
 ## Adjust The Template
 ### Reset
