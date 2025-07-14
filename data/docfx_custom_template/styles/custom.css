@@ -466,10 +466,12 @@ div.article.row.grid-right {
 }
 
 div.custom-menu-summary-data > .markdown.level1.summary.member-summary > p {
-  margin-top: 2px;
-  margin-bottom: 2px;
-  font-size: 14px;
   line-height: 1.1;
+  font-size: 13px;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
+  margin-top: 0;
+  margin-bottom: 2px;
 }
 
 .markdown.level0.summary,

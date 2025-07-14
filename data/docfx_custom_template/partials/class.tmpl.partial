@@ -533,8 +533,6 @@ for full license information.}}
                 }
                 items[i].innerHTML = items[i].innerHTML.replace('readonly ', '').replace('public ', '').replace('override ', '').replace('protected ', '');
 
-                items[i].innerHTML = items[i].innerHTML.replace('static ', '<span class="field-static-colored">static</span> ');
-
                 if (isClickable === true) {
                     let txt = items[i].innerHTML;
                     if (txt && txt.length > 5 && txt[0] !== ' ') {
@@ -544,6 +542,8 @@ for full license information.}}
                         items[i].innerHTML = txt;
                     }
                 }
+
+                items[i].innerHTML = items[i].innerHTML.replace('static ', '<span class="field-static-colored">static </span>');
 
                 continue;
             }
@@ -941,11 +941,12 @@ for full license information.}}
     function hideConstructorSummaryRemarksAndViewSource() {
         const h3 = document.querySelector('h3#constructors');
         const next = h3?.nextElementSibling;
-        if (next?.classList?.contains('custom-container') == true) 
-        {
+        if (next?.classList?.contains('custom-container') == true) {
             next.classList.add('hidden');
-        } 
+        }
     }
+
+    
 
     //FUNCTION FUNCTIONS END
     setTimeout(updateFunctionNames, 5);
@@ -953,6 +954,8 @@ for full license information.}}
     setTimeout(hideRemarksInheritedFromClass, 5);
     setTimeout(updateClassNames, 5);
     setTimeout(hideConstructorSummaryRemarksAndViewSource, 10);
+    setTimeout(() => hideSourceLinksForDocfxHideAttribute(), 33);
+    setTimeout(() => hideAllEmptyMarkdowns(), 33);
 
     setTimeout(() => addEventDisplayMenuDataOnClickPart('class-example'), 75);
     setTimeout(() => addEventDisplayMenuDataOnClickPart('class-arguments'), 80);
@@ -961,10 +964,6 @@ for full license information.}}
     //NOTE: Disabled clicking on args and return type - the sample should give enough info
     //setTimeout(() => addEventDisplayMenuDataOnClickPart('arguments'), 40);
     //setTimeout(() => addEventDisplayMenuDataOnClickPart('returntype'), 40);
-
-    setTimeout(() => hideAllEmptyMarkdowns(), 100);
-
-    setTimeout(() => hideSourceLinksForDocfxHideAttribute(), 100);
 
     setTimeout(addEventsToTabCloseButtons, 105);
 

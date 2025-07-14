@@ -13,21 +13,21 @@
             "**/App_Data/**",
             "**/modules/**",
             "**/imports/**",
-
             "**/node_modules/**",
             "**/dist/**",
-
             "**/css/**",
             "**/styles/**",
             "**/images/**",
             "**/static/**",
-            
             "**/*.Tests.csproj",
             "**/*.Benchmarks.csproj"
           ]
         }
       ],
       "dest": "[%projectDirectory%][%projectName%]",
+      "properties": {
+        "order": "declare"
+      },
       "disableGitFeatures": false,
       "disableDefaultFilter": false,
       "filter": "[%projectName%]_filter.yml"
@@ -62,6 +62,12 @@
     ],
     "dest": "[%projectDirectory%][%projectName%]_site",
     "globalMetadataFiles": [],
+    "globalMetadata": {
+      "_enableSearch": true,
+      "_disableContribution": true,
+      "_disableBreadcrumb": false,
+      "_disableSideFilter": false
+    },
     "fileMetadataFiles": [],
     "template": [
       "docfx_custom_template"

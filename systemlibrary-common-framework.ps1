@@ -28,12 +28,17 @@ $cleanUp = $true # delete temp files generated during building documentation fil
 # - string contains wildcard? => contains (case-sensitive)
 # - else string contains dot? => starts with (case-sensitive)
 # - else => ends with (case-sensitive)
-$skipDocumentationFor = @('LogWriter', 
+$skipDocumentationFor = @(
 '*.Benchmark*',
 '*.Tests*',
 '*.ApiTests*',
 '*.BaseTest*',
-'DelegateJsonConverter'
+'DelegateJsonConverter',
+'CalleeCancelledRequestException',
+'ClientResponse',
+'ContentType',
+'OutputCachePolicy'
+
 ) # case sensitive
 
 # EXECUTE
