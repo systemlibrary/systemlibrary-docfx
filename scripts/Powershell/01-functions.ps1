@@ -314,11 +314,14 @@ function ConvertMdToHtml([string] $markdownFile, [string] $relativeFullFileName)
         $tocHtmlContent = $tocHtmlContent.Replace("\", "\\");
     }
 
-    $htmlContent = Get-Content -Path ($scriptsDir + "Markdown.template.html") -Raw;
 
     $mdContentEncoded = [System.Net.WebUtility]::HtmlEncode($mdContent)
 
     $mdContentEncoded = $mdContentEncoded.Replace("!!TOC!!", $tocHtmlContent);
+    
+    $htmlContent = Get-Content -Path ($scriptsDir + "Markdown.template.html") -Raw;
+
+    $htmlContent = $htmlContent.Replace("[%relativeHostingPath%]", $relativeHostingPath);
 
     [string]$htmlMdContent = $htmlContent.Replace("@md-content-encoded", $mdContentEncoded);
 
