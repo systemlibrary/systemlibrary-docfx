@@ -15,7 +15,7 @@ try {
     ReplaceTextInFile $docfxJson "[%projectName%]" $projectName
     ReplaceTextInFile $docfxJson "[%projectDirectory%]" $projectDirectory.replace('\', '/')
 
-    Out (("DocFx .yml files copied to project dir: " + $projectDirectory))
+    Out ("DocFx .yml files copied to project dir: " + $projectDirectory)
 }
 catch {
     Warn ("Copy to " + $projectDirectory + $projectName + " failed")

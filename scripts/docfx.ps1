@@ -2,6 +2,8 @@ if ($LASTEXITCODE -eq 1) {
     $LASTEXITCODE = 0
 }
 
+$Error.Clear()
+
 . ($PSScriptRoot + "\Powershell\01-functions.ps1")
 
 . ($PSScriptRoot + "\Powershell\02-variables.ps1")
