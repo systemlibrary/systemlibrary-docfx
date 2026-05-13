@@ -1,13 +1,10 @@
-$docfxDataDir = $PSScriptRoot + "\..\..\data\"
+$configFullPath = $PSScriptRoot + "\..\Config\"
 
-$projectName = GetFileName $csprojFileFullPath
-$projectDirectory = (GetFolderPath $csprojFileFullPath) + "\"
-$projectDocDirectory = $projectDirectory + $projectName + "\"
-$projectSiteDirectory = $projectDirectory + $projectName + "_site\"
-$projectDisplayName = GetFileDisplayName $csprojFileFullPath
+$rootPath = $SourceRootFullPath
+$docPath = $DocumentationRelativePath
 
-$logFileFullPath = ($projectDirectory + $projectName + "-log.txt")
+$docfxJsonFullPath = Join-Path $configFullPath 'docfx.json'
+$filterYml = Join-Path $configFullPath 'filter.yml'
 
-$docfxJson = ($projectDirectory + $projectName + "_docfx.json")
-$docfxTemplateDir = ($docfxDataDir + "docfx_custom_template")
-
+$docfxJsonDest = Join-Path $rootPath 'docfx.json'
+$filterYmlDest = Join-Path $rootPath 'docfxfilter.yml'

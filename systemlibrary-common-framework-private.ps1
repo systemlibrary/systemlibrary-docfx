@@ -1,46 +1,47 @@
 Set-Location $PSScriptRoot
 
 # REQUIRED OPTIONS
-$csprojFileFullPath = "C:\syslib\systemlibrary-common-framework-private\source\systemlibrary.common.framework\SystemLibrary.Common.Framework.csproj"
-#$csprojFileFullPath = "C:\syslib\systemlibrary-common-framework-private\source\SystemLibrary.Common.Framework.sln"
+# Usually the parent folder or same folder as the .sln, or if you document a single csproj, the folder that contains that .csproj
+$SourceRootFullPath = "C:\syslib\systemlibrary-common-framework-private\source"
 
-#$outputFolderFullPath = "C:\syslib\systemlibrary-common-framework\docs\" 
-$outputFolderFullPath = "C:\temp\Docs\" # set to $null if you want outputFolder to be at the root project folder
+# Relative from the above folder, where do you have the documentation stored, or if it is siblings to the csproj use blank ""
+$DocumentationRelativePath = "SystemLibrary.Common.Framework\Docs"
 
-$siteTitle = "System Library Common Framework"
+$Output = "C:\Temp\Docs\"
 
-#$relativeHostingPath = "/systemlibrary-common-framework/"
-$relativeHostingPath = "" # If local IIS, most likely $null, "" or "/" is sufficient
-# If using 'github pages' it should be the name of the repo with prefix and suffix /
-# It is the path of where css/js is loaded from, from the "root" of your site
-# Simply checking network tab in chrome while browsing your site will reveal what it should be, as youll get 404/red for css/js requests
+# Main title of the site
+$Title = "System Library Common Framework"
 
-# OPTIONAL OPTIONS
-$showViewSourceLinks = $true
+# Relative Hosting Path
+$RelativeHostingPath = "" # if local IIS or similar it is $null or "" or "/", if using github pages it should be the name of the repo with prefix and suffix /
+                          # its the path to the css and js will be loaded from, from root of your site
 
-$footerGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-framework/" # set to blank or null to skip creating link
-$footerNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Framework/"    # set to blank or null to skip creating link
-$footerWebsiteUrl = "https://www.systemlibrary.com/"  # set to blank or null to skip creating link
-$footerSiteTitle = "System Library Common Framework"
+# OPTIONAL
+$EnableSearch = $true
+$DisableGitFeatures = $false
 
-$cleanUp = $false # delete temp files generated during building documentation files
+$FooterGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-framework/" # leave blank to opt out
+$FooterNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Framework/"    # leave blank to opt out
+$FooterWebsiteUrl = "https://www.systemlibrary.com/" # leave blank to opt out
+$FooterSiteTitle = "System Library Common Framework" # leave blank to opt out
 
-# Skip rules on the full output: Name.Space.Class
-# - string contains wildcard? => contains (case-sensitive)
-# - else string contains dot? => starts with (case-sensitive)
-# - else => ends with (case-sensitive)
-$skipDocumentationFor = @(
+$Debug = $false # Prints additional information during build
+$CleanUp = $true # Removes all files and folders used during build, set to false to debug
+
+# Skip api documentation for classes/namespaces, an array of strings:
+# - string contains wildcard => uses contains case sensitive matching
+# - string contains a dot => starts with case sensitive matching
+# - else uses ends with case sensitive matching
+$SkipDocumentationFor = @(
 '*.Benchmark*',
 '*.Tests*',
 '*.ApiTests*',
-'*.BaseTest*',
 'DelegateJsonConverter',
 'CalleeCancelledRequestException',
 'ClientResponse',
 'ContentType',
 'OutputCachePolicy'
-
-) # case sensitive
+)
 
 # EXECUTE
-. ($PSScriptRoot + "\scripts\docfx.ps1")
+. ($PSScriptRoot + "\scripts\Powershell\00-docfx.ps1")Output

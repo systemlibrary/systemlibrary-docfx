@@ -284,18 +284,14 @@ function ConvertMdToHtml([string] $markdownFile, [string] $relativeFullFileName)
             
             $relativeMdPath = $md.Substring($markdownDir.Length).TrimStart('\', '/')
 
-            if($markdownDir.EndsWith("\Manual")) 
-            {
-                if($relativeMdPath.Contains("Manual\") -eq $false)
-                {
+            if ($markdownDir.EndsWith("\Manual")) {
+                if ($relativeMdPath.Contains("Manual\") -eq $false) {
                     $relativeMdPath = "Manual\" + $relativeMdPath;
                 }
             }
 
-            if($markdownDir.EndsWith("\Guide")) 
-            {
-                if($relativeMdPath.Contains("Guide\") -eq $false)
-                {
+            if ($markdownDir.EndsWith("\Guide")) {
+                if ($relativeMdPath.Contains("Guide\") -eq $false) {
                     $relativeMdPath = "Guide\" + $relativeMdPath;
                 }
             }

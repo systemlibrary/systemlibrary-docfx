@@ -19,11 +19,16 @@ apiRules:
     uidRegex: ^System\.Configuration
     type: Type
 
-- exclude:
-    uidRegex: ^System\.Attribute
-    type: Type
-
 - exclude: 
     uidRegex: ^System\.Runtime
     type: Type
 
+- exclude:
+    visibility:
+      - private
+      - internal
+      - protected
+
+- exclude:
+    hasAttribute:
+      uid: System.ObsoleteAttribute

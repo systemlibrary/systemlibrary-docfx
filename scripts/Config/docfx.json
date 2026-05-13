@@ -1,0 +1,88 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "**/*.csproj"
+          ],
+          "exclude": [
+            "**/.vs/**",
+            "**/obj/**",
+            "**/bin/**",
+            "**/App_Data/**",
+            "**/modules/**",
+            "**/imports/**",
+            "**/node_modules/**",
+            "**/dist/**",
+            "**/css/**",
+            "**/styles/**",
+            "**/static/**",
+            "**/public/**",
+            "**/*Tests.csproj",
+            "**/*Benchmarks.csproj",
+            "**/*Test.csproj",
+            "**/*Benchmark.csproj"
+          ]
+        }
+      ],
+      "dest": "docsapi",
+      "filter": "docfxfilter.yml"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "src": "@DocumentationRelativePath",
+        "files": [
+          "**/*.md",
+          "**/*.yml"
+        ]
+      },
+      {
+        "files": [
+          "docsapi/**/*.yml"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "src": "@DocumentationRelativePath",
+        "files": [
+          "**/*.html",
+          "**/*.png",
+          "**/*.svg",
+          "**/*.ico",
+          "**/*.jpg",
+          "**/*.jpeg",
+          "**/*.gif",
+          "**/*.webp",
+          "**/*.avi",
+          "**/*.mp4",
+          "**/*.zip"
+        ]
+      }
+    ],
+    "output": "__docfxsite",
+    "markdownEngineName": "markdig",
+    "template": [
+      "default",
+      "modern"
+    ],
+    "globalMetadata": {
+      "_appName": "@Title",
+      "_appTitle": "@Title",
+      "_disableContribution": true,
+      "_disableBreadcrumb": true,
+      "_disableNavbar": false,
+      "_enableSearch": @EnableSearch,
+      "_disableAffix": true,
+      "_disableToc": false,
+      "pdf": false
+    },
+    "disableGitFeatures": {
+      @DisableGitFeatures
+    }
+  }
+}
