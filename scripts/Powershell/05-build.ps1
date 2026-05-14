@@ -2,10 +2,14 @@ Out ("Docfx running...")
 
 Set-Location $SourceRootFullPath
 
-$results = & docfx 'docfx.json' `
+& docfx 'docfx.json' `
     -l $logPath `
     --logLevel warning `
-    --warningsAsErrors false `
+    --warningsAsErrors false 2>&1 |
+    Tee-Object -Variable results |
+    ForEach-Object {
+        Write-Host $_ -ForegroundColor DarkYellow
+    }
 
 if (HasError $results -eq $true) {
     Remove-Item $logFileFullPath -Force -ErrorAction SilentlyContinue
@@ -33,15 +37,7 @@ if (HasError $results -eq $true) {
     EXIT 1
 }
 else {
-    if ($results -is [System.Collections.IEnumerable]) {
-        foreach ($res in $results) {
-            Write-Host $res -ForegroundColor DarkYellow
-        }
-    }
-    else {
-        Write-Host $results -ForegroundColor DarkYellow
-    }
-    Out ("Built")
+    Out ("Build completed")
 
     # CREATE THE INDEX.HTML FRONTPAGE FOR ALL DOCS
     Move-Item -Path $projectSiteDirectory$projectName"_index.html" -Destination $projectSiteDirectory$projectName\index.html -Force -ErrorAction SilentlyContinue

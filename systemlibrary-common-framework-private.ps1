@@ -1,15 +1,20 @@
 Set-Location $PSScriptRoot
 
 # REQUIRED OPTIONS
-# Usually the parent folder or same folder as the .sln, or if you document a single csproj, the folder that contains that .csproj
+
+# Root folder of the repository/solution.
+# Base directory where DocFX scans for .csproj files and where docfx.json is executed from.
 $SourceRootFullPath = "C:\syslib\systemlibrary-common-framework-private\source"
 
-# Relative from the above folder, where do you have the documentation stored, or if it is siblings to the csproj use blank ""
+# Relative path (from $SourceRootFullPath) to the documentation source folder.
+# Contains Markdown (.md) files and any documentation structure (TOC, assets, etc.).
+# If docs are located directly in the root, set to "" (empty string).
 $DocumentationRelativePath = "SystemLibrary.Common.Framework\Docs"
 
+# Final output folder where the generated static website will be copied, deployable to GitHub Pages, IIS wwwroot, etc.
 $Output = "C:\Temp\Docs\"
 
-# Main title of the site
+# Display name of the documentation site shown in UI header.
 $Title = "System Library Common Framework"
 
 # Relative Hosting Path
