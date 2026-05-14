@@ -22,23 +22,24 @@ if ($LASTEXITCODE -eq 1) {
     EXIT
 }
 
-. ($PSScriptRoot + "\05-build.ps1")
+# . ($PSScriptRoot + "\05-build.ps1")
 
-# if ($LASTEXITCODE -eq 1) { 
-#     . ($PSScriptRoot + "\Powershell\13-clean-up.ps1")
-#     EXIT
-# }
+if ($LASTEXITCODE -eq 1) { 
+    . ($PSScriptRoot + "\Powershell\13-clean-up.ps1")
+    EXIT
+}
 
-# . ($PSScriptRoot + "\Powershell\06-clean-output-dir.ps1")
+. ($PSScriptRoot + "\06-read-html-files.ps1")
 
-# . ($PSScriptRoot + "\Powershell\07-read-html-files.ps1")
+. ($PSScriptRoot + "\07-clean-output-dir.ps1")
 
-# if ($LASTEXITCODE -eq 1) { 
-#     . ($PSScriptRoot + "\Powershell\13-clean-up.ps1")
-#     EXIT
-# }
+if ($LASTEXITCODE -eq 1) { 
+    . ($PSScriptRoot + "\Powershell\13-clean-up.ps1")
+    EXIT
+}
 
-# . ($PSScriptRoot + "\Powershell\08-create-table-of-contents.ps1")
+. ($PSScriptRoot + "\08-populate-toc.ps1")
+
 # . ($PSScriptRoot + "\Powershell\09-create-index-html.ps1")
 # . ($PSScriptRoot + "\Powershell\10-swap-variables-in-html.ps1")
 # . ($PSScriptRoot + "\Powershell\11-move-to-site-directory.ps1")

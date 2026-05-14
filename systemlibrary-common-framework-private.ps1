@@ -49,4 +49,4 @@ $SkipDocumentationFor = @(
 )
 
 # EXECUTE
-. ($PSScriptRoot + "\scripts\Powershell\00-docfx.ps1")Output
+. ($PSScriptRoot + "\scripts\Powershell\00-docfx.ps1")

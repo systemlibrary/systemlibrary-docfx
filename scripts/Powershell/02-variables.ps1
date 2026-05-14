@@ -2,6 +2,7 @@ $configFullPath = $PSScriptRoot + "\..\Config\"
 
 $SourceRootFullPath = $SourceRootFullPath.Replace("\", "/")
 $DocumentationRelativePath = $DocumentationRelativePath.Replace("\", "/")
+$SitePath = Join-Path $SourceRootFullPath "__docfxsite"
 $logPath = Join-Path $SourceRootFullPath "__docfxsite.log"
 
 $rootPath = $SourceRootFullPath

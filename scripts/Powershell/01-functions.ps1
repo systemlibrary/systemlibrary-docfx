@@ -1,6 +1,31 @@
-function Out([string] $msg) {
-    Write-Host $msg -ForegroundColor DarkCyan
+function Out($msg) {
+    if ($msg -is [string]) {
+        Write-Host $msg -ForegroundColor DarkCyan
+        return
+    }
+
+    $trimmed = $msg | ForEach-Object {
+
+        $obj = $_
+        $clone = [ordered]@{}
+
+        $obj.PSObject.Properties | ForEach-Object {
+            $val = $_.Value
+
+            if ($val -is [string] -and $val.Length -gt 22) {
+                $clone[$_.Name] = $val.Substring(0, 22) + ""
+            }
+            else {
+                $clone[$_.Name] = $val
+            }
+        }
+
+        [PSCustomObject]$clone
+    }
+
+    $trimmed | Format-Table -AutoSize | Out-Host
 }
+
 function Warn([string] $msg) {
     Write-Host $msg -ForegroundColor DarkYellow
 }
