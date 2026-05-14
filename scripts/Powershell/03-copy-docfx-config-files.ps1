@@ -1,4 +1,5 @@
 try {
+    
     # Copy templated docfx config files
     Copy-Item -Path $docfxJson -Destination $docfxJsonDest -Force
     Copy-Item -Path $filterYml -Destination $filterYmlDest -Force

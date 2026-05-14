@@ -1,18 +1,11 @@
-Out ("Building...")
+Out ("Docfx running...")
 
-Set-Location $projectDirectory
+Set-Location $SourceRootFullPath
 
-dotnet restore $csprojFileFullPath
-#dotnet build $csprojFileFullPath -c Release
-
-Out "Docfx extracting..."
-
-$results = & docfx $docfxJson `
-    -o $outputFolderFullPath `
-    -l $logFileFullPath `
+$results = & docfx 'docfx.json' `
+    -l $logPath `
     --logLevel warning `
     --warningsAsErrors false `
-    --template "C:\syslib\systemlibrary-docfx\data\docfx_custom_template" # $docfxTemplateDir # 
 
 if (HasError $results -eq $true) {
     Remove-Item $logFileFullPath -Force -ErrorAction SilentlyContinue

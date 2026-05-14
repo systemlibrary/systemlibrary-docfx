@@ -27,8 +27,7 @@
           ]
         }
       ],
-      "dest": "docsapi",
-      "filter": "docfxfilter.yml"
+      "dest": "docsapi"
     }
   ],
   "build": {
@@ -81,8 +80,6 @@
       "_disableToc": false,
       "pdf": false
     },
-    "disableGitFeatures": {
-      @DisableGitFeatures
-    }
+    "disableGitFeatures": @DisableGitFeatures
   }
 }

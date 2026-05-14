@@ -10,20 +10,19 @@ $Error.Clear()
 
 . ($PSScriptRoot + "\03-copy-docfx-config-files.ps1")
 
-# if ($LASTEXITCODE -eq 1) { 
-#     # . ($PSScriptRoot + "\13-clean-up.ps1")
-#     Out ( "Err")
-#     EXIT
-# }
+if ($LASTEXITCODE -eq 1) { 
+    . ($PSScriptRoot + "\13-clean-up.ps1")
+    EXIT
+}
 
-# . ($PSScriptRoot + "\Powershell\04-validate-settings.ps1")
+. ($PSScriptRoot + "\04-validate-settings.ps1")
 
-# if ($LASTEXITCODE -eq 1) { 
-#     . ($PSScriptRoot + "\Powershell\13-clean-up.ps1")
-#     EXIT
-# }
+if ($LASTEXITCODE -eq 1) { 
+    . ($PSScriptRoot + "\13-clean-up.ps1")
+    EXIT
+}
 
-# . ($PSScriptRoot + "\Powershell\05-build.ps1")
+. ($PSScriptRoot + "\05-build.ps1")
 
 # if ($LASTEXITCODE -eq 1) { 
 #     . ($PSScriptRoot + "\Powershell\13-clean-up.ps1")
