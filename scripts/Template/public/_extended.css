@@ -2,3 +2,9 @@
     max-width: 32px;
     max-height: 32px;
 }
+
+main>div.content {
+    @media screen and (min-width: 1024px) {
+        max-width: 880px;
+    }
+}

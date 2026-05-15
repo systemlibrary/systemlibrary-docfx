@@ -4,6 +4,10 @@ apiRules:
     type: Type
 
 - exclude:
+    uidRegex: ^System\.Object
+    type: Member
+
+- exclude:
     uidRegex: ^System\.Attribute
     type: Type
 

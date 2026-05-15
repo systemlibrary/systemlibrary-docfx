@@ -63,6 +63,7 @@
         ]
       }
     ],
+    "filterConfig": "docfxfilter.yml",
     "output": "__docfxsite",
     "markdownEngineName": "markdig",
     "template": [
@@ -79,6 +80,7 @@
       "_enableSearch": @EnableSearch,
       "_disableAffix": true,
       "_disableToc": false,
+      "hideInheritedMembers": true,
       "pdf": false
     },
     "disableGitFeatures": @DisableGitFeatures
