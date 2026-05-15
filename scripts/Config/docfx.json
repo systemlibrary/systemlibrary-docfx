@@ -67,7 +67,7 @@
     "markdownEngineName": "markdig",
     "template": [
       "default",
-      "modern"
+      "docfxtemplate"
     ],
     "globalMetadata": {
       "_appName": "@Title",

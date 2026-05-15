@@ -1,8 +1,11 @@
 try {
-    
+    if (Test-Path $templatePathDest) {
+        Remove-Item $templatePathDest -Recurse -Force -ErrorAction SilentlyContinue
+    }        
     # Copy templated docfx config files
     Copy-Item -Path $docfxJson -Destination $docfxJsonDest -Force
     Copy-Item -Path $filterYml -Destination $filterYmlDest -Force
+    Copy-Item -Path $templatePath -Destination $templatePathDest -Force -Recurse
 
     # Replace consumer variables into the docfx config files
     ReplaceTextInFile $docfxJsonDest "@DocumentationRelativePath" $DocumentationRelativePath

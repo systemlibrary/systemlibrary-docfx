@@ -37,8 +37,6 @@ foreach ($doc in $htmlTocDocs) {
     $toc = "<div><ul>"
 
     foreach ($li in $tocItems) {
-        
-        
         $href = $li.Name + ".html"
 
         if ($li.Name -eq "Index") {

@@ -14,8 +14,8 @@ $DocumentationRelativePath = "SystemLibrary.Common.Framework\Docs"
 # Final output folder where the generated static website will be copied, deployable to GitHub Pages, IIS wwwroot, etc.
 $Output = "C:\Temp\Docs\"
 
-# Display name of the documentation site shown in UI header.
-$Title = "System Library Common Framework"
+# Display name of the documentation site shown in UI header and in Footer.
+$SiteTitle = "System Library Common Framework"
 
 # Relative Hosting Path
 $RelativeHostingPath = "" # if local IIS or similar it is $null or "" or "/", if using github pages it should be the name of the repo with prefix and suffix /
