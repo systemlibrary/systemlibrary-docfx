@@ -71,8 +71,8 @@
     ],
     "globalMetadata": {
       "_appLogoPath": "logo.@LogoExtension",
-      "_appName": "@Title",
-      "_appTitle": "@Title",
+      "_appName": "@SiteTitle",
+      "_appTitle": " ",
       "_disableContribution": true,
       "_disableBreadcrumb": true,
       "_disableNavbar": false,

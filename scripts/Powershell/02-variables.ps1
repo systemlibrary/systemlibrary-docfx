@@ -17,7 +17,3 @@ $filterYmlDest = Join-Path $rootPath 'docfxfilter.yml'
 $templatePath = $PSScriptRoot + "\..\Template\"
 $templatePathDest = Join-Path $rootPath "docfxtemplate"
 
-Out $templatePath
-Out $templatePathDest
-
-Out $docfxJsonDest
