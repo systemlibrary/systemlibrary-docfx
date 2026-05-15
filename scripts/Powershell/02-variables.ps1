@@ -8,8 +8,10 @@ $logPath = Join-Path $SourceRootFullPath "__docfxsite.log"
 $rootPath = $SourceRootFullPath
 $docPath = $DocumentationRelativePath
 
-$docfxJsonFullPath = Join-Path $configFullPath 'docfx.json'
+$docfxJson = Join-Path $configFullPath 'docfx.json'
 $filterYml = Join-Path $configFullPath 'filter.yml'
 
 $docfxJsonDest = Join-Path $rootPath 'docfx.json'
 $filterYmlDest = Join-Path $rootPath 'docfxfilter.yml'
+
+Out $docfxJsonDest

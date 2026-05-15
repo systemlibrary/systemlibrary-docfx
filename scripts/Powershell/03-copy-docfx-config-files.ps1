@@ -14,8 +14,6 @@ try {
     Out ("Docfx config files copied and overwritten variables at: " + $rootPath)
 }
 catch {
-    Warn ("Copying docfx config files and replacing variables failed: " + $rootPath)
-
-    Err "Error occured: typo in SourceRootFullPath or DocumentationRelativePath?"
+    Err ("Copy-docfx-config-files errored: typo in SourceRootFullPath or DocumentationRelativePath? " + $_)
     EXIT 1
 }

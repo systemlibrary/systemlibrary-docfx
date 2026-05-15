@@ -4,6 +4,16 @@ function Out($msg) {
         return
     }
 
+    if ($msg -is [int]) {
+        Write-Host $msg -ForegroundColor DarkCyan
+        return
+    }
+
+    if ($msg -is [bool]) {
+        Write-Host $msg -ForegroundColor DarkCyan
+        return
+    }
+    
     $trimmed = $msg | ForEach-Object {
 
         $obj = $_

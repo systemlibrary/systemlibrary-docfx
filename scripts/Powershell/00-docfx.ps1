@@ -22,7 +22,7 @@ if ($LASTEXITCODE -eq 1) {
     EXIT
 }
 
-# . ($PSScriptRoot + "\05-build.ps1")
+. ($PSScriptRoot + "\05-build.ps1")
 
 if ($LASTEXITCODE -eq 1) { 
     . ($PSScriptRoot + "\Powershell\13-clean-up.ps1")

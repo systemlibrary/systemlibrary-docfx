@@ -1,22 +1,64 @@
+foreach ($doc in $htmlTocDocs) {
 
-[string]$listItemInstall = CreateListItem '/Install.md' 'Installation instructions'
-[string]$listItemManual = CreateListItem '/Manual/Manual.md' 'A handbook about implementation specific details'
-[string]$listItemGuide = CreateListItem '/Guide/Guide.md' 'A guide about this software in details'
+    if (-not $doc.Content) { 
+        continue
+    }
 
-$htmlFilesCopy = @() + $htmlFiles
+    $path = $doc.RelativePath
+    $depth = ($path -split '/').Count
 
+    $tocItems = $htmlDocs | Where-Object {
+        # Remove self from TOC
+        if ($doc.FullName -eq $_.FullName) {
+            return $false
+        }
+        
+        # Remove toc.yml from TOC
+        if ($_.Name -eq "toc") {
+            return $false
+        }
 
-if ($listItemManual -ne $null -and $listItemManual -ne "") {
-    $htmlFilesCopy = @($listItemManual) + $htmlFilesCopy
+        if ($_.RelativePath.StartsWith($path) -eq $true) {
+
+            # Exact relative path means a sibling, return true
+            if ($_.RelativePath -eq $path) {
+                return $true;
+            }
+
+            if ($_.Name -eq "Index") {
+                $d = ($_.RelativePath -split '/').Count
+                return ($d - 1) -eq $depth
+            }
+        }
+        
+        return $false;
+    }
+
+    $toc = "<div><ul>"
+
+    foreach ($li in $tocItems) {
+        
+        
+        $href = $li.Name + ".html"
+
+        if ($li.Name -eq "Index") {
+            $href = Join-Path $li.RelativePath $href
+        }
+
+        $title = $li.Title
+
+        $toc += "<li><a href=""$href"">$title</a></li>"
+    }
+
+    $toc += "</ul></div>"
+
+    $doc.Content = $doc.Content.Replace("<p>!!TOC!!</p>", $toc)
+
+    if ($doc.Content.Contains("!!TOC!!") -eq $true) {
+        $doc.Content = $doc.Content.Replace("!!TOC!!", $toc)
+    }
+
+    Set-Content -Path $doc.FullName -Value $doc.Content -Encoding UTF8
+
+    Out "TOC populated: $($doc.FullName)"
 }
-
-if ($listItemGuide -ne $null -and $listItemGuide -ne "") {
-    $htmlFilesCopy = @($listItemGuide) + $htmlFilesCopy
-}
-
-if ($listItemInstall -ne $null -and $listItemInstall -ne "") {
-    $htmlFilesCopy = @($listItemInstall) + $htmlFilesCopy
-}
-
-
-$indexHtmlOrderedList = createOrderedList $htmlFilesCopy

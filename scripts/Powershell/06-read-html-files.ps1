@@ -7,6 +7,7 @@ if ($SkipDocumentationFor -and $SkipDocumentationFor.Count -gt 0) {
 }
 
 $htmlFiles = Get-ChildItem $sitePath -Recurse -Filter *.html | ForEach-Object {
+    $fullName = $_.FullName.Replace("\", "/")
 
     $isGeneric = $false
     if ($_.BaseName -match '-\d+$') {
@@ -28,28 +29,54 @@ $htmlFiles = Get-ChildItem $sitePath -Recurse -Filter *.html | ForEach-Object {
 
     $content = ""
     if (-not $isSkipped -and -not $isGeneric) {
-        $content = Get-Content $_.FullName -Raw
+        $content = Get-Content $fullName -Raw
     }
 
-    $title = $null
-    if ($content -match "<title>(.*?)</title>") {
+    $title = $_.BaseName
+
+    if ($content -match '(?s)<h1[^>]*>(.*?)</h1>') {
         $title = $matches[1]
+    }
+    else {
+        if ($content -match "<title>(.*?)</title>") {
+            $title = $matches[1]
+        }
+    }
+
+    # strip nested HTML tags
+    $title = $title -replace '<[^>]+>', ''
+
+    # normalize whitespace
+    $title = $title -replace '\s+', ' '
+    $title = $title.Trim()
+
+    # remove API prefix
+    $title = $title -replace '^(Class|Interface|Enum|Struct|Record)\s+', ''
+
+    if ($title.Contains(' | ')) {
+        $title = $title.Split(' | ')[0].Trim()
     }
 
     $hasToc = $content.Contains("!!TOC!!")
+
     if (-not $hasToc) {
         $content = ""
     }
 
+    $relativePath = ($fullName -split '__docfxsite/')[1]
+
+    $relativePath = $relativePath.Replace($_.Name, "");
+
     [PSCustomObject]@{
-        Name        = $_.BaseName
-        FullName    = $_.FullName
-        Title       = $title
-        IsGeneric   = $isGeneric
-        IsSkipped   = $isSkipped
-        Content     = $content
-        HasToc      = $hasToc
-        IsNamespace = $title -and $title.Contains(".")
+        Name         = $_.BaseName
+        FullName     = $fullName
+        Title        = $title
+        IsGeneric    = $isGeneric
+        IsSkipped    = $isSkipped
+        Content      = $content
+        HasToc       = $hasToc
+        IsNamespace  = $title -and $title.Contains(".")
+        RelativePath = $relativePath
     }
 }
 
