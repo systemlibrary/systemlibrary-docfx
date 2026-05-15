@@ -31,26 +31,6 @@
 </dl>
 {{/syntax.parameters.0}}
 
-{{#syntax.return}}
-<h4 class="section">{{__global.returns}}</h4>
-<dl class="parameters">
-  <dt>{{{type.specName.0.value}}}</dt>
-  <dd>{{{description}}}</dd>
-</dl>
-{{/syntax.return}}
-
-{{#syntax.typeParameters.0}}
-<h4 class="section">{{__global.typeParameters}}</h4>
-<dl class="parameters">
-{{/syntax.typeParameters.0}}
-{{#syntax.typeParameters}}
-  <dt><code>{{{id}}}</code></dt>
-  <dd>{{{description}}}</dd>
-{{/syntax.typeParameters}}
-{{#syntax.typeParameters.0}}
-</dl>
-{{/syntax.typeParameters.0}}
-
 {{#inClass}}
 {{#derivedClasses.0}}
 <dl class="typelist derived">
