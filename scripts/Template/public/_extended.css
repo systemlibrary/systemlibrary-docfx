@@ -8,3 +8,29 @@ main>div.content {
         max-width: 880px;
     }
 }
+
+article h1 {
+    margin-bottom: 1.5rem;
+}
+
+article h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.625rem;
+}
+
+article h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+article h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+
+article p {
+    margin-bottom: 1rem;
+}
