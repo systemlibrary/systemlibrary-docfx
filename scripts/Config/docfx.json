@@ -70,6 +70,7 @@
       "docfxtemplate"
     ],
     "globalMetadata": {
+      "_appLogoPath": "logo.@LogoExtension",
       "_appName": "@Title",
       "_appTitle": "@Title",
       "_disableContribution": true,

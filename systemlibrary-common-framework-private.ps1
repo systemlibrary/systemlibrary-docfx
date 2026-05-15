@@ -22,6 +22,7 @@ $RelativeHostingPath = "" # if local IIS or similar it is $null or "" or "/", if
                           # its the path to the css and js will be loaded from, from root of your site
 
 # OPTIONAL
+$LogoExtension = "png"
 $EnableSearch = $true
 $DisableGitFeatures = $false
 

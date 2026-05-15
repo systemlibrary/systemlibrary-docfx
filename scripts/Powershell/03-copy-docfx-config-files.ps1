@@ -11,6 +11,7 @@ try {
     ReplaceTextInFile $docfxJsonDest "@DocumentationRelativePath" $DocumentationRelativePath
     ReplaceTextInFile $docfxJsonDest "@Title" $Title
 
+    ReplaceTextInFile $docfxJsonDest "@LogoExtension" $LogoExtension.ToString().ToLower()
     ReplaceTextInFile $docfxJsonDest "@EnableSearch" $EnableSearch.ToString().ToLower()
     ReplaceTextInFile $docfxJsonDest "@DisableGitFeatures" $DisableGitFeatures.ToString().ToLower()
 
