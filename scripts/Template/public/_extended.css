@@ -34,3 +34,7 @@ article h4 {
 article p {
     margin-bottom: 1rem;
 }
+
+article ul li {
+    margin-bottom: 0.25rem;
+}
