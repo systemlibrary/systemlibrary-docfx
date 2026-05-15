@@ -9,7 +9,7 @@ try {
 
     # Replace consumer variables into the docfx config files
     ReplaceTextInFile $docfxJsonDest "@DocumentationRelativePath" $DocumentationRelativePath
-    ReplaceTextInFile $docfxJsonDest "@Title" $Title
+    ReplaceTextInFile $docfxJsonDest "@SiteTitle" $SiteTitle
 
     ReplaceTextInFile $docfxJsonDest "@LogoExtension" $LogoExtension.ToString().ToLower()
     ReplaceTextInFile $docfxJsonDest "@EnableSearch" $EnableSearch.ToString().ToLower()
