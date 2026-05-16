@@ -50,13 +50,14 @@ foreach ($doc in $htmlTocDocs) {
 
     $toc += "</ul></div>"
 
-    $doc.Content = $doc.Content.Replace("<p>!!TOC!!</p>", $toc)
+    if ($doc.Content.Contains("!!TOC!!")) {
+        $doc.Changed = $true
+        $doc.Content = $doc.Content.Replace("<p>!!TOC!!</p>", $toc)
 
-    if ($doc.Content.Contains("!!TOC!!") -eq $true) {
-        $doc.Content = $doc.Content.Replace("!!TOC!!", $toc)
+        if ($doc.Content.Contains("!!TOC!!") -eq $true) {
+            $doc.Content = $doc.Content.Replace("!!TOC!!", $toc)
+        }
     }
-
-    Set-Content -Path $doc.FullName -Value $doc.Content -Encoding UTF8
 
     Out "TOC populated: $($doc.FullName)"
 }

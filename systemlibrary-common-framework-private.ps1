@@ -46,6 +46,7 @@ $SkipDocumentationFor = @(
 'CalleeCancelledRequestException',
 'ClientResponse',
 'ContentType',
+'DelegateJsonConverter',
 'OutputCachePolicy',
 '*SystemLibrary.Common.Framework.Boostrap*'
 )

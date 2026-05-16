@@ -25,8 +25,8 @@ foreach ($doc in $htmlDocs) {
     if ($doc.Content.Contains("[FOOTER]")) {
         $doc.Content = $doc.Content.Replace("[FOOTER]", $footerTemplate)
         
-        [System.IO.File]::WriteAllText($doc.FullName, $doc.Content, [System.Text.Encoding]::UTF8)
-        # Set-Content -Path $doc.FullName -Value $doc.Content -Encoding UTF8
+        $doc.Changed = $true
+        
     }
 }
 

@@ -104,3 +104,16 @@ footer {
 .summary-namespace-title {
     font-size: 1.25em;
 }
+
+[data-bs-theme=dark] .class-enum {
+    background: #1e1e1e;
+    color: #dcdcdc;
+}
+
+[data-bs-theme=dark] .class-enum-keyword-enum {
+    color: #4ec9b0;
+}
+
+[data-bs-theme=dark] .class-enum-key-summary {
+    color: red;
+}

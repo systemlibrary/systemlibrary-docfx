@@ -41,6 +41,13 @@ if ($LASTEXITCODE -eq 1) {
 . ($PSScriptRoot + "\08-populate-toc.ps1")
 
 . ($PSScriptRoot + "\09-populate-footer.ps1")
+
+. ($PSScriptRoot + "\10-clean-namespace-links.ps1")
+
+. ($PSScriptRoot + "\11-color-public-enum.ps1")
+
+. ($PSScriptRoot + "\11-write-content.ps1")
+
 # . ($PSScriptRoot + "\Powershell\10-swap-variables-in-html.ps1")
 # . ($PSScriptRoot + "\Powershell\11-move-to-site-directory.ps1")
 # . ($PSScriptRoot + "\Powershell\12-copy-to-output-directory.ps1")

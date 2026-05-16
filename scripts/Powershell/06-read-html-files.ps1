@@ -30,7 +30,6 @@ $htmlFiles = Get-ChildItem $sitePath -Recurse -Filter *.html | ForEach-Object {
     $content = ""
     if (-not $isSkipped -and -not $isGeneric) {
         $content = [System.IO.File]::ReadAllText($fullName, [System.Text.Encoding]::UTF8)
-        # $content = Get-Content $fullName -Raw
     }
 
     $title = $_.BaseName
@@ -74,6 +73,7 @@ $htmlFiles = Get-ChildItem $sitePath -Recurse -Filter *.html | ForEach-Object {
         HasToc       = $hasToc
         IsNamespace  = $title -and $title.Contains(".")
         RelativePath = $relativePath
+        Changed      = $false
     }
 }
 
