@@ -10,6 +10,7 @@
 </h1>
 
 <div class="markdown summary">{{{summary}}}</div>
+<div class="markdown conceptual">{{{conceptual}}}</div>
 
 {{#example.0}}
 <h2 id="{{id}}_examples">{{__global.examples}}</h2>
@@ -23,10 +24,37 @@
 <div class="markdown level0 remarks">{{{remarks}}}</div>
 {{/remarks}}
 
+{{#syntax.parameters.0}}
+<h4 class="section">{{__global.parameters}}</h4>
+<dl class="parameters">
+{{/syntax.parameters.0}}
+{{#syntax.parameters}}
+  <dt><code>{{{id}}}</code> {{{type.specName.0.value}}}</dt>
+  <dd>{{{description}}}</dd>
+{{/syntax.parameters}}
+{{#syntax.parameters.0}}
+</dl>
+{{/syntax.parameters.0}}
+
+{{#inClass}}
+{{#derivedClasses.0}}
+<dl class="typelist derived">
+  <dt>{{__global.derived}}</dt>
+  <dd>
+{{/derivedClasses.0}}
+{{#derivedClasses}}
+    <div>{{{specName.0.value}}}</div>
+{{/derivedClasses}}
+{{#derivedClasses.0}}
+  </dd>
+</dl>
+{{/derivedClasses.0}}
+{{/inClass}}
+
+{{#isEnum}}
 <div class="class-enum">
   {{syntax.content.0.value}}
   <span>{</span>
-    {{#isEnum}}
     {{#children}}
     <dl class="parameters">
     {{#children}}
@@ -42,7 +70,7 @@
     {{/children}}
     </dl>
     {{/children}}
-    {{/isEnum}}
   <span>}</span>
 </div>
+{{/isEnum}}
 
