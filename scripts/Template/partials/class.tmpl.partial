@@ -10,10 +10,6 @@
 
 {{#children}}
 
-{{#overload}}
-<a id="{{id}}" data-uid="{{uid}}"></a>
-{{/overload}}
-
 <h3 id="{{id}}" data-uid="{{uid}}">
   {{name.0.value}}
   {{#sourceurl}}<a class="header-action link-secondary" title="View source" href="{{sourceurl}}"><i class="bi bi-code-slash"></i></a>{{/sourceurl}}
@@ -50,7 +46,6 @@
   <dd>{{{description}}}</dd>
 </dl>
 {{/eventType}}
-
 {{/syntax}}
 
 {{#example.0}}
@@ -65,51 +60,6 @@
 <div class="markdown level1 remarks">{{{remarks}}}</div>
 {{/remarks}}
 
-{{#exceptions.0}}
-<h4 class="section">{{__global.exceptions}}</h4>
-<dl class="parameters">
-{{/exceptions.0}}
-{{#exceptions}}
-  <dt>{{{type.specName.0.value}}}</dt>
-  <dd>{{{description}}}</dd>
-{{/exceptions}}
-{{#exceptions.0}}
-</dl>
-{{/exceptions.0}}
-
-{{#seealso.0}}
-<dl class="typelist seealso">
-  <dt>{{__global.seealso}}</dt>
-  <dd>
-{{/seealso.0}}
-{{#seealso}}
-  {{#isCref}}
-  <div>{{{type.specName.0.value}}}</div>
-  {{/isCref}}
-  {{^isCref}}
-  <div>{{{url}}}</div>
-  {{/isCref}}
-{{/seealso}}
-{{#seealso.0}}
-  </dd>
-</dl>
-{{/seealso.0}}
-
 {{/children}}
 {{/children}}
 
-{{#seealso.0}}
-<h2 id="seealso">{{__global.seealso}}</h2>
-<div class="seealso">
-{{/seealso.0}}
-{{#seealso}}
-  {{#isCref}}
-    <div>{{{type.specName.0.value}}}</div>
-  {{/isCref}}
-  {{^isCref}}
-    <div>{{{url}}}</div>
-  {{/isCref}}
-{{/seealso}}
-{{#seealso.0}}
-</div>
-{{/seealso.0}}

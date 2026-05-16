@@ -7,6 +7,7 @@
 
 <div class="facts text-secondary">
   <dl><dt>{{__global.namespace}}</dt><dd>{{{namespace.specName.0.value}}}</dd></dl>
+  
 </div>
 
 <div class="markdown summary">{{{summary}}}</div>
@@ -17,33 +18,6 @@
   <pre><code class="lang-csharp hljs">{{syntax.content.0.value}}</code></pre>
 </div>
 {{/syntax.content.0.value}}
-
-{{#syntax.parameters.0}}
-<h4 class="section">{{__global.parameters}}</h4>
-<dl class="parameters">
-{{/syntax.parameters.0}}
-{{#syntax.parameters}}
-  <dt><code>{{{id}}}</code> {{{type.specName.0.value}}}</dt>
-  <dd>{{{description}}}</dd>
-{{/syntax.parameters}}
-{{#syntax.parameters.0}}
-</dl>
-{{/syntax.parameters.0}}
-
-{{#inClass}}
-{{#derivedClasses.0}}
-<dl class="typelist derived">
-  <dt>{{__global.derived}}</dt>
-  <dd>
-{{/derivedClasses.0}}
-{{#derivedClasses}}
-    <div>{{{specName.0.value}}}</div>
-{{/derivedClasses}}
-{{#derivedClasses.0}}
-  </dd>
-</dl>
-{{/derivedClasses.0}}
-{{/inClass}}
 
 {{#isEnum}}
 {{#children}}
