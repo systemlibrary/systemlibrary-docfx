@@ -4,6 +4,12 @@
 
 {{#children}}
 
+{{^_splitReference}}
+<h2 class="section" id="{{id}}">{{>partials/classSubtitle}}</h2>
+{{/_splitReference}}
+
+{{#children}}
+
 <h3 id="{{id}}" data-uid="{{uid}}">
   {{name.0.value}}
   {{#sourceurl}}<a class="header-action link-secondary" title="View source" href="{{sourceurl}}"><i class="bi bi-code-slash"></i></a>{{/sourceurl}}
@@ -18,7 +24,7 @@
 </div>
 
 {{#fieldValue}}
-<h4 class="section field">{{__global.fieldValue}}</h4>
+<h4 class="section">{{__global.fieldValue}}</h4>
 <dl class="parameters">
   <dt>{{{type.specName.0.value}}}</dt>
   <dd>{{{description}}}</dd>
@@ -26,7 +32,7 @@
 {{/fieldValue}}
 
 {{#propertyValue}}
-<h4 class="section property">{{__global.propertyValue}}</h4>
+<h4 class="section">{{__global.propertyValue}}</h4>
 <dl class="parameters">
   <dt>{{{type.specName.0.value}}}</dt>
   <dd>{{{description}}}</dd>
@@ -34,7 +40,7 @@
 {{/propertyValue}}
 
 {{#eventType}}
-<h4 class="section event">{{__global.eventType}}</h4>
+<h4 class="section">{{__global.eventType}}</h4>
 <dl class="parameters">
   <dt>{{{type.specName.0.value}}}</dt>
   <dd>{{{description}}}</dd>
@@ -43,16 +49,17 @@
 {{/syntax}}
 
 {{#example.0}}
-<h4 class="section examples" id="{{id}}_examples">{{__global.examples}}</h4>
+<h4 class="section" id="{{id}}_examples">{{__global.examples}}</h4>
 {{/example.0}}
 {{#example}}
 {{{.}}}
 {{/example}}
 
 {{#remarks}}
-<h4 class="section remarks" id="{{id}}_remarks">{{__global.remarks}}</h4>
+<h4 class="section" id="{{id}}_remarks">{{__global.remarks}}</h4>
 <div class="markdown level1 remarks">{{{remarks}}}</div>
 {{/remarks}}
 
+{{/children}}
 {{/children}}
 
