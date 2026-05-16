@@ -158,6 +158,17 @@
         </div>
       </div>
     </footer>
+
+    <script type="text/javascript">
+    window.toggleSection = (btn) => {
+          const content = btn.nextElementSibling
+          if (content.style.display === 'none') {
+              content.style.display = 'block'
+          } else {
+              content.style.display = 'none'
+          }
+      }
+    </script>
   </body>
   {{/redirect_url}}
 </html>

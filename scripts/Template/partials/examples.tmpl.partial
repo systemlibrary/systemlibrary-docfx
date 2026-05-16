@@ -1,0 +1,9 @@
+{{#example.0}}
+<div class="example-wrapper">
+  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+  <div class="markdown level0 example-content" style="display:none">
+    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    {{#example}}{{{.}}}{{/example}}
+  </div>
+</div>
+{{/example.0}}
