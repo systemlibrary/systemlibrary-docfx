@@ -27,38 +27,6 @@
   <pre><code class="lang-csharp hljs">{{syntax.content.0.value}}</code></pre>
 </div>
 
-{{#syntax.parameters.0}}
-<h4 class="section">{{__global.parameters}}</h4>
-<dl class="parameters">
-{{/syntax.parameters.0}}
-{{#syntax.parameters}}
-  <dt><code>{{{id}}}</code> {{{type.specName.0.value}}}</dt>
-  <dd>{{{description}}}</dd>
-{{/syntax.parameters}}
-{{#syntax.parameters.0}}
-</dl>
-{{/syntax.parameters.0}}
-
-{{#syntax.return}}
-<h4 class="section">{{__global.returns}}</h4>
-<dl class="parameters">
-  <dt>{{{type.specName.0.value}}}</dt>
-  <dd>{{{description}}}</dd>
-</dl>
-{{/syntax.return}}
-
-{{#syntax.typeParameters.0}}
-<h4 class="section">{{__global.typeParameters}}</h4>
-<dl class="parameters">
-{{/syntax.typeParameters.0}}
-{{#syntax.typeParameters}}
-  <dt><code>{{{id}}}</code></dt>
-  <dd>{{{description}}}</dd>
-{{/syntax.typeParameters}}
-{{#syntax.typeParameters.0}}
-</dl>
-{{/syntax.typeParameters.0}}
-
 {{#fieldValue}}
 <h4 class="section">{{__global.fieldValue}}</h4>
 <dl class="parameters">
