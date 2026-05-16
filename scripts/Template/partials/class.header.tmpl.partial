@@ -1,6 +1,6 @@
 {{!Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license.}}
 
-<div class="facts text-secondary">
+<div class="facts text-secondary breadcrumbs">
   <dl><dt>{{__global.namespace}}</dt><dd>{{{namespace.specName.0.value}}}</dd></dl>
 </div>
 
@@ -20,8 +20,7 @@
 {{/example}}
 
 {{#remarks}}
-<h2 id="{{id}}_remarks">{{__global.remarks}}</h2>
-<div class="markdown level0 remarks">{{{remarks}}}</div>
+  {{>partials/remarks}}
 {{/remarks}}
 
 {{#isClass}}

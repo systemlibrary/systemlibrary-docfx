@@ -133,3 +133,26 @@ footer {
 .class-enum-key-summary p {
     margin: 0;
 }
+
+.breadcrumbs a {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
+}
+
+.remarks-wrapper {
+    position: relative;
+}
+
+.remarks-content {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgb(73, 77, 71);
+    border: solid 1px rgb(123, 137, 141);
+    border-radius: 8px;
+    padding: 1em;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}

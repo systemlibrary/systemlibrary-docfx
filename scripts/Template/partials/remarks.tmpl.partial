@@ -1,0 +1,19 @@
+<div class="remarks-wrapper">
+  <button class="remarks-toggle" onclick="toggleSection(this)">▶ Remarks</button>
+  <div class="markdown level0  remarks-content">
+    {{{remarks}}}
+  </div>
+</div>
+
+<script type="text/javascript">
+   window.toggleSection = (btn) => {
+        const content = btn.nextElementSibling
+        if (content.style.display === 'none') {
+            content.style.display = 'block'
+            btn.textContent = btn.textContent.replace('▶', '▼')
+        } else {
+            content.style.display = 'none'
+            btn.textContent = btn.textContent.replace('▼', '▶')
+        }
+    }
+</script>
