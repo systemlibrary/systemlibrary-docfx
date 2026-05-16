@@ -108,6 +108,9 @@ footer {
 [data-bs-theme=dark] .class-enum {
     background: #1e1e1e;
     color: #dcdcdc;
+    padding: 2em;
+    border: solid 1px;
+    border-radius: 8px;
 }
 
 [data-bs-theme=dark] .class-enum-keyword-enum {
@@ -115,5 +118,14 @@ footer {
 }
 
 [data-bs-theme=dark] .class-enum-key-summary {
-    color: red;
+    background: rgb(73, 77, 71);
+    border: solid rgb(123, 137, 141);
+    border-radius: 8px;
+    border-width: 1px;
+    padding: 0.75em;
+    margin-left: 0.25em;
+    margin-bottom: 0;
+    margin-top: 2em;
+    font-size: 14px !important;
+    color: #9ec49f !important;
 }

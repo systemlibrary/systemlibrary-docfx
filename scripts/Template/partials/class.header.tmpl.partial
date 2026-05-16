@@ -23,25 +23,26 @@
 <div class="markdown level0 remarks">{{{remarks}}}</div>
 {{/remarks}}
 
-
-{{#syntax.content.0.value}}
-<div class="codewrapper">
-  <pre><code class="lang-csharp hljs"></code></pre>
-</div>
-{{/syntax.content.0.value}}
-
 <div class="class-enum">
   {{syntax.content.0.value}}
+  <span>{</span>
+    {{#isEnum}}
+    {{#children}}
+    <dl class="parameters">
+    {{#children}}
+       {{#summary}}
+      <div class="class-enum-key-summary">
+        <dd>
+          {{{summary}}}
+          {{#remarks}}{{{remarks}}}{{/remarks}}
+        </dd>
+      </div>
+      {{/summary}}
+      <dt id="{{id}}">&nbsp;&nbsp;{{syntax.content.0.value}}</dt>
+    {{/children}}
+    </dl>
+    {{/children}}
+    {{/isEnum}}
+  <span>}</span>
 </div>
 
-{{#isEnum}}
-{{#children}}
-<dl class="parameters">
-{{#children}}
-  <dt id="{{id}}"><code>{{syntax.content.0.value}}</code></dt>
-  {{#remarks}}<dd>{{{summary}}}{{{remarks}}}</dd>{{/remarks}}
-  {{^remarks}}<dd>{{{summary}}}</dd>{{/remarks}}
-{{/children}}
-</dl>
-{{/children}}
-{{/isEnum}}
