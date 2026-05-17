@@ -3,7 +3,7 @@
 {{>partials/class.header}}
 
 {{#isEnum}}
-  <h3 style='color: rgb(207, 34, 46); font-size:18px;'><span style="font-size:14px;">enum</span> {{name.0.value}}</h3>
+  <h3 class="class-content-title"><span>enum </span>{{name.0.value}}</h3>
   <span>{</span>
   <div class="class-body">
     {{#children}}

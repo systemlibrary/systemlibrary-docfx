@@ -29,7 +29,10 @@
 {{^inConstructor}}
 
 <h3 id="{{id}}" data-uid="{{uid}}">
-  {{name.0.value}}
+  {{name.0.value}}<br>
+  {{name.value}}<br>
+  <span>Hello</span>
+
   {{#sourceurl}}<a class="header-action link-secondary" title="View source" href="{{sourceurl}}"><i class="bi bi-code-slash"></i></a>{{/sourceurl}}
 </h3>
 
@@ -66,22 +69,27 @@
 {{/eventType}}
 {{/syntax}}
 
-{{#example.0}}
-<h4 class="section" id="{{id}}_examples">{{__global.examples}}</h4>
-{{/example.0}}
-{{#example}}
-{{{.}}}
-{{/example}}
 
-{{#remarks}}
-<h4 class="section" id="{{id}}_remarks">{{__global.remarks}}</h4>
-<div class="markdown level1 remarks">{{{remarks}}}</div>
-{{/remarks}}
+<div class="doc-toggles">
+  {{#example}}
+    {{>partials/examples}}
+  {{/example}}
+
+  {{#remarks}}
+    {{>partials/remarks}}
+  {{/remarks}}
+</div>
 
 {{/inConstructor}}
 
 {{/children}}
 {{/children}}
+
+{{#isStruct}}
+  </div>
+  <span>}</span>
+</div>
+{{/isStruct}}
 
 {{#isInterface}}
   </div>
