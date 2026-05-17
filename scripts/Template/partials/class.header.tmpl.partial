@@ -9,8 +9,12 @@
   {{#sourceurl}}<a class="header-action link-secondary" title="View source" href="{{sourceurl}}"><i class="bi bi-code-slash"></i></a>{{/sourceurl}}
 </h1>
 
+{{#summary}}
 <div class="markdown summary">{{{summary}}}</div>
+{{/summary}}
+{{#conceptual}} 
 <div class="markdown conceptual">{{{conceptual}}}</div>
+{{/conceptual}} 
 
 <div class="doc-toggles">
   {{#example}}

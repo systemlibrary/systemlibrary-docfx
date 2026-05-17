@@ -1,13 +1,18 @@
 {{!Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license.}}
 
 <h1 id="{{id}}" data-uid="{{uid}}" class="text-break">{{>partials/title}}</h1>
+
+{{#summary}}
 <div class="markdown level0 summary">{{{summary}}}</div>
+{{/summary}}
 
 {{#children}}
   {{#children}}
   <dl class="jumplist">
-    <dt class="summary-namespace-title"><xref uid="{{uid}}" altProperty="fullName" displayProperty="name"/></dt>
-    <dd class="summary-namespace">{{{summary}}}</dd>
+    {{#summary}}
+      <dt class="summary-namespace-title"><xref uid="{{uid}}" altProperty="fullName" displayProperty="name"/></dt>
+      <dd class="markdown summary">{{{summary}}}</dd>
+    {{/summary}}
   </dl>
   {{/children}}
 {{/children}}
