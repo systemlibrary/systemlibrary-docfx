@@ -2,18 +2,26 @@
 
 {{>partials/class.header}}
 
-{{#seealso.0}}
-<h2 id="seealso">{{__global.seealso}}</h2>
-<div class="seealso">
-{{/seealso.0}}
-{{#seealso}}
-  {{#isCref}}
-    <div>{{{type.specName.0.value}}}</div>
-  {{/isCref}}
-  {{^isCref}}
-    <div>{{{url}}}</div>
-  {{/isCref}}
-{{/seealso}}
-{{#seealso.0}}
-</div>
-{{/seealso.0}}
+{{#isEnum}}
+  <h3 style='color: rgb(207, 34, 46); font-size:18px;'><span style="font-size:14px;">enum</span> {{name.0.value}}</h3>
+  <span>{</span>
+  <div class="class-body">
+    {{#children}}
+    <dl class="parameters">
+    {{#children}}
+       {{#summary}}
+      <div class="class-enum-key-summary">
+        <dd>
+          {{{summary}}}
+          {{#remarks}}{{{remarks}}}{{/remarks}}
+        </dd>
+      </div>
+      {{/summary}}
+      <dt id="{{id}}">&nbsp;&nbsp;{{syntax.content.0.value}}</dt>
+    {{/children}}
+    </dl>
+    {{/children}}
+  </div>
+  <span>}</span>
+{{/isEnum}}
+

@@ -26,27 +26,3 @@
   {{/remarks}}
 </div>
 
-{{#isEnum}}
-<div class="class-enum">
-  <h3><span style='color: rgb(207, 34, 46);'>enum</span> {{name.0.value}}</h3>
-  {{syntax.content.0.value}}
-  <span>{</span>
-    {{#children}}
-    <dl class="parameters">
-    {{#children}}
-       {{#summary}}
-      <div class="class-enum-key-summary">
-        <dd>
-          {{{summary}}}
-          {{#remarks}}{{{remarks}}}{{/remarks}}
-        </dd>
-      </div>
-      {{/summary}}
-      <dt id="{{id}}">&nbsp;&nbsp;{{syntax.content.0.value}}</dt>
-    {{/children}}
-    </dl>
-    {{/children}}
-  <span>}</span>
-</div>
-{{/isEnum}}
-

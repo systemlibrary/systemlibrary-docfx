@@ -90,16 +90,4 @@ $htmlTocDocs = $htmlDocs | Where-Object { $_.HasToc }
 
 $htmlNamespaceDocs = $htmlDocs | Where-Object { $_.IsNamespace }
 
-# Out "-------ALL:-------"
-# Out $htmlFiles
-
-# Out "-------DOCS:-------"
-# Out $htmlDocs
-
-# Out "------TOC:--------"
-# Out $htmlTocDocs
-
-# Out "------NAMESPACE:--------"
-# Out $htmlNamespaceDocs
-
 Out "HTML docs are read and sorted"
