@@ -26,14 +26,6 @@
   {{/remarks}}
 </div>
 
-{{#isClass}}
-{{#syntax.content.0.value}}
-<div class="codewrapper">
-  <pre><code class="lang-csharp hljs">{{syntax.content.0.value}}</code></pre>
-</div>
-{{/syntax.content.0.value}}
-{{/isClass}}
-
 {{#isEnum}}
 <div class="class-enum">
   {{syntax.content.0.value}}
