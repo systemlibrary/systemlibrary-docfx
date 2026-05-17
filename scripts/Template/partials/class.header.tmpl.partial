@@ -26,16 +26,9 @@
   {{/remarks}}
 </div>
 
-{{#isClass}}
-{{#syntax.content.0.value}}
-<div class="codewrapper">
-  <pre><code class="lang-csharp hljs">{{syntax.content.0.value}}</code></pre>
-</div>
-{{/syntax.content.0.value}}
-{{/isClass}}
-
 {{#isEnum}}
 <div class="class-enum">
+  <h3><span style='color: rgb(207, 34, 46);'>enum</span> {{name.0.value}}</h3>
   {{syntax.content.0.value}}
   <span>{</span>
     {{#children}}

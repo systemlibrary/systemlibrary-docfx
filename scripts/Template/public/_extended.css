@@ -164,6 +164,20 @@ code.hljs {
     }
 }
 
+.class-enum-key-summary {
+    padding: 0.25em;
+    padding-bottom: 0;
+    margin: 0;
+    margin-left: 6px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.class-enum-key-summary+dt {
+    margin-top: 0 !important;
+}
+
+.class-enum-key-summary,
 .markdown.example-content,
 .markdown.remarks-content {
     background: rgb(246, 248, 246);
@@ -175,6 +189,9 @@ code.hljs {
     color: #4ec9b0;
 }
 
+.class-body {
+    margin-left: 1em;
+}
 
 [data-bs-theme=dark] {
     .class-enum {
@@ -184,7 +201,8 @@ code.hljs {
 
     .class-enum-key-summary {
         background: rgb(73, 77, 71);
-        border: solid rgb(123, 137, 141);
+        border: solid 1px rgb(123, 137, 141);
+        color: #9ec49f;
     }
 
     .example-content,

@@ -2,13 +2,31 @@
 
 {{>partials/class.header}}
 
+{{#isClass}}
+<div class="class-content">
+  <h3><span style='color: rgb(207, 34, 46);'>class</span> {{name.0.value}}</h3>
+  <span>{</span>
+  <div class="class-body">
+{{/isClass}}
+
+{{#isInterface}}
+<div class="class-content">
+  <h3><span style='color: rgb(207, 34, 46);'>interface</span> {{name.0.value}}</h3>
+  <span>{</span>
+  <div class="class-body">
+{{/isInterface}}
+
+{{#isStruct}}
+<div class="class-content">
+  <h3><span style='color: rgb(207, 34, 46);'>struct</span> {{name.0.value}}</h3>
+  <span>{</span>
+  <div class="class-body">
+{{/isStruct}}
+
+{{#children}}
 {{#children}}
 
-{{^_splitReference}}
-<h2 class="section" id="{{id}}">{{>partials/classSubtitle}}</h2>
-{{/_splitReference}}
-
-{{#children}}
+{{^inConstructor}}
 
 <h3 id="{{id}}" data-uid="{{uid}}">
   {{name.0.value}}
@@ -60,6 +78,19 @@
 <div class="markdown level1 remarks">{{{remarks}}}</div>
 {{/remarks}}
 
+{{/inConstructor}}
+
 {{/children}}
 {{/children}}
 
+{{#isInterface}}
+  </div>
+  <span>}</span>
+</div>
+{{/isInterface}}
+
+{{#isClass}}
+  </div>
+  <span>}</span>
+</div>
+{{/isClass}}
