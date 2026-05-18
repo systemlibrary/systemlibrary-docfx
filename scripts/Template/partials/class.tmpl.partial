@@ -29,11 +29,18 @@
 {{^inConstructor}}
 
 <h3 id="{{id}}" data-uid="{{uid}}">
-  {{name.0.value}}<br>
-  {{name.value}}<br>
-  <span>Hello</span>
+  @%@{{syntax.content.0.value}}@%@
+  @!@isStatic@!@
+  {{#syntax.return}}
+    {{syntax.return.type.name.0.value}}
+  {{/syntax.return}}
 
-  {{#sourceurl}}<a class="header-action link-secondary" title="View source" href="{{sourceurl}}"><i class="bi bi-code-slash"></i></a>{{/sourceurl}}
+  <span class="member-name">
+    {{name.0.value}}
+  </span>
+  @!@isGeneric@!@
+  @!@isMethod@!@
+  @!@isProperty@!@
 </h3>
 
 <div class="markdown level1 summary">{{{summary}}}</div>
