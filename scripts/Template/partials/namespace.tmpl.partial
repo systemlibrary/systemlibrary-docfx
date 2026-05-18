@@ -11,7 +11,7 @@
   <dl class="jumplist">
     {{#summary}}
       <dt class="summary-namespace-title"><xref uid="{{uid}}" altProperty="fullName" displayProperty="name"/></dt>
-      <dd class="markdown summary">{{{summary}}}</dd>
+      <dd class="markdown summary summary-namespace">{{{summary}}}</dd>
     {{/summary}}
   </dl>
   {{/children}}
