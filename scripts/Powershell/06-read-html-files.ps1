@@ -90,4 +90,6 @@ $htmlTocDocs = $htmlDocs | Where-Object { $_.HasToc }
 
 $htmlNamespaceDocs = $htmlDocs | Where-Object { $_.IsNamespace }
 
+$htmlApiDocs = $htmlFiles | Where-Object { -not $_.IsSkipped -and -not $_.HasToc -and -not $_.IsNamespace }
+
 Out "HTML docs are read and sorted"

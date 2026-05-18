@@ -1,11 +1,11 @@
 $keyValues = @(
-    @{ Key = 'isGeneric'; Value = "<>" }
-    @{ Key = 'isStatic'; Value = "static " }
-    @{ Key = 'isMethod'; Value = "()" }
-    @{ Key = 'isProperty'; Value = "{ get; set; }" }
+    @{ Var = 'isGeneric'; Keyword = '<'; Value = "<span class='method-generic'><></span>" }
+    @{ Var = 'isStatic'; Keyword = 'static '; Value = "<span class='member-static'>static </span>" }
+    @{ Var = 'isMethod'; Keyword = '('; Value = "<span class='member-method'>()</span>" }
+    @{ Var = 'isProperty'; Keyword = '{ '; Value = "<span class='member-property'>{ get; set; }</span>" }
 )
 
-foreach ($doc in $htmlFiles) {
+foreach ($doc in $htmlApiDocs) {
     if (-not $doc.Content) { 
         continue
     }
@@ -14,22 +14,22 @@ foreach ($doc in $htmlFiles) {
         continue
     }
 
-    $fullMemberName = ""
-    if ($doc.Content -match "@%@.*?@%@") {
+    while ($doc.Content -match "@%@(.*?)@%@") {
         $fullMemberName = $matches[0]
-    }
 
-    if($fullMemberName -NE $null -and $fullMemberName.Length -gt 0) {
-        foreach ($kv in $keyValues) {
-            if($fullMemberName.Contains($kv.Key)) {
-                $doc.Content = $doc.Content.Replace("@!@" + $kv.Key + "@!@", $kv.Value)
-            }else {
-                $doc.Content =  $doc.Content.Replace("@!@" + $kv.Key + "@!@", "")
+        if ($fullMemberName -NE $null -and $fullMemberName.Length -gt 0) {
+            foreach ($kv in $keyValues) {
+                if ($fullMemberName.Contains($kv.Keyword)) {
+                    $doc.Content = $doc.Content.Replace("@!@" + $kv.Var + "@!@", $kv.Value)
+                }
+                else {
+                    $doc.Content = $doc.Content.Replace("@!@" + $kv.Var + "@!@", "")
+                }
             }
+            $doc.Content = $doc.Content.Replace($fullMemberName, "")
         }
-
-        $doc.Content = $doc.Content.Replace($fullMemberName, "")
     }
+    
     $doc.Changed = $true
 }
 

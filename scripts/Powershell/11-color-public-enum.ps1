@@ -1,5 +1,5 @@
 # $colorPublicEnum = @(
-#     @{ Key = 'public enum '; Value = "<span class='class-enum-keyword-enum'>enum </span>" }
+#     @{ Key = 'public enum ' Value = "<span class='class-enum-keyword-enum'>enum </span>" }
 # )
 
 # foreach ($doc in $htmlFiles) {
