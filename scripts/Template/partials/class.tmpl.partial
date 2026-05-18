@@ -28,6 +28,7 @@
 
 {{^inConstructor}}
 
+<div class="class-member">
 <div class="markdown level1 summary">{{{summary}}}</div>
 <div class="markdown level1 conceptual">{{{conceptual}}}</div>
 
@@ -73,7 +74,6 @@
 {{/eventType}}
 {{/syntax}}
 
-
 <div class="doc-toggles">
   {{#example}}
     {{>partials/examples}}
@@ -82,6 +82,7 @@
   {{#remarks}}
     {{>partials/remarks}}
   {{/remarks}}
+</div>
 </div>
 
 {{/inConstructor}}

@@ -25,6 +25,14 @@ article h3 {
     font-size: 1.25rem;
 }
 
+article .class-member h3 {
+    margin: 0 !important;
+}
+
+article .class-member {
+    margin-bottom: 1em;
+}
+
 article h4 {
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
