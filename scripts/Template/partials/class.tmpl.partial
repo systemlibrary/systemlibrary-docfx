@@ -46,6 +46,21 @@
 </h3>
 {{#syntax}}
 
+
+<div class="doc-toggles">
+  {{#summary}} 
+    {{>partials/summary}}  
+  {{/summary}}
+  {{#example}}
+    {{>partials/examples}}
+  {{/example}}
+
+  {{#remarks}}
+    {{>partials/remarks}}
+  {{/remarks}}
+</div>
+</div>
+
 {{#fieldValue}}
 <h4 class="section">{{__global.fieldValue}}</h4>
 <dl class="parameters">
@@ -70,20 +85,6 @@
 </dl>
 {{/eventType}}
 {{/syntax}}
-
-<div class="doc-toggles">
-  {{#summary}} 
-    {{>partials/examples}}  
-  {{/summary}}
-  {{#example}}
-    {{>partials/examples}}
-  {{/example}}
-
-  {{#remarks}}
-    {{>partials/remarks}}
-  {{/remarks}}
-</div>
-</div>
 
 {{/inConstructor}}
 
