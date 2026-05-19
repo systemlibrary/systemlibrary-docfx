@@ -27,10 +27,41 @@ article h3 {
 
 article .class-member h3 {
     margin: 0 !important;
+    font-size: 16px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 102ch;
+}
+
+.member-static {
+    color: rgb(10, 88, 202);
+}
+
+.member-returntype {
+    color: rgb(10, 88, 202);
+}
+
+.member-name {
+    font-weight: 600;
 }
 
 article .class-member {
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
+
+    & .markdown.level1.summary {
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
+
+        & p {
+            margin: 0;
+        }
+
+    }
+
+    & .doc-toggles {
+        margin-top: 4px;
+    }
 }
 
 article h4 {
@@ -66,6 +97,7 @@ footer {
 }
 
 .doc-toggles .remarks-toggle,
+.doc-toggles .summary-toggle,
 .doc-toggles .example-toggle {
     color: #0f0f0f;
     margin-bottom: 0;
@@ -89,11 +121,13 @@ code.hljs {
 }
 
 .example-wrapper,
-.remarks-wrapper {
+.remarks-wrapper,
+.summary-wrapper {
     position: static;
 }
 
 .example-content,
+.summary-content,
 .remarks-content {
     display: none;
     position: absolute;
@@ -114,7 +148,8 @@ code.hljs {
 }
 
 .example-close,
-.remarks-close {
+.remarks-close,
+.summary-close {
     position: absolute;
     top: 0.12em;
     right: 0.33em;
@@ -124,6 +159,7 @@ code.hljs {
 }
 
 .example-close:hover,
+.summary-close:hover,
 .remarks-close:hover {
     opacity: 1;
 }
@@ -152,6 +188,7 @@ code.hljs {
 }
 
 .markdown.example-content,
+.markdown.summary-content,
 .markdown.remarks-content,
 .content>article .markdown.summary,
 .content>article>pre>code.hljs {
@@ -194,6 +231,7 @@ code.hljs {
 
 .class-enum-key-summary,
 .markdown.example-content,
+.markdown.summary-content,
 .markdown.remarks-content {
     background: rgb(246, 248, 246);
     border: solid 1px rgb(163, 193, 163);
@@ -241,6 +279,7 @@ code.hljs {
     }
 
     .example-content,
+    .summary-content,
     .remarks-content {
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
         background: rgb(73, 77, 71);
@@ -249,6 +288,7 @@ code.hljs {
     }
 
     .doc-toggles .remarks-toggle,
+    .doc-toggles .summary-toggle,
     .doc-toggles .example-toggle {
         color: white;
     }
