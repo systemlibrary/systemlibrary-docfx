@@ -1,19 +1,29 @@
-$removeNamespaceTags = @(
-    @{ Key = '<a class="xref" href="SystemLibrary.Common.html">Common</a>'; Value = "<span>Common</span>" },
-    @{ Key = '<a class="xref" href="SystemLibrary.html">SystemLibrary</a>'; Value = "<span>SystemLibrary</span>" }
-)
+if($UnlinkNamespaces -and $UnlinkNamespaces.Count -gt 0)
+{
+    $unlinkNamespaceKeyValue = @()
 
-foreach ($doc in $htmlFiles) {
-    if (-not $doc.Content) { 
-        continue
-    }
+    foreach ($link in $UnlinkNamespaces) {
 
-    foreach ($ns in $removeNamespaceTags) {
-        if ($doc.Content.Contains($ns.Key)) {
-            $doc.Content = $doc.Content.Replace($ns.Key, $ns.Value)
-            $doc.Changed = $true
+        $linkTitleParts = $link.Split('.')
+        $linkTitle = $linkTitleParts[-1]
+
+        $unlinkNamespaceKeyValue += @{
+            Key = '<a class="xref" href="' + $link + '.html">' + $linkTitle + '</a>';
+            Value = '<span>' + $linkTitle + '</span>'
         }
     }
-}
 
-Out "Cleaned namespace links"
+    foreach ($doc in $htmlFiles) {
+        if (-not $doc.Content) { 
+            continue
+        }
+
+        foreach ($ns in $unlinkNamespaceKeyValue) {
+            if ($doc.Content.Contains($ns.Key)) {
+                $doc.Content = $doc.Content.Replace($ns.Key, $ns.Value)
+                $doc.Changed = $true
+            }
+        }
+    }
+    Out "Cleaned namespace links"
+}

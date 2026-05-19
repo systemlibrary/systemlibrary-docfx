@@ -51,5 +51,11 @@ $SkipDocumentationFor = @(
 '*SystemLibrary.Common.Framework.Boostrap*'
 )
 
+# Namespaces are clickable by default in the 'api docs', but if a 'namespace' does not have classes in the output docs, change the link of that namespace part to just a <span>
+$UnlinkNamespaces = @(
+    'SystemLibrary.Common',
+    'SystemLibrary'
+)
+
 # EXECUTE
 . ($PSScriptRoot + "\scripts\Powershell\00-docfx.ps1")
