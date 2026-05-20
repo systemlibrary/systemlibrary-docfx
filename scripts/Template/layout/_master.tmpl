@@ -160,13 +160,13 @@
     </footer>
 
     <script type="text/javascript">
-    window.toggleSection = (btn) => {
-          const content = btn.nextElementSibling
-          if (content.style.display === 'none') {
-              content.style.display = 'block'
-          } else {
-              content.style.display = 'none'
-          }
+      window.toggleSection = (btn) => {
+        const content = btn.nextElementSibling
+
+        const open = content.style.display !== 'none'
+        content.style.display = open ? 'none' : 'block'
+
+        btn.textContent = (open ? '▼' : '▲') + btn.textContent.slice(1)
       }
     </script>
   </body>

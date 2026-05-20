@@ -1,7 +1,25 @@
 try {
+    # Clear previous build if existing
     if (Test-Path $templatePathDest) {
         Remove-Item $templatePathDest -Recurse -Force -ErrorAction SilentlyContinue
-    }        
+    }
+
+    if (Test-Path $docsApiPath) {
+        Remove-Item $docsApiPath -Recurse -Force -ErrorAction SilentlyContinue
+    }
+
+    if (Test-Path $logPath) {
+        Remove-Item $logPath -Recurse -Force -ErrorAction SilentlyContinue
+    }
+
+    if (Test-Path $SitePath) {
+        Remove-Item $SitePath -Recurse -Force -ErrorAction SilentlyContinue
+    }
+
+    if (Test-Path $docfxJsonDest) {
+        Remove-Item $docfxJsonDest -Recurse -Force -ErrorAction SilentlyContinue
+    }
+
     # Copy templated docfx config files
     Copy-Item -Path $docfxJson -Destination $docfxJsonDest -Force
     Copy-Item -Path $filterYml -Destination $filterYmlDest -Force

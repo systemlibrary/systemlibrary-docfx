@@ -41,14 +41,7 @@ $CleanUp = $true # Removes all files and folders used during build, set to false
 $SkipDocumentationFor = @(
 '*.Benchmark*',
 '*.Tests*',
-'*.ApiTests*',
-'DelegateJsonConverter',
-'CalleeCancelledRequestException',
-'ClientResponse',
-'ContentType',
-'DelegateJsonConverter',
-'OutputCachePolicy',
-'*SystemLibrary.Common.Framework.Boostrap*'
+'*.ApiTests*'
 )
 
 # Namespaces are clickable by default in the 'api docs', but if a 'namespace' does not have classes in the output docs, change the link of that namespace part to just a <span>

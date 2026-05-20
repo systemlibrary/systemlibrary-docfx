@@ -2,8 +2,6 @@ $configFullPath = $PSScriptRoot + "\..\Config\"
 
 $SourceRootFullPath = $SourceRootFullPath.Replace("\", "/")
 $DocumentationRelativePath = $DocumentationRelativePath.Replace("\", "/")
-$SitePath = Join-Path $SourceRootFullPath "__docfxsite"
-$logPath = Join-Path $SourceRootFullPath "__docfxsite.log"
 
 $rootPath = $SourceRootFullPath
 $docPath = $DocumentationRelativePath
@@ -13,6 +11,10 @@ $filterYml = Join-Path $configFullPath 'filter.yml'
 
 $docfxJsonDest = Join-Path $rootPath 'docfx.json'
 $filterYmlDest = Join-Path $rootPath 'docfxfilter.yml'
+
+$SitePath = Join-Path $rootPath "__docfxsite"
+$logPath = Join-Path $rootPath "__docfxsite.log"
+$docsApiPath = Join-Path $rootPath "docsapi"
 
 $templatePath = $PSScriptRoot + "\..\Template\"
 $templatePathDest = Join-Path $rootPath "docfxtemplate"

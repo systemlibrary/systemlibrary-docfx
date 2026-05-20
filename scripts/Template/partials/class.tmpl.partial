@@ -62,18 +62,18 @@
 </div>
 
 {{#fieldValue}}
-<h4 class="section">{{__global.fieldValue}}</h4>
+<h4 class="section">{{__global.fieldValue}} 123</h4>
 <dl class="parameters">
-  <dt>{{{type.specName.0.value}}}</dt>
-  <dd>{{{description}}}</dd>
+  <dt>{{{type.specName.0.value}}} 567</dt>
+  <dd>{{{description}}} 789</dd>
 </dl>
 {{/fieldValue}}
 
 {{#propertyValue}}
-<h4 class="section">{{__global.propertyValue}}</h4>
+<h4 class="section">{{__global.propertyValue}} aaa</h4>
 <dl class="parameters">
-  <dt>{{{type.specName.0.value}}}</dt>
-  <dd>{{{description}}}</dd>
+  <dt>{{{type.specName.0.value}}}bbb</dt>
+  <dd>{{{description}}}ccc</dd>
 </dl>
 {{/propertyValue}}
 

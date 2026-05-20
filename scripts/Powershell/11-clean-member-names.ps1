@@ -14,7 +14,7 @@ foreach ($doc in $htmlApiDocs) {
         continue
     }
 
-    while ($doc.Content -match "@%@(.*?)@%@") {
+    while ($doc.Content -match "(?s)@%@(.*?)@%@") {
         $fullMemberName = $matches[0]
 
         if ($fullMemberName -NE $null -and $fullMemberName.Length -gt 0) {
@@ -26,10 +26,16 @@ foreach ($doc in $htmlApiDocs) {
                     $doc.Content = $doc.Content.Replace("@!@" + $kv.Var + "@!@", "")
                 }
             }
+
             $doc.Content = $doc.Content.Replace($fullMemberName, "")
         }
     }
-    
+
+    if ($doc.Content.Contains("@%@")) {
+        Out (doc.Name + " still contains the template markers for member names. Regex did not caught it")
+        Write-Host $doc.Content
+    }
+
     $doc.Changed = $true
 }
 

@@ -44,11 +44,9 @@ if ($LASTEXITCODE -eq 1) {
 
 . ($PSScriptRoot + "\10-clean-namespace-links.ps1")
 
-. ($PSScriptRoot + "\11-color-public-enum.ps1")
+. ($PSScriptRoot + "\11-clean-member-names.ps1")
 
-. ($PSScriptRoot + "\12-clean-member-names.ps1")
-
-. ($PSScriptRoot + "\11-write-content.ps1")
+. ($PSScriptRoot + "\12-write-content.ps1")
 
 # . ($PSScriptRoot + "\Powershell\10-swap-variables-in-html.ps1")
 # . ($PSScriptRoot + "\Powershell\11-move-to-site-directory.ps1")

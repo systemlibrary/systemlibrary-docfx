@@ -1,5 +1,5 @@
 <div class="summary-wrapper">
-  <button class="btn btn-sm btn-outline-secondary summary-toggle" onclick="toggleSection(this)"> ▼ Summary</button>
+  <button class="btn btn-sm btn-outline-secondary summary-toggle" onclick="toggleSection(this)">▼ Summary</button>
   <div class="markdown level0 summary-content" style="display:none">
     <span class="summary-close" onclick="toggleSection(this.closest('.summary-wrapper').querySelector('.summary-toggle'))">✕</span>
     {{{summary}}}

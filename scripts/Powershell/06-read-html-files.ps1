@@ -38,7 +38,7 @@ $htmlFiles = Get-ChildItem $sitePath -Recurse -Filter *.html | ForEach-Object {
         $title = $matches[1]
     }
     else {
-        if ($content -match "<title>(.*?)</title>") {
+        if ($content -match "(?s)<title>(.*?)</title>") {
             $title = $matches[1]
         }
     }
@@ -62,6 +62,10 @@ $htmlFiles = Get-ChildItem $sitePath -Recurse -Filter *.html | ForEach-Object {
     $relativePath = ($fullName -split '__docfxsite/')[1]
 
     $relativePath = $relativePath.Replace($_.Name, "");
+
+    if ($_.BaseName.Contains("DelegateJsonConverter")) {
+        Out "YES FOUND WHEN CREATING HTMLFILES list!"
+    }
 
     [PSCustomObject]@{
         Name         = $_.BaseName
@@ -90,6 +94,23 @@ $htmlTocDocs = $htmlDocs | Where-Object { $_.HasToc }
 
 $htmlNamespaceDocs = $htmlDocs | Where-Object { $_.IsNamespace }
 
-$htmlApiDocs = $htmlFiles | Where-Object { -not $_.IsSkipped -and -not $_.HasToc -and -not $_.IsNamespace }
+$htmlApiDocs = $htmlFiles | Where-Object { -not $_.IsNamespace }
+
+function TraceDocName($name, $listName, $list) {
+    foreach ($doc in $list) {
+        if ($doc.Name.Contains($name)) {
+            Write-Host "$name found in $listName"
+        }
+    }
+}
+
+$traceDocName = "DelegateJsonConverter"
+
+TraceDocName $traceDocName "htmlFiles" $htmlFiles
+TraceDocName $traceDocName "htmlDocs" $htmlDocs
+TraceDocName $traceDocName "htmlDocsSorted" $htmlDocsSorted
+TraceDocName $traceDocName "htmlTocDocs" $htmlTocDocs
+TraceDocName $traceDocName "htmlNamespaceDocs" $htmlNamespaceDocs
+TraceDocName $traceDocName "htmlApiDocs" $htmlApiDocs
 
 Out "HTML docs are read and sorted"

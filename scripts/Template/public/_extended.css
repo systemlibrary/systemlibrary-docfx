@@ -31,7 +31,11 @@ article .class-member h3 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 102ch;
+    max-width: 110ch;
+
+    @media screen and (max-width: 768px) {
+        font-size: 16px !important;
+    }
 }
 
 .member-static {
@@ -105,6 +109,8 @@ footer {
     padding-right: 1em;
     padding-top: 4px;
     padding-bottom: 4px;
+    border-width: 0px;
+    border-bottom-width: 1px;
 }
 
 .doc-toggles {
@@ -188,7 +194,7 @@ code.hljs {
     padding: 0.33rem;
     border-right: solid rgb(222, 226, 230) 1px;
     max-width: 440px;
-    flex: 0.45;
+    flex: 0.45 !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -196,6 +202,7 @@ code.hljs {
         padding: 0;
         border: 0;
         max-width: unset;
+        flex: 0.37 !important;
     }
 }
 
@@ -269,6 +276,7 @@ code.hljs {
 
 .class-content-title {
     font-size: 22px;
+
     color: var(--bs-body-color);
 
     margin-bottom: 0;
@@ -276,6 +284,14 @@ code.hljs {
     & span {
         font-size: 18px;
         font-weight: 400;
+
+        @media screen and (max-width: 768px) {
+            font-size: 16px !important;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        font-size: 18px !important;
     }
 }
 
