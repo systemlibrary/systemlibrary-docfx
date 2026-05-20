@@ -1,0 +1,29 @@
+
+<h3 id="{{id}}" data-uid="{{uid}}">
+    @%@{{syntax.content.0.value}}@%@
+    @!@isStatic@!@
+    {{#syntax.return}}
+    <span class="member-returntype">
+    {{syntax.return.type.name.0.value}}
+    </span>
+    {{/syntax.return}}
+
+    <span class="member-name">
+    {{name.0.value}}
+    </span>
+    @!@isGeneric@!@
+    @!@isProperty@!@
+</h3>
+
+<div class="doc-toggles">
+    {{#summary}} 
+        {{>partials/summary}}  
+    {{/summary}}
+    {{#example}}
+        {{>partials/examples}}
+    {{/example}}
+
+    {{#remarks}}
+        {{>partials/remarks}}
+    {{/remarks}}
+</div>

@@ -28,7 +28,7 @@ $htmlFiles = Get-ChildItem $sitePath -Recurse -Filter *.html | ForEach-Object {
     }
 
     $content = ""
-    if (-not $isSkipped -and -not $isGeneric) {
+    if (-not $isSkipped) {
         $content = [System.IO.File]::ReadAllText($fullName, [System.Text.Encoding]::UTF8)
     }
 
@@ -104,7 +104,7 @@ function TraceDocName($name, $listName, $list) {
     }
 }
 
-$traceDocName = "DelegateJsonConverter"
+$traceDocName = "Config<"
 
 TraceDocName $traceDocName "htmlFiles" $htmlFiles
 TraceDocName $traceDocName "htmlDocs" $htmlDocs

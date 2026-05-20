@@ -26,85 +26,48 @@
 {{#children}}
 {{#children}}
 
-{{^inConstructor}}
+  {{^inConstructor}}
+    <div class="class-member">
+    
+     {{#syntax.fieldValue}}
+        {{>partials/member-variable}}
+      {{/syntax.fieldValue}}
 
-<div class="class-member">
-<h3 id="{{id}}" data-uid="{{uid}}">
-  @%@{{syntax.content.0.value}}@%@
-  @!@isStatic@!@
-  {{#syntax.return}}
-    <span class="member-returntype">
-    {{syntax.return.type.name.0.value}}
-    </span>
-  {{/syntax.return}}
+      {{#syntax.propertyValue}}
+        {{>partials/member-variable}}
+      {{/syntax.propertyValue}}
 
-  <span class="member-name">
-    {{name.0.value}}
-  </span>
-  @!@isGeneric@!@
-  @!@isProperty@!@
-</h3>
-{{#syntax}}
+      {{#syntax.eventType}}
+        {{>partials/member-variable}}
+      {{/syntax.eventType}}
 
+      {{^syntax.fieldValue}}
+      {{^syntax.propertyValue}}
+      {{^syntax.eventType}}
+        {{>partials/member-method}}
+      {{/syntax.eventType}}
+      {{/syntax.propertyValue}}
+      {{/syntax.fieldValue}}
 
-<div class="doc-toggles">
-  {{#summary}} 
-    {{>partials/summary}}  
-  {{/summary}}
-  {{#example}}
-    {{>partials/examples}}
-  {{/example}}
-
-  {{#remarks}}
-    {{>partials/remarks}}
-  {{/remarks}}
-</div>
-</div>
-
-{{#fieldValue}}
-<h4 class="section">{{__global.fieldValue}} 123</h4>
-<dl class="parameters">
-  <dt>{{{type.specName.0.value}}} 567</dt>
-  <dd>{{{description}}} 789</dd>
-</dl>
-{{/fieldValue}}
-
-{{#propertyValue}}
-<h4 class="section">{{__global.propertyValue}} aaa</h4>
-<dl class="parameters">
-  <dt>{{{type.specName.0.value}}}bbb</dt>
-  <dd>{{{description}}}ccc</dd>
-</dl>
-{{/propertyValue}}
-
-{{#eventType}}
-<h4 class="section">{{__global.eventType}}</h4>
-<dl class="parameters">
-  <dt>{{{type.specName.0.value}}}</dt>
-  <dd>{{{description}}}</dd>
-</dl>
-{{/eventType}}
-{{/syntax}}
-
-{{/inConstructor}}
-
+    </div>
+  {{/inConstructor}}
 {{/children}}
 {{/children}}
 
 {{#isStruct}}
-  </div>
+</div>
   <span>}</span>
 </div>
 {{/isStruct}}
 
 {{#isInterface}}
-  </div>
+</div>
   <span>}</span>
 </div>
 {{/isInterface}}
 
 {{#isClass}}
-  </div>
+</div>
   <span>}</span>
 </div>
 {{/isClass}}
