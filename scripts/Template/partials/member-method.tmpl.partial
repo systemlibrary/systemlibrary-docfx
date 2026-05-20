@@ -15,15 +15,3 @@
     @!@isProperty@!@
 </h3>
 
-<div class="doc-toggles">
-    {{#summary}} 
-        {{>partials/summary}}  
-    {{/summary}}
-    {{#example}}
-        {{>partials/examples}}
-    {{/example}}
-
-    {{#remarks}}
-        {{>partials/remarks}}
-    {{/remarks}}
-</div>

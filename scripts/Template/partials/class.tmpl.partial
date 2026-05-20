@@ -28,7 +28,7 @@
 
   {{^inConstructor}}
     <div class="class-member">
-    
+
      {{#syntax.fieldValue}}
         {{>partials/member-variable}}
       {{/syntax.fieldValue}}
@@ -48,6 +48,18 @@
       {{/syntax.eventType}}
       {{/syntax.propertyValue}}
       {{/syntax.fieldValue}}
+
+      <div class="doc-toggles">
+          {{#summary}} 
+              {{>partials/summary}}  
+          {{/summary}}
+          {{#example}}
+              {{>partials/examples}}
+          {{/example}}
+          {{#remarks}}
+              {{>partials/remarks}}
+          {{/remarks}}
+      </div>
 
     </div>
   {{/inConstructor}}

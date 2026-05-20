@@ -36,6 +36,11 @@ foreach ($doc in $htmlApiDocs) {
         Write-Host $doc.Content
     }
 
+      if ($doc.Content.Contains("@!@")) {
+        Out (doc.Name + " still contains placeholders for flags. Regex did not caught it")
+        Write-Host $doc.Content
+    }
+
     $doc.Changed = $true
 }
 

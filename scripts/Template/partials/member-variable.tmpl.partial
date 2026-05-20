@@ -1,37 +1,17 @@
 
 <span class="member-line">
-  @!@isStatic@!@
+    @!@isStatic@!@
 
-  <span class="member-returntype">
-    {{{type.specName.0.value}}}
+  <span class="member-type">
+    {{type.name.0.value}}
+    {{type.name}}
   </span>
 
-  <span class="member-variable">
+  <span class="member-name">
     {{name.0.value}}
   </span>
 
-  {{#propertyValue}}
-    <span class="member-property">{ get; set; }</span>
-  {{/propertyValue}}
+  {{#syntax.propertyValue}}
+    <span class="member-prop">{ get; set; }</span>
+  {{/syntax.propertyValue}}
 </span>
-
-{{#fieldValue}}
-<dl class="parameters">
-  <dt>{{{type.specName.0.value}}}</dt>
-  <dd>{{{description}}}</dd>
-</dl>
-{{/fieldValue}}
-
-{{#propertyValue}}
-<dl class="parameters">
-  <dt>{{{type.specName.0.value}}}</dt>
-  <dd>{{{description}}}</dd>
-</dl>
-{{/propertyValue}}
-
-{{#eventType}}
-<dl class="parameters">
-  <dt>{{{type.specName.0.value}}}</dt>
-  <dd>{{{description}}}</dd>
-</dl>
-{{/eventType}}
