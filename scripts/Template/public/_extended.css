@@ -153,6 +153,16 @@ code.hljs {
     }
 }
 
+.summary-show-inline {
+    display: block;
+    position: relative;
+    z-index: unset;
+    top: unset;
+    padding: 0.6em;
+    border: 0;
+    border-radius: 12px;
+}
+
 .example-close,
 .remarks-close,
 .summary-close {

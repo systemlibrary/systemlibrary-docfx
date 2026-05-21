@@ -81,7 +81,7 @@
       "_disableAffix": true,
       "_disableToc": false,
       "hideInheritedMembers": true,
-      "__summaryAsToggle": "@SummaryAsToggle",
+      "__summaryAsToggle": @SummaryAsToggle,
       "pdf": false
     },
     "disableGitFeatures": @DisableGitFeatures

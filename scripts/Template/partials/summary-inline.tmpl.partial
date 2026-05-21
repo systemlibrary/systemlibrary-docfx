@@ -1,6 +1,6 @@
 {{^__summaryAsToggle}}
 <div class="summary-wrapper">
-  <div class="markdown level0 summary-content">
+  <div class="markdown level0 summary-content summary-show-inline">
     {{{summary}}}
   </div>
 </div>
