@@ -158,11 +158,11 @@ code.hljs {
     position: relative;
     z-index: unset;
     top: unset;
-    padding: 0.6em;
-    border: 0;
-    border-radius: 12px;
-    background: rgb(220, 232, 220);
-    font-size: 14px;
+    padding: 0.6em !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    background: rgb(220, 232, 220) !important;
+    font-size: 14px !important;
 }
 
 .example-close,
