@@ -30,6 +30,9 @@
     <div class="class-member">
 
      {{#syntax.fieldValue}}
+        {{#summary}} 
+            {{>partials/summary-inline}}  
+        {{/summary}}
         {{>partials/member-variable}}
         <div class="doc-toggles">
           {{#summary}} 
@@ -45,6 +48,9 @@
       {{/syntax.fieldValue}}
 
       {{#syntax.propertyValue}}
+        {{#summary}} 
+            {{>partials/summary-inline}}  
+        {{/summary}}
         {{>partials/member-variable}}
         <div class="doc-toggles">
           {{#summary}} 
@@ -60,6 +66,9 @@
       {{/syntax.propertyValue}}
 
       {{#syntax.eventType}}
+        {{#summary}} 
+            {{>partials/summary-inline}}  
+        {{/summary}}
         {{>partials/member-variable}}
         <div class="doc-toggles">
           {{#summary}} 
@@ -86,6 +95,10 @@
       {{^syntax.fieldValue}}
       {{^syntax.propertyValue}}
       {{^syntax.eventType}}
+        {{#summary}} 
+            {{>partials/summary-inline}}  
+        {{/summary}}
+        
         {{>partials/member-method}}
 
         <div class="doc-toggles">

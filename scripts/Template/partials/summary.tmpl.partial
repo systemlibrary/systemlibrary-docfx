@@ -1,3 +1,4 @@
+{{#__summaryAsToggle}}
 <div class="summary-wrapper">
   <button class="btn btn-sm btn-outline-secondary summary-toggle" onclick="toggleSection(this)">▼ Summary</button>
   <div class="markdown level0 summary-content" style="display:none">
@@ -5,4 +6,4 @@
     {{{summary}}}
   </div>
 </div>
-
+{{/__summaryAsToggle}}

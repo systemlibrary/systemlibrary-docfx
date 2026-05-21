@@ -1,0 +1,7 @@
+{{^__summaryAsToggle}}
+<div class="summary-wrapper">
+  <div class="markdown level0 summary-content">
+    {{summary}}
+  </div>
+</div>
+{{/__summaryAsToggle}}

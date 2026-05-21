@@ -25,6 +25,7 @@ $RelativeHostingPath = "" # if local IIS or similar it is $null or "" or "/", if
 $LogoExtension = "png"
 $EnableSearch = $true
 $DisableGitFeatures = $false
+$SummaryAsToggle = $false
 
 $FooterGithubUrl = "https://github.com/systemlibrary/systemlibrary-common-framework/" # leave blank to opt out
 $FooterNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Framework/"    # leave blank to opt out

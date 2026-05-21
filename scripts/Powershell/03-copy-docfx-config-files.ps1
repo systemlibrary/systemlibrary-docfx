@@ -29,6 +29,13 @@ try {
     ReplaceTextInFile $docfxJsonDest "@DocumentationRelativePath" $DocumentationRelativePath
     ReplaceTextInFile $docfxJsonDest "@SiteTitle" $SiteTitle
 
+    if ($SummaryAsToggle -eq $true) {
+        ReplaceTextInFile $docfxJsonDest "@SummaryAsToggle" $SummaryAsToggle.ToString().ToLower()
+    }
+    else {
+        ReplaceTextInFile $docfxJsonDest "@SummaryAsToggle" ""
+    }
+
     ReplaceTextInFile $docfxJsonDest "@LogoExtension" $LogoExtension.ToString().ToLower()
     ReplaceTextInFile $docfxJsonDest "@EnableSearch" $EnableSearch.ToString().ToLower()
     ReplaceTextInFile $docfxJsonDest "@DisableGitFeatures" $DisableGitFeatures.ToString().ToLower()
