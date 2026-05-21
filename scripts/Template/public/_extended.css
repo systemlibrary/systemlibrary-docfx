@@ -27,23 +27,19 @@ article h3 {
 
 article .class-member h3 {
     margin: 0 !important;
-    font-size: 20px !important;
+    font-size: 16px !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 110ch;
 
-    @media screen and (max-width: 768px) {
-        font-size: 16px !important;
-    }
 }
 
-.member-static {
-    color: rgb(10, 88, 202);
-}
-
+.member-type,
+.member-static,
 .member-returntype {
-    color: rgb(10, 88, 202);
+    /* color: rgb(10, 88, 202); */
+    color: var(--bs-link-color);
 }
 
 .member-name {
@@ -320,14 +316,6 @@ code.hljs {
     .doc-toggles .summary-toggle,
     .doc-toggles .example-toggle {
         color: var(--bs-body-color);
-    }
-
-    .member-static {
-        color: var(--bs-link-color);
-    }
-
-    .member-returntype {
-        color: var(--bs-link-color);
     }
 
     .markdown.example-content,

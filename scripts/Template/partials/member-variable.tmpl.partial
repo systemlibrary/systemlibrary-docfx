@@ -1,10 +1,11 @@
 
 <span class="member-line">
+???
+    @%@{{syntax.content.0.value}}@%@
     @!@isStatic@!@
 
   <span class="member-type">
     {{type.name.0.value}}
-    {{type.name}}
   </span>
 
   <span class="member-name">
@@ -14,4 +15,5 @@
   {{#syntax.propertyValue}}
     <span class="member-prop">{ get; set; }</span>
   {{/syntax.propertyValue}}
+  ???
 </span>

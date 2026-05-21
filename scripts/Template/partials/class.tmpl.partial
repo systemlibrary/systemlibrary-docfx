@@ -31,25 +31,7 @@
 
      {{#syntax.fieldValue}}
         {{>partials/member-variable}}
-      {{/syntax.fieldValue}}
-
-      {{#syntax.propertyValue}}
-        {{>partials/member-variable}}
-      {{/syntax.propertyValue}}
-
-      {{#syntax.eventType}}
-        {{>partials/member-variable}}
-      {{/syntax.eventType}}
-
-      {{^syntax.fieldValue}}
-      {{^syntax.propertyValue}}
-      {{^syntax.eventType}}
-        {{>partials/member-method}}
-      {{/syntax.eventType}}
-      {{/syntax.propertyValue}}
-      {{/syntax.fieldValue}}
-
-      <div class="doc-toggles">
+        <div class="doc-toggles">
           {{#summary}} 
               {{>partials/summary}}  
           {{/summary}}
@@ -60,7 +42,66 @@
               {{>partials/remarks}}
           {{/remarks}}
       </div>
+      {{/syntax.fieldValue}}
 
+      {{#syntax.propertyValue}}
+        {{>partials/member-variable}}
+        <div class="doc-toggles">
+          {{#summary}} 
+              {{>partials/summary}}  
+          {{/summary}}
+          {{#example}}
+              {{>partials/examples}}
+          {{/example}}
+          {{#remarks}}
+              {{>partials/remarks}}
+          {{/remarks}}
+      </div>
+      {{/syntax.propertyValue}}
+
+      {{#syntax.eventType}}
+        {{>partials/member-variable}}
+        <div class="doc-toggles">
+          {{#summary}} 
+              {{>partials/summary}}  
+          {{/summary}}
+          {{#example}}
+              {{>partials/examples}}
+          {{/example}}
+          {{#remarks}}
+              {{>partials/remarks}}
+          {{/remarks}}
+      </div>
+      {{/syntax.eventType}}
+    </div>
+  {{/inConstructor}}
+{{/children}}
+{{/children}}
+
+
+{{#children}}
+{{#children}}
+  {{^inConstructor}}
+    <div class="class-member">
+      {{^syntax.fieldValue}}
+      {{^syntax.propertyValue}}
+      {{^syntax.eventType}}
+        {{>partials/member-method}}
+
+        <div class="doc-toggles">
+          {{#summary}} 
+              {{>partials/summary}}  
+          {{/summary}}
+          {{#example}}
+              {{>partials/examples}}
+          {{/example}}
+          {{#remarks}}
+              {{>partials/remarks}}
+          {{/remarks}}
+        </div>
+      {{/syntax.eventType}}
+      {{/syntax.propertyValue}}
+      {{/syntax.fieldValue}}
     </div>
   {{/inConstructor}}
 {{/children}}

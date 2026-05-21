@@ -10,35 +10,67 @@ foreach ($doc in $htmlApiDocs) {
         continue
     }
 
-    if (-not $doc.Content.Contains("@%@")) {
+    if (-not $doc.Content.Contains("???")) {
         continue
     }
 
-    while ($doc.Content -match "(?s)@%@(.*?)@%@") {
-        $fullMemberName = $matches[0]
+    $maxFlagBlockCounter = 0
+    
+    while ($doc.Content.Contains("???")) {
+        $maxFlagBlockCounter = $maxFlagBlockCounter + 1
 
-        if ($fullMemberName -NE $null -and $fullMemberName.Length -gt 0) {
+        if ($maxFlagBlockCounter -gt 10) {
+            break
+        }
+
+        $start = $doc.Content.IndexOf("???")
+
+        $end = $doc.Content.IndexOf("???", $start + 3)
+        
+        if ($end -lt 3) { 
+            break 
+        }
+
+        $end += 3  # include last ???
+
+        # Extract a block of text with ??? and next ???, which is eligible for all Vars in 'keyValues' list
+        $length = $end - $start
+
+        $block = $doc.Content.Substring($start, $length)
+    
+        if ($block -match "(?s)@%@(.*?)@%@") {
+            $fullMemberName = $matches[0]
+
             foreach ($kv in $keyValues) {
                 if ($fullMemberName.Contains($kv.Keyword)) {
-                    $doc.Content = $doc.Content.Replace("@!@" + $kv.Var + "@!@", $kv.Value)
+                    $block = $block.Replace(("@!@" + $kv.Var + "@!@"), $kv.Value)
                 }
                 else {
-                    $doc.Content = $doc.Content.Replace("@!@" + $kv.Var + "@!@", "")
+                    $block = $block.Replace(("@!@" + $kv.Var + "@!@"), "")
                 }
             }
-
-            $doc.Content = $doc.Content.Replace($fullMemberName, "")
+        
+            $block = $block.Replace($fullMemberName, "")
         }
+        else {
+            Out ("Could not find @%@ within the a block of ???, in document: " + $doc.Name + ", block: " + $block)
+        }
+
+        $block = $block.Substring(3, $block.Length - 6).Trim()
+
+        $doc.Content = $doc.Content.Remove($start, $length).Insert($start, $block)
     }
 
-    if ($doc.Content.Contains("@%@")) {
-        Out (doc.Name + " still contains the template markers for member names. Regex did not caught it")
-        Write-Host $doc.Content
+    if ($doc.Content.Contains("???")) {
+        Out ($doc.Name + " still contains the template markers for member names. Regex did not caught it")
     }
 
-      if ($doc.Content.Contains("@!@")) {
-        Out (doc.Name + " still contains placeholders for flags. Regex did not caught it")
-        Write-Host $doc.Content
+    if ($doc.Content.Contains("@!@")) {
+        Out ($doc.Name + " still contains placeholders for flags, string replace did not replace some variables. Are you using old obsoleted variable flags?")
+        Out ("Supported variable flags within @!@ are:")
+        foreach ($kv in $keyValues) {
+            Out ($kv.Var)
+        }
     }
 
     $doc.Changed = $true
