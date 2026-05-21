@@ -19,7 +19,8 @@ foreach ($doc in $htmlApiDocs) {
     while ($doc.Content.Contains("???")) {
         $maxFlagBlockCounter = $maxFlagBlockCounter + 1
 
-        if ($maxFlagBlockCounter -gt 10) {
+        if ($maxFlagBlockCounter -gt 750) {
+            Out ("Maximum blocks of ??? has been reached which is 750 members. Doc exceeded that: " + $doc.Name)
             break
         }
 
