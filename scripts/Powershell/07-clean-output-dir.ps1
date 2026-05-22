@@ -26,7 +26,11 @@ try {
     }
 
     if (Test-Path $resolved) {
-        Remove-Item -Recurse -Force $resolved -ErrorAction Stop
+
+        Get-ChildItem -Path $resolved -Force -ErrorAction SilentlyContinue |
+        Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+    
+        # Remove-Item -Recurse -Force $resolved -ErrorAction Stop
         Out "Cleaned $resolved"
     }
     else {
@@ -36,5 +40,5 @@ try {
 }
 catch {
     Err "Error cleaning output folder: $($_.Exception.Message)"
-    Out "Skipping cleanup, continuing build..."
+    Warn ("Continuing without cleaning up " + $Output)
 }

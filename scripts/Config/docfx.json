@@ -49,6 +49,8 @@
       {
         "src": "@DocumentationRelativePath",
         "files": [
+          "**/*.zip",
+          "**/*.7z",
           "**/*.html",
           "**/*.png",
           "**/*.svg",
