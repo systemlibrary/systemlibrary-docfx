@@ -60,4 +60,6 @@ if ($LASTEXITCODE -eq 1) {
 
 . ($PSScriptRoot + "\14-clean-temp-files.ps1")
 
-Write-Host ("Success - doc site is ready at:" + $Output) -ForegroundColor DarkGreen
+Write-Host "Success" -ForegroundColor Green
+Write-Host "`tWebsite at: $Output" -ForegroundColor DarkGreen
+Write-Host "`tRun with 'docfx serve'" -ForegroundColor DarkGreen
