@@ -1,4 +1,38 @@
 $skipRules = @()
+function ReplaceNewlinesInContentPart {
+    param(
+        [string]$content,
+        [string]$pattern
+    )
+
+    if (-not [regex]::IsMatch($content, $pattern)) {
+        return $content
+    }
+
+    $replacer = {
+        param($match)
+
+        $outer = $match.Groups[1].Value
+
+        # Find the one <p> tag in the part and replace new lines with br if not already formatted by br or ul/ol by the Consumer
+        $newOuter = [regex]::Replace($outer, '(?s)<p>(.*?)</p>', {
+                param($pMatch)
+
+                $pInner = $pMatch.Groups[1].Value
+
+                if ($pInner -match '<br') { return $pMatch.Value }
+                if ($pInner -match '<ul|<ol') { return $pMatch.Value }
+
+                $pReplaced = $pInner -replace "`r`n", '<br/>' -replace "`n", '<br/>'
+
+                return $pMatch.Value.Replace($pInner, $pReplaced)
+            })
+
+        return $match.Value.Replace($outer, $newOuter)
+    }
+
+    return [regex]::Replace($content, $pattern, $replacer)
+}
 
 if ($SkipDocumentationFor -and $SkipDocumentationFor.Count -gt 0) {
     foreach ($s in $SkipDocumentationFor) {
@@ -30,6 +64,15 @@ $htmlFiles = Get-ChildItem $sitePath -Recurse -Filter *.html | ForEach-Object {
     $content = ""
     if (-not $isSkipped) {
         $content = [System.IO.File]::ReadAllText($fullName, [System.Text.Encoding]::UTF8)
+
+        $summaryPattern = '(?s)<div[^>]*markdown summary[^>]*>(.*?)\r?\n?</div>'
+        $summaryMemberPattern = '(?s)<div[^>]*summary-content[^>]*>(.*?)\r?\n?</div>'
+        
+        $remarksPattern = '(?s)<div[^>]*remarks-content[^>]*>(.*?)\r?\n?</div>'
+
+        $content = ReplaceNewlinesInContentPart $content $summaryPattern
+        $content = ReplaceNewlinesInContentPart $content $remarksPattern
+        $content = ReplaceNewlinesInContentPart $content $summaryMemberPattern
     }
 
     $title = $_.BaseName
