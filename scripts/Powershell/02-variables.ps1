@@ -12,17 +12,6 @@ if (![System.IO.Path]::IsPathRooted($Output)) {
     throw "Output must be an absolute path: $Output"
 }
 
-if (!$IsWindows -and
-    ![System.IO.Path]::IsPathRooted($DocumentationRelativePath) -and
-    !$DocumentationRelativePath.StartsWith('./')) {
-
-    throw "DocumentationRelativePath must be an absolute path or start with './' on Linux: $DocumentationRelativePath"
-}
-
-if ($IsWindows -and $DocumentationRelativePath.StartsWith('./')) {
-    throw "DocumentationRelativePath must not start with './' on Windows: $DocumentationRelativePath"
-}
-
 $rootPath = $SourceRootFullPath
 
 $docfxJson = Join-Path $configFullPath 'docfx.json'

@@ -7,7 +7,7 @@ param(
     # Relative path (from $SourceRootFullPath) to the documentation source folder.
     # Contains Markdown (.md) files and any documentation structure (TOC, assets, etc.).
     # If docs are located directly in the root, set to "" (empty string).
-    [string]$DocumentationRelativePath = "systemlibrary.common.framework/docs",
+    [string]$DocumentationRelativePath = "systemlibrary.common.framework/Docs",
 
     # Final output folder where the generated static website will be copied, deployable to GitHub Pages, IIS wwwroot, etc.
     [string]$Output = "C:/Temp/Docs",
