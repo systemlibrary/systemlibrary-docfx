@@ -13,7 +13,6 @@ if (![System.IO.Path]::IsPathRooted($Output)) {
 $DocumentationRelativePath = $DocumentationRelativePath.Replace("\", "/")
 
 $rootPath = $SourceRootFullPath
-$docPath = $DocumentationRelativePath
 
 $docfxJson = Join-Path $configFullPath 'docfx.json'
 $filterYml = Join-Path $configFullPath 'filter.yml'
@@ -29,6 +28,8 @@ $templatePath = $PSScriptRoot + "/../Template/"
 $templatePathDest = Join-Path $rootPath "docfxtemplate"
 
 if ($Debug -eq $true) {
+    Write-Host ("SourceRootFullPath " + $SourceRootFullPath) -ForegroundColor Gray
     Write-Host ("DocFxJson " + $docfxJson) -ForegroundColor Gray
     Write-Host ("DocFxJsonDestination " + $docfxJsonDest) -ForegroundColor Gray
+    Write-Host ("Output " + $Output) -ForegroundColor Gray
 }
