@@ -5,12 +5,14 @@ Start-Sleep -Milliseconds 500
 
 # docsapi files are generated and linked by docfx toc file, cannot be touched
 $skipDocsApiFiles = Join-Path $Output "docsapi"
+$skipDocsApiFiles2 = Join-Path $Output "DocsApi"
 
 
 # RENAME FILES AND FOLDERS INSIDE OUTPUT TO "<name>.LOWERCASE"
 Get-ChildItem -Path $Output -Recurse |
     Where-Object {
-        $_.FullName -notlike "$skipDocsApiFiles/*"
+        $_.FullName -notlike "$skipDocsApiFiles/*" -and 
+        $_.FullName -notlike "$skipDocsApiFiles2/*"
     } |
     Sort-Object FullName -Descending |
     ForEach-Object {
