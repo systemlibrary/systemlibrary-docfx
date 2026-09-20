@@ -1,6 +1,15 @@
 $configFullPath = $PSScriptRoot + "/../Config/"
 
 $SourceRootFullPath = $SourceRootFullPath.Replace("\", "/")
+
+if (![System.IO.Path]::IsPathRooted($SourceRootFullPath)) {
+    throw "SourceRootFullPath must be an absolute path: $SourceRootFullPath"
+}
+
+if (![System.IO.Path]::IsPathRooted($Output)) {
+    throw "Output must be an absolute path: $Output"
+}
+
 $DocumentationRelativePath = $DocumentationRelativePath.Replace("\", "/")
 
 $rootPath = $SourceRootFullPath
