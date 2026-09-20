@@ -2,14 +2,14 @@ Remove-Item $docfxJsonDest -Force -ErrorAction Continue
 
 Remove-Item $filterYmlDest -Force -ErrorAction Continue
 
-Remove-Item -Recurse -Force $docsApiPath -ErrorAction Continue
+Remove-Item -Recurse -Force $docsApiPath -ErrorAction SilentlyContinue
 
-Remove-Item -Recurse -Force $templatePathDest -ErrorAction Continue
+Remove-Item -Recurse -Force $templatePathDest -ErrorAction SilentlyContinue
 
-Remove-Item -Recurse -Force $SitePath -ErrorAction Continue
+Remove-Item -Recurse -Force $SitePath -ErrorAction SilentlyContinue
 
 if ($Debug -eq $false) {
-    Remove-Item $logPath -Force
+    Remove-Item $logPath -Force -ErrorAction SilentlyContinue
 }
 
 Start-Sleep -Milliseconds 50

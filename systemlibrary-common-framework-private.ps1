@@ -10,10 +10,11 @@ param(
     [string]$DocumentationRelativePath = "systemlibrary.common.framework\docs",
 
     # Final output folder where the generated static website will be copied, deployable to GitHub Pages, IIS wwwroot, etc.
-    [string]$Output = "C:\Temp\Docs\"
+    [string]$Output = "C:\Temp\Docs"
 )
 
 Write-Host "`tCreating documentation for $SourceRootFullPath" -ForegroundColor Cyan
+Write-Host "`tRelative path: $DocumentationRelativePath" -ForegroundColor Cyan
 Write-Host "`tOutput to $Output" -ForegroundColor Cyan
 
 Set-Location $PSScriptRoot
