@@ -1,18 +1,22 @@
+param(
+    # REQUIRED OPTIONS
+    # Root folder of the repository/solution.
+    # Base directory where DocFX scans for .csproj files and where docfx.json is executed from.
+    [string]$SourceRootFullPath = "C:\syslib\systemlibrary-common-framework-private\source",
+
+    # Relative path (from $SourceRootFullPath) to the documentation source folder.
+    # Contains Markdown (.md) files and any documentation structure (TOC, assets, etc.).
+    # If docs are located directly in the root, set to "" (empty string).
+    [string]$DocumentationRelativePath = "systemlibrary.common.framework\docs",
+
+    # Final output folder where the generated static website will be copied, deployable to GitHub Pages, IIS wwwroot, etc.
+    [string]$Output = "C:\Temp\Docs\"
+)
+
+Write-Host "`tCreating documentation for $SourceRootFullPath" -ForegroundColor Cyan
+Write-Host "`tOutput to $Output" -ForegroundColor Cyan
+
 Set-Location $PSScriptRoot
-
-# REQUIRED OPTIONS
-
-# Root folder of the repository/solution.
-# Base directory where DocFX scans for .csproj files and where docfx.json is executed from.
-$SourceRootFullPath = "C:\syslib\systemlibrary-common-framework-private\source"
-
-# Relative path (from $SourceRootFullPath) to the documentation source folder.
-# Contains Markdown (.md) files and any documentation structure (TOC, assets, etc.).
-# If docs are located directly in the root, set to "" (empty string).
-$DocumentationRelativePath = "SystemLibrary.Common.Framework\Docs"
-
-# Final output folder where the generated static website will be copied, deployable to GitHub Pages, IIS wwwroot, etc.
-$Output = "C:\Temp\Docs\"
 
 # Display name of the documentation site shown in UI header and in Footer.
 $SiteTitle = "System Library Common Framework"
