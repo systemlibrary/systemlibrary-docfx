@@ -10,7 +10,7 @@ $skipDocsApiFiles = Join-Path $Output "docsapi"
 # RENAME FILES AND FOLDERS INSIDE OUTPUT TO "<name>.LOWERCASE"
 Get-ChildItem -Path $Output -Recurse |
     Where-Object {
-        $_.FullName -notlike "$skipDocsApiFiles\*"
+        $_.FullName -notlike "$skipDocsApiFiles/*"
     } |
     Sort-Object FullName -Descending |
     ForEach-Object {
@@ -28,7 +28,7 @@ Start-Sleep -Milliseconds 500
 # LOWER CASE PATH, PRESERVE $OUTPUT, AND REMOVE SUFFIX ".lowercase"
 Get-ChildItem -Path $Output -Recurse |
     Where-Object {
-        $_.FullName -notlike "$skipDocsApiFiles\*"
+        $_.FullName -notlike "$skipDocsApiFiles/*"
     } |
     Sort-Object FullName -Descending |
     ForEach-Object {
