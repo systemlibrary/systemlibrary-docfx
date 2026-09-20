@@ -38,5 +38,12 @@ try {
 }
 catch {
     Err ("Copy-docfx-config-files errored: typo in SourceRootFullPath or DocumentationRelativePath? " + $_)
+
+    try {
+        Copy-Item -Path $docfxJson -Destination $docfxJsonDest -Force
+    }
+    catch {
+        Err ("Copying " + $docfxJson + " to destination: " + $docfxJsonDest + " failed: " + $_)
+    }
     EXIT 1
 }

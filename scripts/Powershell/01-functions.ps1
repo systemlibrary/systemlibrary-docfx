@@ -302,7 +302,7 @@ function ConvertMdToHtml([string] $markdownFile, [string] $relativeFullFileName)
     $mdContent = $mdContent.Replace("""", "!????!");
     $mdContent = $mdContent.Replace("'", "!@@@@!");
 
-    $scriptsDir = $PSScriptRoot + "\..\..\scripts\";
+    $scriptsDir = $PSScriptRoot + "/../../scripts/";
 
     $tocHtmlContent = ""
 

@@ -1,4 +1,4 @@
-$configFullPath = $PSScriptRoot + "\..\Config\"
+$configFullPath = $PSScriptRoot + "/../Config/"
 
 $SourceRootFullPath = $SourceRootFullPath.Replace("\", "/")
 $DocumentationRelativePath = $DocumentationRelativePath.Replace("\", "/")
@@ -16,6 +16,10 @@ $SitePath = Join-Path $rootPath "__docfxsite"
 $logPath = Join-Path $rootPath "__docfxsite.log"
 $docsApiPath = Join-Path $rootPath "docsapi"
 
-$templatePath = $PSScriptRoot + "\..\Template\"
+$templatePath = $PSScriptRoot + "/../Template/"
 $templatePathDest = Join-Path $rootPath "docfxtemplate"
 
+if ($Debug -eq $true) {
+    Write-Host ("DocFxJson " + $docfxJson) -ForegroundColor Gray
+    Write-Host ("DocFxJsonDestination " + $docfxJsonDest) -ForegroundColor Gray
+}

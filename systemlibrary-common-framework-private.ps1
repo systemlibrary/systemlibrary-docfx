@@ -10,7 +10,10 @@ param(
     [string]$DocumentationRelativePath = "systemlibrary.common.framework\docs",
 
     # Final output folder where the generated static website will be copied, deployable to GitHub Pages, IIS wwwroot, etc.
-    [string]$Output = "C:\Temp\Docs"
+    [string]$Output = "C:\Temp\Docs",
+
+    # Prints additional information during build
+    [boolean]$Debug = $false
 )
 
 Write-Host "`tCreating documentation for $SourceRootFullPath" -ForegroundColor Cyan
@@ -39,7 +42,6 @@ $FooterNugetUrl = "https://www.nuget.org/packages/SystemLibrary.Common.Framework
 $FooterWebsiteUrl = "https://www.systemlibrary.com/" # leave blank to opt out
 $FooterSiteTitle = "" # leave blank to opt out
 
-$Debug = $false # Prints additional information during build
 $CleanUp = $true # Removes all files and folders used during build, set to false to debug
 
 # Skip api documentation for classes/namespaces, an array of strings:
