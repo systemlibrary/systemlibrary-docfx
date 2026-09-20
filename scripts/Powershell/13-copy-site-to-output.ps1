@@ -27,9 +27,6 @@ Start-Sleep -Milliseconds 500
 
 # LOWER CASE PATH, PRESERVE $OUTPUT, AND REMOVE SUFFIX ".lowercase"
 Get-ChildItem -Path $Output -Recurse |
-    Where-Object {
-        $_.FullName -notlike "$skipDocsApiFiles/*"
-    } |
     Sort-Object FullName -Descending |
     ForEach-Object {
         if ($_.Name.EndsWith(".lowercase", [System.StringComparison]::Ordinal)) {
