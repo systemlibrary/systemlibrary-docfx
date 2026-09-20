@@ -14,7 +14,7 @@ if ($LASTEXITCODE -eq 1) {
     if ($Debug -eq $false) {
         . ($PSScriptRoot + "\14-clean-temp-files.ps1")
     }
-    EXIT
+    EXIT 1
 }
 
 . ($PSScriptRoot + "\04-validate-settings.ps1")
@@ -23,7 +23,7 @@ if ($LASTEXITCODE -eq 1) {
     if ($Debug -eq $false) {
         . ($PSScriptRoot + "\14-clean-temp-files.ps1")
     }
-    EXIT
+    EXIT 1
 }
 
 . ($PSScriptRoot + "\05-build.ps1")
@@ -32,7 +32,7 @@ if ($LASTEXITCODE -eq 1) {
     if ($Debug -eq $false) {
         . ($PSScriptRoot + "\14-clean-temp-files.ps1")
     }
-    EXIT
+    EXIT 1
 }
 
 . ($PSScriptRoot + "\06-read-html-files.ps1")
@@ -43,7 +43,7 @@ if ($LASTEXITCODE -eq 1) {
     if ($Debug -eq $false) {
         . ($PSScriptRoot + "\14-clean-temp-files.ps1")
     }
-    EXIT
+    EXIT 1
 }
 
 . ($PSScriptRoot + "\08-populate-toc.ps1")
