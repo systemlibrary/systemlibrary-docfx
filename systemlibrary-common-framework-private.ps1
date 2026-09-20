@@ -19,6 +19,8 @@ Write-Host "`tOutput to $Output" -ForegroundColor Cyan
 
 Set-Location $PSScriptRoot
 
+Write-Host "`Set Location $PSScriptRoot" -ForegroundColor Cyan
+
 # Display name of the documentation site shown in UI header and in Footer.
 $SiteTitle = "System Library Common Framework"
 
