@@ -37,11 +37,14 @@ if (Test-Path $docsapiIndexFile) {
 }
 else {
     $docsapiIndexFile2 = Join-Path $Output "docsapi/Index.html"
-    $lowerName = "index.html"
 
-    if ((Get-Item $docsapiIndexFile2).Name -cne $lowerName) {
-        $temporaryName = "Index.html.lowercase"
-        Rename-Item -Path $docsapiIndexFile2 -NewName $temporaryName
+    if (Test-Path $docsapiIndexFile2) {
+        $lowerName = "index.html"
+
+        if ((Get-Item $docsapiIndexFile2).Name -cne $lowerName) {
+            $temporaryName = "Index.html.lowercase"
+            Rename-Item -Path $docsapiIndexFile2 -NewName $temporaryName
+        }
     }
 }
 
