@@ -38,6 +38,8 @@ Get-ChildItem -Path $Output -Recurse |
         }
     }
 
+New-Item -ItemType File -Path (Join-Path $Output ".nojekyll") -Force
+
 Start-Sleep -Milliseconds 500
 
 $outputFilesRemaining = Get-ChildItem -Path $SitePath -Recurse -File
