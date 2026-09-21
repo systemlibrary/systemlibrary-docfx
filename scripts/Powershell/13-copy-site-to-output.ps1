@@ -1,23 +1,40 @@
 # MOVE TO __DOCFXSITE TO OUTPUT
 Move-Item -Path (Join-Path $SitePath '*') -Destination $Output -Force 
 
-Start-Sleep -Milliseconds 500
+Start-Sleep -Milliseconds 1000
+
+# RENAME 'docsapi/index.html' and any case variation to always lower cased for Linux (github pages)
+$docsapiIndexFile = Join-Path $Output "docsapi/Index.html"
+if (Test-Path $docsapiIndexFile) {
+    $lowerName = "index.html"
+
+    if ((Get-Item $docsapiIndexFile).Name -cne $lowerName) {
+        $temporaryName = "Index.html.lowercase"
+        Rename-Item -Path $docsapiIndexFile -NewName $temporaryName
+    }
+}
+else {
+    $docsapiIndexFile2 = Join-Path $Output "DocsApi/Index.html"
+    $lowerName = "index.html"
+
+    if ((Get-Item $docsapiIndexFile2).Name -cne $lowerName) {
+        $temporaryName = "Index.html.lowercase"
+        Rename-Item -Path $docsapiIndexFile2 -NewName $temporaryName
+    }
+}
+
+Start-Sleep -Milliseconds 333
 
 # docsapi files are generated and linked by docfx toc file, cannot be touched
 $skipDocsApiFiles = Join-Path $Output "/docsapi"
 $skipPublicFiles = Join-Path $Output "/public"
-$includeDocsApiIndexHtmlFile = Join-Path $Output + "/docsapi/Index.html"
 
-# RENAME FILES AND FOLDERS INSIDE OUTPUT TO "<name>.LOWERCASE"
+# RENAME FILES AND FOLDERS THAT ARE OUTSIDE THE DEFAULT DOCFX OUTPUT, TO "<name>.LOWERCASE"
 Get-ChildItem -Path $Output -Recurse |
 Where-Object {
-    (
-        !$_.FullName.StartsWith($skipDocsApiFiles, [System.StringComparison]::OrdinalIgnoreCase) -and
-        !$_.FullName.StartsWith($skipPublicFiles, [System.StringComparison]::OrdinalIgnoreCase)
-    ) -or
-    $_.FullName.StartsWith($includeDocsApiIndexHtmlFile, [System.StringComparison]::OrdinalIgnoreCase)
+    !$_.FullName.StartsWith($skipDocsApiFiles, [System.StringComparison]::OrdinalIgnoreCase) -and
+    !$_.FullName.StartsWith($skipPublicFiles, [System.StringComparison]::OrdinalIgnoreCase)
 } |
-Sort-Object FullName -Descending |
 ForEach-Object {
     $lowerName = $_.Name.ToLowerInvariant()
 
@@ -28,11 +45,11 @@ ForEach-Object {
     }
 }
 
-Start-Sleep -Milliseconds 500
+
+Start-Sleep -Milliseconds 1000
 
 # LOWER CASE PATH, PRESERVE $OUTPUT, AND REMOVE SUFFIX ".lowercase"
 Get-ChildItem -Path $Output -Recurse |
-Sort-Object FullName -Descending |
 ForEach-Object {
     if ($_.Name.EndsWith(".lowercase", [System.StringComparison]::Ordinal)) {
         $lowerName = $_.Name.Substring(
@@ -45,8 +62,6 @@ ForEach-Object {
 }
 
 New-Item -ItemType File -Path (Join-Path $Output ".nojekyll") -Force
-
-Start-Sleep -Milliseconds 500
 
 $outputFilesRemaining = Get-ChildItem -Path $SitePath -Recurse -File
 
