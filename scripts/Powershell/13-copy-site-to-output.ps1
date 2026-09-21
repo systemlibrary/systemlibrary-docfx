@@ -5,40 +5,44 @@ Start-Sleep -Milliseconds 500
 
 # docsapi files are generated and linked by docfx toc file, cannot be touched
 $skipDocsApiFiles = Join-Path $Output "/docsapi"
-$skipPublicFiles =  Join-Path $Output "/public"
+$skipPublicFiles = Join-Path $Output "/public"
+$includeDocsApiIndexHtmlFile = Join-Path $Output + "/docsapi/Index.html"
 
 # RENAME FILES AND FOLDERS INSIDE OUTPUT TO "<name>.LOWERCASE"
 Get-ChildItem -Path $Output -Recurse |
-    Where-Object {
+Where-Object {
+    (
         !$_.FullName.StartsWith($skipDocsApiFiles, [System.StringComparison]::OrdinalIgnoreCase) -and
         !$_.FullName.StartsWith($skipPublicFiles, [System.StringComparison]::OrdinalIgnoreCase)
-    } |
-    Sort-Object FullName -Descending |
-    ForEach-Object {
-        $lowerName = $_.Name.ToLowerInvariant()
+    ) -or
+    $_.FullName.StartsWith($includeDocsApiIndexHtmlFile, [System.StringComparison]::OrdinalIgnoreCase)
+} |
+Sort-Object FullName -Descending |
+ForEach-Object {
+    $lowerName = $_.Name.ToLowerInvariant()
 
-        if ($_.Name -cne $lowerName) {
-            $temporaryName = $_.Name + ".lowercase"
+    if ($_.Name -cne $lowerName) {
+        $temporaryName = $_.Name + ".lowercase"
 
-            Rename-Item -Path $_.FullName -NewName $temporaryName
-        }
+        Rename-Item -Path $_.FullName -NewName $temporaryName
     }
+}
 
 Start-Sleep -Milliseconds 500
 
 # LOWER CASE PATH, PRESERVE $OUTPUT, AND REMOVE SUFFIX ".lowercase"
 Get-ChildItem -Path $Output -Recurse |
-    Sort-Object FullName -Descending |
-    ForEach-Object {
-        if ($_.Name.EndsWith(".lowercase", [System.StringComparison]::Ordinal)) {
-            $lowerName = $_.Name.Substring(
-                0,
-                $_.Name.Length - ".lowercase".Length
-            ).ToLowerInvariant()
+Sort-Object FullName -Descending |
+ForEach-Object {
+    if ($_.Name.EndsWith(".lowercase", [System.StringComparison]::Ordinal)) {
+        $lowerName = $_.Name.Substring(
+            0,
+            $_.Name.Length - ".lowercase".Length
+        ).ToLowerInvariant()
 
-            Rename-Item -Path $_.FullName -NewName $lowerName
-        }
+        Rename-Item -Path $_.FullName -NewName $lowerName
     }
+}
 
 New-Item -ItemType File -Path (Join-Path $Output ".nojekyll") -Force
 
