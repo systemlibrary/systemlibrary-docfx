@@ -25,7 +25,7 @@ ForEach-Object {
 
 Start-Sleep -Milliseconds 1500
 
-$docsapiDir = Join-Path $Output "DocsApi"
+$docsapiDir = Join-Path $Output "/DocsApi"
 if (Test-Path $docsapiDir) {
     $lowerName = "docsapi"
 
@@ -38,7 +38,7 @@ if (Test-Path $docsapiDir) {
 Start-Sleep -Milliseconds 1500
 
 # RENAME 'docsapi/index.html' and any case variation to always lower cased for Linux (github pages)
-$docsapiIndexFile = Join-Path $Output "docsapi.lowercase/Index.html"
+$docsapiIndexFile = Join-Path $Output "/docsapi.lowercase/Index.html"
 if (Test-Path $docsapiIndexFile) {
     $lowerName = "index.html"
 
@@ -48,7 +48,7 @@ if (Test-Path $docsapiIndexFile) {
     }
 }
 else {
-    $docsapiIndexFile2 = Join-Path $Output "docsapi/Index.html"
+    $docsapiIndexFile2 = Join-Path $Output "/docsapi/Index.html"
     if (Test-Path $docsapiIndexFile2) {
         $lowerName = "index.html"
 
