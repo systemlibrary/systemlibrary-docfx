@@ -26,11 +26,11 @@ ForEach-Object {
 Start-Sleep -Milliseconds 1500
 
 $docsapiDir = Join-Path $Output "DocsApi"
-if(Test-Path $docsapiDir) {
+if (Test-Path $docsapiDir) {
     $lowerName = "docsapi"
 
     if ((Get-Item $docsapiDir).Name -cne $lowerName) {
-        $temporaryName = "DocsApi.lowercase"
+        $temporaryName = "docsapi.lowercase"
         Rename-Item -Path $docsapiDir -NewName $temporaryName
     }
 }
@@ -38,7 +38,7 @@ if(Test-Path $docsapiDir) {
 Start-Sleep -Milliseconds 1500
 
 # RENAME 'docsapi/index.html' and any case variation to always lower cased for Linux (github pages)
-$docsapiIndexFile = Join-Path $Output "DocsApi.lowercase/Index.html"
+$docsapiIndexFile = Join-Path $Output "docsapi.lowercase/Index.html"
 if (Test-Path $docsapiIndexFile) {
     $lowerName = "index.html"
 
@@ -47,8 +47,20 @@ if (Test-Path $docsapiIndexFile) {
         Rename-Item -Path $docsapiIndexFile -NewName $temporaryName
     }
 }
+else {
+    $docsapiIndexFile2 = Join-Path $Output "docsapi/Index.html"
+    if (Test-Path $docsapiIndexFile2) {
+        $lowerName = "index.html"
 
-Start-Sleep -Milliseconds 1500
+        if ((Get-Item $docsapiIndexFile2).Name -cne $lowerName) {
+            $temporaryName = "Index.html.lowercase"
+            Rename-Item -Path $docsapiIndexFile2 -NewName $temporaryName
+        }
+    }
+}
+
+
+Start-Sleep -Milliseconds 2000
 
 # LOWER CASE PATH, PRESERVE $OUTPUT, AND REMOVE SUFFIX ".lowercase"
 Get-ChildItem -Path $Output -Recurse |
@@ -59,7 +71,12 @@ ForEach-Object {
             $_.Name.Length - ".lowercase".Length
         ).ToLowerInvariant()
 
-        Rename-Item -Path $_.FullName -NewName $lowerName
+        try {
+            Rename-Item -Path $_.FullName -NewName $lowerName
+        }
+        catch {
+            Warn("Renaming " + $_.FullName + " failed, continue...")
+        }
     }
 }
 
