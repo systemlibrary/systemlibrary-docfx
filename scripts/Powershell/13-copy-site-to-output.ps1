@@ -75,7 +75,12 @@ ForEach-Object {
             $_.Name.Length - ".lowercase".Length
         ).ToLowerInvariant()
         
-        Rename-Item -Path $_.FullName -NewName $lowerName
+        try {
+            Rename-Item -Path $_.FullName -NewName $lowerName
+        }
+        catch {
+            Warn ($_.FullName + " could not be renamed, continue...")
+        }
     }
 }
 
