@@ -1,7 +1,7 @@
 # MOVE TO __DOCFXSITE TO OUTPUT
 Move-Item -Path (Join-Path $SitePath '*') -Destination $Output -Force 
 
-Start-Sleep -Milliseconds 1000
+Start-Sleep -Milliseconds 2500
 
 # docsapi files are generated and linked by docfx toc file, cannot be touched
 $skipDocsApiFiles = Join-Path $Output "/docsapi"
@@ -23,7 +23,19 @@ ForEach-Object {
     }
 }
 
-Start-Sleep -Milliseconds 1000
+Start-Sleep -Milliseconds 1500
+
+$docsapiDir = Join-Path $Output "DocsApi"
+if(Test-Path $docsapiDir) {
+    $lowerName = "docsapi"
+
+    if ((Get-Item $docsapiDir).Name -cne $lowerName) {
+        $temporaryName = "DocsApi.lowercase"
+        Rename-Item -Path $docsapiDir -NewName $temporaryName
+    }
+}
+
+Start-Sleep -Milliseconds 1500
 
 # RENAME 'docsapi/index.html' and any case variation to always lower cased for Linux (github pages)
 $docsapiIndexFile = Join-Path $Output "DocsApi.lowercase/Index.html"
@@ -35,20 +47,8 @@ if (Test-Path $docsapiIndexFile) {
         Rename-Item -Path $docsapiIndexFile -NewName $temporaryName
     }
 }
-else {
-    $docsapiIndexFile2 = Join-Path $Output "docsapi/Index.html"
 
-    if (Test-Path $docsapiIndexFile2) {
-        $lowerName = "index.html"
-
-        if ((Get-Item $docsapiIndexFile2).Name -cne $lowerName) {
-            $temporaryName = "Index.html.lowercase"
-            Rename-Item -Path $docsapiIndexFile2 -NewName $temporaryName
-        }
-    }
-}
-
-Start-Sleep -Milliseconds 333
+Start-Sleep -Milliseconds 1500
 
 # LOWER CASE PATH, PRESERVE $OUTPUT, AND REMOVE SUFFIX ".lowercase"
 Get-ChildItem -Path $Output -Recurse |
@@ -64,6 +64,8 @@ ForEach-Object {
 }
 
 New-Item -ItemType File -Path (Join-Path $Output ".nojekyll") -Force
+
+Start-Sleep -Milliseconds 1000
 
 $outputFilesRemaining = Get-ChildItem -Path $SitePath -Recurse -File
 
