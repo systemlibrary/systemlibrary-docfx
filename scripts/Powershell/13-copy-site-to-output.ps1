@@ -1,7 +1,7 @@
 # MOVE TO __DOCFXSITE TO OUTPUT
 Move-Item -Path (Join-Path $SitePath '*') -Destination $Output -Force 
 
-Start-Sleep -Milliseconds 2500
+Start-Sleep -Milliseconds 3000
 
 # docsapi files are generated and linked by docfx toc file, cannot be touched
 $skipDocsApiFiles = Join-Path $Output "/docsapi"
@@ -24,22 +24,10 @@ ForEach-Object {
     }
 }
 
-Start-Sleep -Milliseconds 1500
-
-$docsapiDir = Join-Path $Output "/DocsApi"
-if (Test-Path $docsapiDir) {
-    $lowerName = "docsapi"
-
-    if ((Get-Item $docsapiDir).Name -cne $lowerName) {
-        $temporaryName = "docsapi.lowercase"
-        Rename-Item -Path $docsapiDir -NewName $temporaryName
-    }
-}
-
-Start-Sleep -Milliseconds 1500
+Start-Sleep -Milliseconds 3000
 
 # RENAME 'docsapi/index.html' and any case variation to always lower cased for Linux (github pages)
-$docsapiIndexFile = Join-Path $Output "/docsapi.lowercase/Index.html"
+$docsapiIndexFile = Join-Path $Output "/docsapi/Index.html"
 if (Test-Path $docsapiIndexFile) {
     $lowerName = "index.html"
 
@@ -48,18 +36,31 @@ if (Test-Path $docsapiIndexFile) {
         Rename-Item -Path $docsapiIndexFile -NewName $temporaryName
     }
 }
-else {
-    $docsapiIndexFile2 = Join-Path $Output "/docsapi/Index.html"
-    if (Test-Path $docsapiIndexFile2) {
-        $lowerName = "index.html"
 
-        if ((Get-Item $docsapiIndexFile2).Name -cne $lowerName) {
-            $temporaryName = "Index.html.lowercase"
-            Rename-Item -Path $docsapiIndexFile2 -NewName $temporaryName
-        }
+Start-Sleep -Milliseconds 1000
+
+$docsapiIndexFile = Join-Path $Output "/DocsApi/Index.html"
+if (Test-Path $docsapiIndexFile) {
+    $lowerName = "index.html"
+
+    if ((Get-Item $docsapiIndexFile).Name -cne $lowerName) {
+        $temporaryName = "Index.html.lowercase"
+        Rename-Item -Path $docsapiIndexFile -NewName $temporaryName
     }
 }
 
+Start-Sleep -Milliseconds 1000
+
+$docsapiDir = Join-Path $Output "/DocsApi"
+if (Test-Path $docsapiDir) {
+    $lowerName = "docsapi"
+
+    if ((Get-Item $docsapiDir).Name -cne $lowerName) {
+        $temporaryName = "docsapi.lowercase"
+
+        Rename-Item -Path $docsapiDir -NewName $temporaryName
+    }
+}
 
 Start-Sleep -Milliseconds 2000
 
@@ -68,17 +69,13 @@ Get-ChildItem -Path $Output -Recurse |
 Sort-Object FullName -Descending |
 ForEach-Object {
     if ($_.Name.EndsWith(".lowercase", [System.StringComparison]::Ordinal)) {
+
         $lowerName = $_.Name.Substring(
             0,
             $_.Name.Length - ".lowercase".Length
         ).ToLowerInvariant()
-
-        try {
-            Rename-Item -Path $_.FullName -NewName $lowerName
-        }
-        catch {
-            Warn("Renaming " + $_.FullName + " failed " + $lowername + ", continue...")
-        }
+        
+        Rename-Item -Path $_.FullName -NewName $lowerName
     }
 }
 
