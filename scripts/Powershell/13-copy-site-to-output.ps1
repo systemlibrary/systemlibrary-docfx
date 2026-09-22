@@ -13,6 +13,7 @@ Where-Object {
     !$_.FullName.StartsWith($skipDocsApiFiles, [System.StringComparison]::OrdinalIgnoreCase) -and
     !$_.FullName.StartsWith($skipPublicFiles, [System.StringComparison]::OrdinalIgnoreCase)
 } |
+Sort-Object FullName -Descending |
 ForEach-Object {
     $lowerName = $_.Name.ToLowerInvariant()
 
@@ -64,6 +65,7 @@ Start-Sleep -Milliseconds 2000
 
 # LOWER CASE PATH, PRESERVE $OUTPUT, AND REMOVE SUFFIX ".lowercase"
 Get-ChildItem -Path $Output -Recurse |
+Sort-Object FullName -Descending |
 ForEach-Object {
     if ($_.Name.EndsWith(".lowercase", [System.StringComparison]::Ordinal)) {
         $lowerName = $_.Name.Substring(
@@ -75,7 +77,7 @@ ForEach-Object {
             Rename-Item -Path $_.FullName -NewName $lowerName
         }
         catch {
-            Warn("Renaming " + $_.FullName + " failed, continue...")
+            Warn("Renaming " + $_.FullName + " failed " + $lowername + ", continue...")
         }
     }
 }
