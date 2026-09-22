@@ -208,10 +208,10 @@ code.hljs {
 
 @media screen and (max-width: 768px) {
     .toc-offcanvas {
+        display: none;
+        visibility: hidden;
         padding: 0;
         border: 0;
-        max-width: unset;
-        flex: 0.37 !important;
     }
 }
 
