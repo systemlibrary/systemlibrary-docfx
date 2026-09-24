@@ -64,16 +64,8 @@ if (Test-Path $docsapiDir) {
 
 Start-Sleep -Milliseconds 3000
 
-$docsapiDir = Join-Path $Output "/DocsApi.lowercase"
-if (Test-Path $docsapiDir) {
-    $temporaryName = "docsapi"
-    Rename-Item -Path $docsapiDir -NewName $temporaryName
-}
-
-Start-Sleep -Milliseconds 3000
-
-# LOWER CASE PATH, PRESERVE $OUTPUT, AND REMOVE SUFFIX ".lowercase"
-Get-ChildItem -Path $Output -Recurse |
+# LOWER CASE PATH - FOLDERS FIRST
+Get-ChildItem -Path $Output -Recurse -Directory |
 Sort-Object FullName -Descending |
 ForEach-Object {
     if ($_.Name.EndsWith(".lowercase", [System.StringComparison]::Ordinal)) {
@@ -82,15 +74,39 @@ ForEach-Object {
             0,
             $_.Name.Length - ".lowercase".Length
         ).ToLowerInvariant()
-        
+
         try {
             Rename-Item -Path $_.FullName -NewName $lowerName
         }
         catch {
-            Warn ($_.FullName + " could not be renamed, continue...")
+            Warn ($_.FullName + " to " + $lowerName + " could not rename directory, continue...")
+        }
+        Start-Sleep -Milliseconds 50
+    }
+}
+
+Start-Sleep -Milliseconds 1000
+
+# LOWER CASE PATH - FILES SECOND
+Get-ChildItem -Path $Output -Recurse -File |
+Sort-Object FullName -Descending |
+ForEach-Object {
+    if ($_.Name.EndsWith(".lowercase", [System.StringComparison]::Ordinal)) {
+
+        $lowerName = $_.Name.Substring(
+            0,
+            $_.Name.Length - ".lowercase".Length
+        ).ToLowerInvariant()
+
+        try {
+            Rename-Item -Path $_.FullName -NewName $lowerName
+        }
+        catch {
+            Warn ($_.FullName + " to " + $lowerName + " could not rename file, continue...")
         }
     }
 }
+
 
 New-Item -ItemType File -Path (Join-Path $Output ".nojekyll") -Force
 
