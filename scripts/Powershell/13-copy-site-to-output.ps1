@@ -4,21 +4,26 @@ Move-Item -Path (Join-Path $SitePath '*') -Destination $Output -Force
 Start-Sleep -Milliseconds 1000
 
 # LINUX REQUIRES CASE-SENSITIVE PATHS
-if ($IsLinux) {
+$skipDocsApiFiles = Join-Path $Output "/docsapi"
+$skipPublicFiles = Join-Path $Output "/public"
 
+# RENAME FILES AND FOLDERS THAT ARE OUTSIDE THE DEFAULT DOCFX OUTPUT, TO "<name>.LOWERCASE"
+if ($IsLinux -or $true) {
     $upperCaseItems = Get-ChildItem -Path $Output -Recurse |
-        Where-Object {
-            $_.Name -cne $_.Name.ToLowerInvariant()
-        }
+    Where-Object {
+        !$_.FullName.StartsWith($skipDocsApiFiles, [System.StringComparison]::OrdinalIgnoreCase) -and
+        !$_.FullName.StartsWith($skipPublicFiles, [System.StringComparison]::OrdinalIgnoreCase) -and
+        $_.Name -cne $_.Name.ToLowerInvariant()
+    }
 
     if ($upperCaseItems.Count -gt 0) {
 
         Warn "Linux requires all documentation paths to be lowercase:"
         
         $upperCaseItems |
-            ForEach-Object {
-                Warn $_.FullName
-            }
+        ForEach-Object {
+            Warn $_.FullName
+        }
 
         throw "Upper-case file or directory names detected in documentation output."
     }
