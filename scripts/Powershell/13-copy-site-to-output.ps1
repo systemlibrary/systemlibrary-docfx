@@ -71,19 +71,30 @@ ForEach-Object {
 
 Start-Sleep -Milliseconds 500
 
-# RENAME 'docsapi/Index.html' and any case variation to always lower cased for Linux (github pages)
-$docsapiIndexFile = Join-Path $Output "/docsapi/Index.html"
+# RENAME 'DocsApi/Index.html' and any case variation to always lower cased for Linux (github pages)
+$docsapiIndexFile = Join-Path $Output "/DocsApi/Index.html"
 if (Test-Path $docsapiIndexFile) {
     $lowerName = "index.html"
 
     if ((Get-Item $docsapiIndexFile).Name -cne $lowerName) {
         Rename-Item -Path $docsapiIndexFile -NewName "Index.html.lowercase"
 
-        Start-Sleep -Milliseconds 100
+        Start-Sleep -Milliseconds 50
 
-        $docsapiIndexFile = Join-Path $Output "/docsapi/Index.html.lowercase"
+        $docsapiIndexFile = Join-Path $Output "/DocsApi/Index.html.lowercase"
 
         Rename-Item -Path $docsapiIndexFile -NewName "index.html"
+
+        Start-Sleep -Milliseconds 50
+
+        $docsapiDir = Join-Path $Output "/DocsApi"
+
+        $docsapiDirFiles = Get-ChildItem -Path $docsapiDir -Recurse -File
+ 
+        if ($docsapiDirFiles.Count -eq 0) {
+            # Linux, the 'DocsApi' folder is empty and shall be deleted
+            Remove-Item $docsapiDir
+        }
     }
 }
 
