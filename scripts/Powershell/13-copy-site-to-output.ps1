@@ -3,7 +3,7 @@ Move-Item -Path (Join-Path $SitePath '*') -Destination $Output -Force
 
 Start-Sleep -Milliseconds 500
 
-# docsapi files are generated and linked by docfx toc file, cannot be touched
+# docsapi and public files are generated and linked by docfx toc file, cannot be touched
 $skipDocsApiFiles = Join-Path $Output "/docsapi"
 $skipPublicFiles = Join-Path $Output "/public"
 
@@ -83,7 +83,9 @@ if (Test-Path $docsapiIndexFile) {
 
         $docsapiIndexFile = Join-Path $Output "/DocsApi/Index.html.lowercase"
 
-        Rename-Item -Path $docsapiIndexFile -NewName "index.html"
+        $docsApiDest = Join-Path $Output "/docsapi"
+
+        Rename-Item -Path $docsApiDest -NewName "index.html"
 
         Start-Sleep -Milliseconds 50
 
