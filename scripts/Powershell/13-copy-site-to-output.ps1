@@ -8,7 +8,7 @@ $skipDocsApiFiles = Join-Path $Output "/apidocs"
 $skipPublicFiles = Join-Path $Output "/public"
 
 # RENAME FILES AND FOLDERS THAT ARE OUTSIDE THE DEFAULT DOCFX OUTPUT, TO "<name>.LOWERCASE"
-if ($IsLinux -or $true) {
+if ($IsLinux) {
     $upperCaseItems = Get-ChildItem -Path $Output -Recurse |
     Where-Object {
         !$_.FullName.StartsWith($skipDocsApiFiles, [System.StringComparison]::OrdinalIgnoreCase) -and
