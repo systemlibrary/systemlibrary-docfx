@@ -83,19 +83,23 @@ if (Test-Path $docsapiIndexFile) {
 
         $docsapiIndexFile = Join-Path $Output "/DocsApi/Index.html.lowercase"
 
-        # Linux requires us to specify the docsapi as lower, on windows theres no issue as that folder already is lowercased and we just lowercase t he "Index.html" actually
+        # Linux requires the docsapi directory to be lowercase.
         $docsApiDest = Join-Path $Output "/docsapi"
 
-        Rename-Item -Path $docsApiDest -NewName "index.html"
+        # Move the lowercased index.html into the lowercase docsapi directory.
+        Move-Item `
+            -Path $docsapiIndexFile `
+            -Destination (Join-Path $docsApiDest "index.html") `
+            -Force
 
         Start-Sleep -Milliseconds 50
 
+        # DocsApi only exists separately on Linux because its filesystem is case-sensitive.
         $docsapiDir = Join-Path $Output "/DocsApi"
 
         $docsapiDirFiles = Get-ChildItem -Path $docsapiDir -Recurse -File
- 
+
         if ($docsapiDirFiles.Count -eq 0) {
-            # Linux, the 'DocsApi' folder is empty and shall be deleted
             Remove-Item $docsapiDir
         }
     }
