@@ -83,6 +83,7 @@ if (Test-Path $docsapiIndexFile) {
 
         $docsapiIndexFile = Join-Path $Output "/DocsApi/Index.html.lowercase"
 
+        # Linux requires us to specify the docsapi as lower, on windows theres no issue as that folder already is lowercased and we just lowercase t he "Index.html" actually
         $docsApiDest = Join-Path $Output "/docsapi"
 
         Rename-Item -Path $docsApiDest -NewName "index.html"
