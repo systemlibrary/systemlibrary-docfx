@@ -4,7 +4,7 @@ Move-Item -Path (Join-Path $SitePath '*') -Destination $Output -Force
 Start-Sleep -Milliseconds 1000
 
 # LINUX REQUIRES CASE-SENSITIVE PATHS
-$skipDocsApiFiles = Join-Path $Output "/docsapi"
+$skipDocsApiFiles = Join-Path $Output "/apidocs"
 $skipPublicFiles = Join-Path $Output "/public"
 
 # RENAME FILES AND FOLDERS THAT ARE OUTSIDE THE DEFAULT DOCFX OUTPUT, TO "<name>.LOWERCASE"
