@@ -1,7 +1,7 @@
 # MOVE TO __DOCFXSITE TO OUTPUT
 Move-Item -Path (Join-Path $SitePath '*') -Destination $Output -Force 
 
-Start-Sleep -Milliseconds 3000
+Start-Sleep -Milliseconds 1000
 
 # docsapi files are generated and linked by docfx toc file, cannot be touched
 $skipDocsApiFiles = Join-Path $Output "/docsapi"
@@ -49,20 +49,7 @@ if (Test-Path $docsapiIndexFile) {
     }
 }
 
-Start-Sleep -Milliseconds 2000
-
-$docsapiDir = Join-Path $Output "/DocsApi"
-if (Test-Path $docsapiDir) {
-    $lowerName = "docsapi"
-
-    if ((Get-Item $docsapiDir).Name -cne $lowerName) {
-        $temporaryName = "DocsApi.lowercase"
-
-        Rename-Item -Path $docsapiDir -NewName $temporaryName
-    }
-}
-
-Start-Sleep -Milliseconds 3000
+Start-Sleep -Milliseconds 1000
 
 # LOWER CASE PATH - FOLDERS FIRST
 Get-ChildItem -Path $Output -Recurse -Directory |
@@ -81,7 +68,7 @@ ForEach-Object {
         catch {
             Warn ($_.FullName + " to " + $lowerName + " could not rename directory, continue...")
         }
-        Start-Sleep -Milliseconds 50
+        Start-Sleep -Milliseconds 33
     }
 }
 
