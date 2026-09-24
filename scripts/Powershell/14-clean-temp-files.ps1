@@ -2,7 +2,7 @@ Remove-Item $docfxJsonDest -Force -ErrorAction Continue
 
 Remove-Item $filterYmlDest -Force -ErrorAction Continue
 
-Remove-Item -Recurse -Force $docsApiPath -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force $apiDocsPath -ErrorAction SilentlyContinue
 
 Remove-Item -Recurse -Force $templatePathDest -ErrorAction SilentlyContinue
 

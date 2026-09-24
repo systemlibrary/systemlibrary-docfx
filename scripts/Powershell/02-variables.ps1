@@ -22,7 +22,7 @@ $filterYmlDest = Join-Path $rootPath 'docfxfilter.yml'
 
 $SitePath = Join-Path $rootPath "__docfxsite"
 $logPath = Join-Path $rootPath "__docfxsite.log"
-$docsApiPath = Join-Path $rootPath "docsapi"
+$apiDocsPath = Join-Path $rootPath "apidocs"
 
 $templatePath = $PSScriptRoot + "/../Template/"
 $templatePathDest = Join-Path $rootPath "docfxtemplate"

@@ -4,8 +4,8 @@ try {
         Remove-Item $templatePathDest -Recurse -Force -ErrorAction SilentlyContinue
     }
 
-    if (Test-Path $docsApiPath) {
-        Remove-Item $docsApiPath -Recurse -Force -ErrorAction SilentlyContinue
+    if (Test-Path $apiDocsPath) {
+        Remove-Item $apiDocsPath -Recurse -Force -ErrorAction SilentlyContinue
     }
 
     if (Test-Path $logPath) {
