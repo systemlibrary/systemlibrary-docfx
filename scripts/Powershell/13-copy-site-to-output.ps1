@@ -66,8 +66,11 @@ Start-Sleep -Milliseconds 3000
 
 $docsapiDir = Join-Path $Output "/DocsApi.lowercase"
 if (Test-Path $docsapiDir) {
-    Start-Sleep -Milliseconds 3000
+    $temporaryName = "docsapi"
+    Rename-Item -Path $docsapiDir -NewName $temporaryName
 }
+
+Start-Sleep -Milliseconds 3000
 
 # LOWER CASE PATH, PRESERVE $OUTPUT, AND REMOVE SUFFIX ".lowercase"
 Get-ChildItem -Path $Output -Recurse |
