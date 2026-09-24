@@ -26,31 +26,6 @@ ForEach-Object {
 
 Start-Sleep -Milliseconds 500
 
-# RENAME 'docsapi/index.html' and any case variation to always lower cased for Linux (github pages)
-$docsapiIndexFile = Join-Path $Output "/docsapi/Index.html"
-if (Test-Path $docsapiIndexFile) {
-    $lowerName = "index.html"
-
-    if ((Get-Item $docsapiIndexFile).Name -cne $lowerName) {
-        $temporaryName = "Index.html.lowercase"
-        Rename-Item -Path $docsapiIndexFile -NewName $temporaryName
-    }
-}
-
-Start-Sleep -Milliseconds 500
-
-$docsapiIndexFile = Join-Path $Output "/DocsApi/Index.html"
-if (Test-Path $docsapiIndexFile) {
-    $lowerName = "index.html"
-
-    if ((Get-Item $docsapiIndexFile).Name -cne $lowerName) {
-        $temporaryName = "Index.html.lowercase"
-        Rename-Item -Path $docsapiIndexFile -NewName $temporaryName
-    }
-}
-
-Start-Sleep -Milliseconds 500
-
 # LOWER CASE PATH - FOLDERS FIRST
 Get-ChildItem -Path $Output -Recurse -Directory |
 Sort-Object FullName -Descending |
@@ -94,10 +69,28 @@ ForEach-Object {
     }
 }
 
+Start-Sleep -Milliseconds 500
+
+# RENAME 'docsapi/Index.html' and any case variation to always lower cased for Linux (github pages)
+$docsapiIndexFile = Join-Path $Output "/docsapi/Index.html"
+if (Test-Path $docsapiIndexFile) {
+    $lowerName = "index.html"
+
+    if ((Get-Item $docsapiIndexFile).Name -cne $lowerName) {
+        Rename-Item -Path $docsapiIndexFile -NewName "Index.html.lowercase"
+
+        Start-Sleep -Milliseconds 100
+
+        $docsapiIndexFile = Join-Path $Output "/docsapi/Index.html.lowercase"
+
+        Rename-Item -Path $docsapiIndexFile -NewName "index.html"
+    }
+}
+
 
 New-Item -ItemType File -Path (Join-Path $Output ".nojekyll") -Force
 
-Start-Sleep -Milliseconds 2000
+Start-Sleep -Milliseconds 500
 
 $outputFilesRemaining = Get-ChildItem -Path $SitePath -Recurse -File
 
