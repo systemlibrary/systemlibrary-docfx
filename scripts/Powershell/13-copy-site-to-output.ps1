@@ -1,7 +1,7 @@
 # MOVE TO __DOCFXSITE TO OUTPUT
 Move-Item -Path (Join-Path $SitePath '*') -Destination $Output -Force 
 
-Start-Sleep -Milliseconds 1000
+Start-Sleep -Milliseconds 500
 
 # docsapi files are generated and linked by docfx toc file, cannot be touched
 $skipDocsApiFiles = Join-Path $Output "/docsapi"
@@ -24,7 +24,7 @@ ForEach-Object {
     }
 }
 
-Start-Sleep -Milliseconds 3000
+Start-Sleep -Milliseconds 500
 
 # RENAME 'docsapi/index.html' and any case variation to always lower cased for Linux (github pages)
 $docsapiIndexFile = Join-Path $Output "/docsapi/Index.html"
@@ -37,7 +37,7 @@ if (Test-Path $docsapiIndexFile) {
     }
 }
 
-Start-Sleep -Milliseconds 1000
+Start-Sleep -Milliseconds 500
 
 $docsapiIndexFile = Join-Path $Output "/DocsApi/Index.html"
 if (Test-Path $docsapiIndexFile) {
@@ -49,7 +49,7 @@ if (Test-Path $docsapiIndexFile) {
     }
 }
 
-Start-Sleep -Milliseconds 1000
+Start-Sleep -Milliseconds 500
 
 # LOWER CASE PATH - FOLDERS FIRST
 Get-ChildItem -Path $Output -Recurse -Directory |
