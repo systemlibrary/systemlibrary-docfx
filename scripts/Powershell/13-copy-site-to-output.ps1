@@ -49,14 +49,14 @@ if (Test-Path $docsapiIndexFile) {
     }
 }
 
-Start-Sleep -Milliseconds 1000
+Start-Sleep -Milliseconds 2000
 
 $docsapiDir = Join-Path $Output "/DocsApi"
 if (Test-Path $docsapiDir) {
     $lowerName = "docsapi"
 
     if ((Get-Item $docsapiDir).Name -cne $lowerName) {
-        $temporaryName = "docsapi.lowercase"
+        $temporaryName = "DocsApi.lowercase"
 
         Rename-Item -Path $docsapiDir -NewName $temporaryName
     }
@@ -86,7 +86,7 @@ ForEach-Object {
 
 New-Item -ItemType File -Path (Join-Path $Output ".nojekyll") -Force
 
-Start-Sleep -Milliseconds 1000
+Start-Sleep -Milliseconds 2000
 
 $outputFilesRemaining = Get-ChildItem -Path $SitePath -Recurse -File
 
