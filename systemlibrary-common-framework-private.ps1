@@ -24,7 +24,7 @@ Write-Host "`Set Location $PSScriptRoot" -ForegroundColor Cyan
 $SiteTitle = "System Library Common Framework"
 
 # Relative Hosting Path
-$RelativeHostingPath = "" # if local IIS or similar it is $null or "" or "/", if using github pages it should be the name of the repo with prefix and suffix /
+$RelativeHostingPath = "/systemlibrary-common-framework/" # if local IIS or similar it is $null or "" or "/", if using github pages it should be the name of the repo with prefix and suffix /
                           # its the path to the css and js will be loaded from, from root of your site
 
 # OPTIONAL
