@@ -23,10 +23,6 @@ Write-Host "`Set Location $PSScriptRoot" -ForegroundColor Cyan
 # Display name of the documentation site shown in UI header and in Footer.
 $SiteTitle = "System Library Common Framework"
 
-# Relative Hosting Path
-$RelativeHostingPath = "/systemlibrary-common-framework/" # if local IIS or similar it is $null or "" or "/", if using github pages it should be the name of the repo with prefix and suffix /
-                          # its the path to the css and js will be loaded from, from root of your site
-
 # OPTIONAL
 $LogoExtension = "png"    # put logo in the root of: $DocumentationRelativePath/logo.EXT
 $EnableSearch = $true
